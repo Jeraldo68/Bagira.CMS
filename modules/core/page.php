@@ -473,7 +473,7 @@ class page {
                 cache::set($key, $html);
             }
 
-            echo $html;
+            echo trim($html);
 			system::stop();
         }
     }
