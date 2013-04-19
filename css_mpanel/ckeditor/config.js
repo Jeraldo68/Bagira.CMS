@@ -25,7 +25,7 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'document', items : [ 'Source','ShowBlocks','Print'] },
 		{ name: 'clipboard', items : [ 'Cut','Copy','PasteText','-','Undo','Redo' ] },
 		{ name: 'editing', items : [ 'Find','Replace','-','SelectAll' ] },
-		{ name: 'insert', items : [ '-','Image','MediaEmbed','Iframe','Flash','Table','Smiley','SpecialChar'] },
+		{ name: 'insert', items : [ '-','Image','MediaEmbed','Iframe','Flash','Table'/*,'Smiley'*/,'SpecialChar'] },
 		{ name: 'insert', items : ['-','About'] },
 		'/',
 		{ name: 'styles', items : [ 'FontSize','Format' ] },    /* ,'Font' */
