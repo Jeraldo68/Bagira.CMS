@@ -106,19 +106,19 @@ class structureMacros {
 	 * @param string $templ_name - шаблон оформления в котором лежит оформление для встраиваемого видео
 	 * @desc МАКРОС: Вернет IFrame с видео, взависимости от видеохостинга
 	 */
-	
+
 	function video($page_id, $field = 'video', $templ_name = '_video_iframes') {
 		$templ_file = '/structure/objects/'.$templ_name.'.tpl';
 		$TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
 			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
-		
+
 		if ($obj = ormPages::get($page_id)) {
 			if ($obj->$field != '') {
 				$domen = parse_url( $obj->$field, PHP_URL_HOST );
-				
-				if (strpos($domen, 'youtube')) {
+
+				if (strpos($domen, 'youtube') !== false) {
 					parse_str( parse_url( $obj->$field, PHP_URL_QUERY ), $my_array_of_vars );
 					if (isset($my_array_of_vars['v'])) {
 						$hash = parse_url( $obj->$field, PHP_URL_FRAGMENT );
@@ -127,7 +127,7 @@ class structureMacros {
 						page::assign('video.id', $my_array_of_vars['v']);
 						return page::parse($TEMPLATE['youtube']);
 					}
-				} else if (strpos($domen, 'vimeo')) {
+				} else if (strpos($domen, 'vimeo') !== false) {
 					$path = explode('/',parse_url( $obj->$field, PHP_URL_PATH ));
 					page::assign('video.id', $path[1]);
 					return page::parse($TEMPLATE['vimeo']);
