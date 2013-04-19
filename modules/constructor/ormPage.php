@@ -750,7 +750,13 @@ class ormPage extends ormObject {
             // Перенос данных полей
             $fields = $this->getClass()->loadFields();
             while(list($fname, $field) = each($fields))
-                if (!empty($field['f_type']) && $field['f_type'] != 97 && $field['f_relation'] < 2 && $fname != 'pseudo_url' && $fname != 'tags')
+				if (!empty($field['f_type']) && in_array($field['f_type'], array(70, 75, 80, 85))) {
+					if ($this->$fname != '' && file_exists(ROOT_DIR.$this->$fname)) {
+						$dirname = dirname($this->$fname);
+						$basename = basename($this->$fname);
+						$copy->__set($fname, system::copyFile(ROOT_DIR.$this->$fname, $basename, $dirname));
+					}
+				} else if (!empty($field['f_type']) && $field['f_type'] != 97 && $field['f_relation'] < 2 && $fname != 'pseudo_url' && $fname != 'tags')
                     $copy->__set($fname, $this->__get($fname));
 
             if (empty($copyTo)) {
