@@ -454,7 +454,15 @@ class ormObject extends innerErrorList {
 
             return count($this->getChildren());
 
-        else {
+		else if ($name == 'comments_count' && $this->id != '') {
+
+			return db::q('SELECT COUNT(c_id) FROM <<comments>> WHERE c_obj_id = '.$this->id.' AND c_active = 1;', value);
+
+		} else if ($name == 'position' && $this->id != '') {
+
+			return db::q('SELECT r_position FROM <<rels>> WHERE r_children_id = '.$this->id.' LIMIT 1;', value);
+
+		} else {
 
             // Смотрим, есть ли флаг для справочников, о получении имени
             if (substr($name, 0, 1) == '_') {
