@@ -1078,7 +1078,7 @@ class ormObject extends innerErrorList {
 					if (!file_exists(ROOT_DIR.$dirname)) {
 						mkdir(ROOT_DIR.$dirname);
 					}
-                    $tmp = system::copyFile($_FILES['file_'.$field]['tmp_name'], $_FILES['file_'.$field]['name'], $dirname);
+                    $tmp = system::copyFile($_FILES['file_'.$field]['tmp_name'], $this->id.'_'.$_FILES['file_'.$field]['name'], $dirname);
                     $value = (empty($tmp)) ? $value : $tmp;
                 }
 
