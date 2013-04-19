@@ -1040,7 +1040,11 @@ class ormObject extends innerErrorList {
 				$cur_file = $this->__get($field);
 				
                 if (isset($_FILES['file_'.$field])) {
-                    $tmp = system::copyFile($_FILES['file_'.$field]['tmp_name'], $_FILES['file_'.$field]['name'], '/upload/file');
+					$dirname = '/upload/file/'.date('Y_m');
+					if (!file_exists(ROOT_DIR.$dirname)) {
+						mkdir(ROOT_DIR.$dirname);
+					}
+                    $tmp = system::copyFile($_FILES['file_'.$field]['tmp_name'], $_FILES['file_'.$field]['name'], $dirname);
                     $value = (empty($tmp)) ? $value : $tmp;
                 }
 				
@@ -1070,7 +1074,11 @@ class ormObject extends innerErrorList {
                 $cur_file = $this->__get($field);
 
                 if (isset($_FILES['file_'.$field])) {
-                    $tmp = system::copyFile($_FILES['file_'.$field]['tmp_name'], $_FILES['file_'.$field]['name'], '/upload/image');
+					$dirname = '/upload/image/'.date('Y_m');
+					if (!file_exists(ROOT_DIR.$dirname)) {
+						mkdir(ROOT_DIR.$dirname);
+					}
+                    $tmp = system::copyFile($_FILES['file_'.$field]['tmp_name'], $_FILES['file_'.$field]['name'], $dirname);
                     $value = (empty($tmp)) ? $value : $tmp;
                 }
 
@@ -1091,7 +1099,11 @@ class ormObject extends innerErrorList {
 				$cur_file = $this->__get($field);
 				
                 if (isset($_FILES['file_'.$field])) {
-                    $tmp = system::copyFile($_FILES['file_'.$field]['tmp_name'], $_FILES['file_'.$field]['name'], '/upload/media');
+					$dirname = '/upload/media/'.date('Y_m');
+					if (!file_exists(ROOT_DIR.$dirname)) {
+						mkdir(ROOT_DIR.$dirname);
+					}
+                    $tmp = system::copyFile($_FILES['file_'.$field]['tmp_name'], $_FILES['file_'.$field]['name'], $dirname);
                     $value = (empty($tmp)) ? $value : $tmp;
                 }
 
@@ -1108,7 +1120,11 @@ class ormObject extends innerErrorList {
 				$cur_file = $this->__get($field);
 				
                 if (isset($_FILES['file_'.$field])) {
-                    $tmp = system::copyFile($_FILES['file_'.$field]['tmp_name'], $_FILES['file_'.$field]['name'], '/upload/flash');
+					$dirname = '/upload/flash/'.date('Y_m');
+					if (!file_exists(ROOT_DIR.$dirname)) {
+						mkdir(ROOT_DIR.$dirname);
+					}
+                    $tmp = system::copyFile($_FILES['file_'.$field]['tmp_name'], $_FILES['file_'.$field]['name'], $dirname);
                     $value = (empty($tmp)) ? $value : $tmp;
                 }
 
@@ -1797,8 +1813,8 @@ class ormObject extends innerErrorList {
             // Перенос данных полей
             $fields = $this->getClass()->loadFields();
             while(list($fname, $field) = each($fields))
-                if (!empty($field['f_type']) && $field['f_type'] != 97 && $field['f_relation'] < 2)
-                    $copy->__set($fname, $this->__get($fname));
+				if (!empty($field['f_type']) && $field['f_type'] != 97 && $field['f_relation'] < 2)
+                	$copy->__set($fname, $this->__get($fname));
 
             if (empty($copyTo))
                 $copy->__set('name', $this->__get('name') . lang::get('copy'));
