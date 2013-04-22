@@ -68,6 +68,7 @@ $LANG['CONSTR_FORM_FIELD3'][16] = 'Специальное';
 $LANG['CONSTR_FORM_FIELD3'][17] = 'Заголовок разделителя';
 $LANG['CONSTR_FORM_FIELD3'][18] = 'Отступ сверху';
 $LANG['CONSTR_FORM_FIELD3'][19] = 'Высота поля';
+$LANG['CONSTR_FORM_FIELD3'][20] = 'Отключить проверку<br>by Jevix';
 
 // Список возможных типов полей.
 // Номера 0 и 1 зарезервированы, это разделители.

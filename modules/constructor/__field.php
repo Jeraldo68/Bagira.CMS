@@ -33,6 +33,7 @@ class __field {
             $filter = $obj->getFilter();
             $required = $obj->getRequired();
             $system = $obj->getSystem();
+            $jevix = $obj->getJevix();
             $type = $obj->getType();
             $list_id = $obj->getListId();
             $uniqum = $obj->getUniqum();
@@ -55,7 +56,7 @@ class __field {
             }
 
             $view = $inherit = 1;
-            $search = $filter = $required = $system = $type = $list_id = $uniqum = $spec = $quick_add = $relation = 0;
+            $search = $filter = $required = $system = $type = $list_id = $uniqum = $spec = $quick_add = $relation = $jevix = 0;
 
             $fr = '';
 
@@ -74,6 +75,7 @@ class __field {
 		ui::CheckBox('filter', 1, $filter, lang::get('CONSTR_FORM_FIELD3', 9));
 		ui::CheckBox('required', 1, $required, lang::get('CONSTR_FORM_FIELD3', 10));
         ui::CheckBox('system', 1, $system, lang::get('CONSTR_FORM_FIELD3', 11));
+        ui::CheckBox('jevix', 1, $jevix, lang::get('CONSTR_FORM_FIELD3', 20));
         ui::CheckBox('uniqum', 1, $uniqum, lang::get('CONSTR_FORM_FIELD3', 13));
         ui::CheckBox('quick_add', 1, $quick_add, lang::get('CONSTR_FORM_FIELD3', 14));
         ui::CheckBox('spec', 1, $spec, lang::get('CONSTR_FORM_FIELD3', 16));
@@ -124,6 +126,7 @@ class __field {
 	    $obj->setFilter(system::POST('filter'));
 	    $obj->setRequired(system::POST('required'));
 	    $obj->setSystem(system::POST('system'));
+	    $obj->setJevix(system::POST('jevix'));
 	    $obj->setUniqum(system::POST('uniqum'));
 	    $obj->setMaxSize(system::POST('max_size'));
 	    $obj->setQuickAdd(system::POST('quick_add'));

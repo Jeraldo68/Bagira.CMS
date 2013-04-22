@@ -52,6 +52,7 @@ $TEMPLATE['frame'] = <<<END
          %view%     <br />
          %inherit%  <br />
          %system%   <br />
+		  %jevix%   <br />
        </div>
 
        <div style="float:left;display:block;width:150px;">

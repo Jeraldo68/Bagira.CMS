@@ -246,18 +246,19 @@ class ormObject extends innerErrorList {
                     $tmp = system::checkVar($value, isDateTime);
                 break;
 
-            // Большой текст
-            case 55:
-                $value = str_replace(array('<', '>'), array('&lt;', '&gt;'), $value);
-                $tmp = system::checkVar($value, isText);
-                break;
+			// Большой текст
+			case 55:
+				if (!$this->fields[$field]['f_jevix']) {
+					$value = str_replace(array('<', '>'), array('&lt;', '&gt;'), $value);
+				}
+				$tmp = system::checkVar($value, isText, 0, !$this->fields[$field]['f_jevix']);
+				break;
 
-            // HTML – текст
-            case 60:
-                $tmp = system::checkVar($value, isText);
-                break;
-
-
+			// HTML – текст
+			case 60:
+				$tmp = system::checkVar($value, isText, 0, !$this->fields[$field]['f_jevix']);
+				break;
+			
 
             // Файл
             case 70:
