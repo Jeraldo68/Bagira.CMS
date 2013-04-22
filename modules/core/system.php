@@ -644,7 +644,7 @@ class system {
 			if (file_exists(ROOT_DIR.$new_filename)) {
 	  			// Если есть, придумываем другое название файлу
 			   	$i = 0; $exist = true;
-				while ($exist && ++$i < 999) {
+				while ($exist && ++$i < 99999) {
 					$new_filename = $pathTo.'/'.$fname.'_'.$i .'.'.$exe;
 					if (!file_exists(ROOT_DIR.$new_filename)) $exist = false;
 				}
