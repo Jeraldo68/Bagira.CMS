@@ -18,7 +18,7 @@ $TEMPLATE['frame_form'] = <<<END
             <input type="password" id="auth_password"  name="passw"/>
              <div class="clear"></div>
 			<div class="remember">
-				<input type="checkbox" checked name="remember_me" value="1" id="remember_me"><label for="remember_me">Запомнить меня</label>
+				<input type="checkbox" name="remember_me" value="1" id="remember_me"><label for="remember_me">Запомнить меня</label>
 			</div>
 
     		<button>Войти</button>

@@ -33,7 +33,7 @@ $TEMPLATE['frame'] = <<<END
     <input type="submit" name="tt" style="display:none;"/>
 
 	<div class="remember">
-		<input type="checkbox" checked name="remember_me" value="1" id="remember_me"><label for="remember_me">Запомнить меня</label>
+		<input type="checkbox" name="remember_me" value="1" id="remember_me"><label for="remember_me">Запомнить меня</label>
 	</div>
 
 	<div class="clear"></div>
