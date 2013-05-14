@@ -59,28 +59,28 @@ class user {
 		//проверяем наличие кукисов если есть авторизуем
       	} else if (isset($_COOKIE['remember_me']) && $_COOKIE['remember_me'] != '') {
 
-			 //разбиваем строку по параметрам: 0 - id, 1 - browser hash, 2 - random hash
-			 $params = explode('-',$_COOKIE["remember_me"]);
+			//разбиваем строку по параметрам: 0 - id, 1 - browser hash, 2 - random hash
+			$params = explode('-',$_COOKIE["remember_me"]);
 
-			 $user = ormObjects::get($params[0], 'user');
-			 $confirmIP = (strpos($user->last_ip, self::getIP(2)) === false);
-				 if (!$confirmIP && $params[1] == self::browserHash() && $params[2] == $user->remember_me) {
+			if ($user = ormObjects::get($params[0], 'user')) {
+				$tmp = explode(',', $user->remember_me);
+				
+				if ($params[1] == self::browserHash() && in_array($params[2], $tmp)) {
+					self::$obj = $user;
+					self::getRights();
+					self::$isAdmin = (count(self::$right) == 0) ? false : true;
+					self::$isGuest = false;
 
-					 self::$obj = $user;
-					 self::getRights();
-					 self::$isAdmin = (count(self::$right) == 0) ? false : true;
-					 self::$isGuest = false;
+					self::updateSession($user->id, $user->login, $user->name, $user->email);
 
- 					 self::updateSession($user->id, $user->login, $user->name, $user->email);
+					self::$obj->last_visit = date('Y-m-d H:i:s');
+					self::$obj->last_ip = self::getIP();
+					self::$obj->error_passw = 0;
+					self::$obj->save();
 
-					 self::$obj->last_visit = date('Y-m-d H:i:s');
-					 self::$obj->last_ip = self::getIP();
-					 self::$obj->error_passw = 0;
-					 self::$obj->save();
-
-					 system::log(lang::get('ENTER_USER_WITH_COOKIE'), info);
-				 }
-
+					system::log(lang::get('ENTER_USER_WITH_COOKIE'), info);	
+				}
+			}	 
 		}
 
        if (!isset($_SESSION['curUser']['name']))
@@ -88,8 +88,7 @@ class user {
 
     }
 
-    
-
+	
     // Создает пользователя гостя
     private static function guestCreate() {
 
@@ -113,11 +112,25 @@ class user {
     // Выход пользователя
     static function logout($redirect = true) {
 
+		//удаляем куки
+		if ($tmp = user::get('remember_me')) {
+			$tmp = explode(',', $tmp);
+			$params = explode('-',$_COOKIE["remember_me"]);
+			foreach ($tmp as $key => $cockie) {
+				if ($cockie == $params[2]) {
+					unset($tmp[$key]);
+					break;
+				}
+			}
+			$user = user::getObject();
+			$user->remember_me = implode(',', $tmp);
+			$user->save();
+		}
+		
+		SetCookie("remember_me","",time() - 3600, "/");
+		
     	system::log(lang::get('EXIT_USER'), info);
      	session_unset();
-
-		//удаляем куки
-		SetCookie("remember_me","",time() - 3600, "/");
 
      	self::guestCreate();
 
@@ -193,7 +206,12 @@ class user {
 		$remeber_me = md5(self::get('id') + rand(1000, 10000000));
 
 		$user = ormObjects::get(self::get('id'), 'user');
-		$user->remember_me = $remeber_me;
+		$tmp = explode(',', $user->remember_me);
+		while (count($tmp) >= 7) {
+			$tmp = array_slice($tmp, 1, count($tmp));
+		}
+		$tmp[] = $remeber_me;
+		$user->remember_me = implode(',', $tmp);
 		$user->save();
 
 		return self::get('id').'-'.self::browserHash().'-'.$remeber_me;
