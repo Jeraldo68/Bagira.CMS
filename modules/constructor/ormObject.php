@@ -371,7 +371,7 @@ class ormObject extends innerErrorList {
 
             } else {
 
-                $this->newError(33, 'Неправильно указано значение для поля "'.$type.'"!', $field);
+                $this->newError(33, 'Неправильно указано значение для поля "'.$type.'"! ('.$field.')', $field);
             }
 
     }
