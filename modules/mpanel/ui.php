@@ -688,7 +688,7 @@ class ui {
 			$keys = array_keys($data);
 
 			//сортировка больших списков по имени
-			if (is_array($data) && is_array($data[$keys[0]]) && count($data) > 5 && isset($data[$keys[0]]['name'])) {
+			if (is_array($data) && !empty($keys) && is_array($data[$keys[0]]) && count($data) > 5 && isset($data[$keys[0]]['name'])) {
 
 				$mas_count = count($data);
 
