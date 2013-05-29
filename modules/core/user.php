@@ -113,7 +113,7 @@ class user {
     static function logout($redirect = true) {
 
 		//удаляем куки
-		if ($tmp = user::get('remember_me')) {
+		if ($tmp = user::get('remember_me') && isset($_COOKIE["remember_me"])) {
 			$tmp = explode(',', $tmp);
 			$params = explode('-',$_COOKIE["remember_me"]);
 			foreach ($tmp as $key => $cockie) {
