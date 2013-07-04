@@ -1,3 +1,3 @@
 # Disable LF normalization for all files
-core.autocrlf false
+core.autocrlf input
 core.safecrlf false
