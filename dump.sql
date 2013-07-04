@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: openserver:3306
--- Время создания: Апр 22 2013 г., 18:36
+-- Время создания: Июл 04 2013 г., 13:30
 -- Версия сервера: 5.1.63-community-log
 -- Версия PHP: 5.2.17
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `bagira_classes` (
   PRIMARY KEY (`c_id`),
   KEY `c_parent_id` (`c_parent_id`),
   KEY `bagira_classes_ibfk_2` (`c_base_class`)
-) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=83 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=83 ;
 
 --
 -- Дамп данных таблицы `bagira_classes`
@@ -101,14 +101,14 @@ CREATE TABLE IF NOT EXISTS `bagira_comments` (
   `c_username` varchar(255) NOT NULL,
   `c_email` varchar(255) NOT NULL,
   `c_publ_date` datetime NOT NULL,
-  `c_text` text NOT NULL,
+  `c_text` mediumtext NOT NULL,
   `c_send_email` int(1) NOT NULL,
   `c_rate` int(11) NOT NULL,
   `c_parram` varchar(255) NOT NULL,
   PRIMARY KEY (`c_id`),
   KEY `c_obj_id` (`c_obj_id`),
   KEY `c_parent_id` (`c_parent_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=58 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=58 ;
 
 --
 -- Дамп данных таблицы `bagira_comments`
@@ -137,12 +137,12 @@ CREATE TABLE IF NOT EXISTS `bagira_domains` (
   `d_sitename` varchar(100) NOT NULL,
   `d_email` varchar(100) NOT NULL,
   `d_online` tinyint(1) NOT NULL,
-  `d_offline_msg` text NOT NULL,
-  `d_error_msg` text NOT NULL,
+  `d_offline_msg` mediumtext NOT NULL,
+  `d_error_msg` mediumtext NOT NULL,
   PRIMARY KEY (`d_id`),
   KEY `d_def_lang` (`d_def_lang`),
   KEY `d_domain_id` (`d_domain_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Дамп данных таблицы `bagira_domains`
@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `bagira_fgroup` (
   `fg_is_clone` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`fg_id`),
   KEY `fg_class_id` (`fg_class_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=130 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=130 ;
 
 --
 -- Дамп данных таблицы `bagira_fgroup`
@@ -276,7 +276,7 @@ CREATE TABLE IF NOT EXISTS `bagira_fields` (
   PRIMARY KEY (`f_id`),
   KEY `f_group_id` (`f_group_id`),
   KEY `f_list_id` (`f_list_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=1785 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1785 ;
 
 --
 -- Дамп данных таблицы `bagira_fields`
@@ -888,7 +888,7 @@ CREATE TABLE IF NOT EXISTS `bagira_langs` (
   `l_name` varchar(30) NOT NULL,
   `l_prefix` varchar(5) NOT NULL,
   PRIMARY KEY (`l_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Дамп данных таблицы `bagira_langs`
@@ -909,7 +909,7 @@ CREATE TABLE IF NOT EXISTS `bagira_modules` (
   `m_active` tinyint(1) DEFAULT '0',
   `m_sort` int(1) DEFAULT '0',
   PRIMARY KEY (`m_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- Дамп данных таблицы `bagira_modules`
@@ -942,7 +942,7 @@ CREATE TABLE IF NOT EXISTS `bagira_modules_rgu` (
   `rgu_value` int(1) NOT NULL DEFAULT '0',
   KEY `rgu_right_id` (`rgu_right_id`),
   KEY `rgu_obj_id` (`rgu_obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira_modules_rgu`
@@ -1118,7 +1118,7 @@ CREATE TABLE IF NOT EXISTS `bagira_modules_rights` (
   PRIMARY KEY (`mr_id`),
   KEY `mr_mod_id` (`mr_mod_id`),
   KEY `mr_parent_id` (`mr_parent_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=172 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=172 ;
 
 --
 -- Дамп данных таблицы `bagira_modules_rights`
@@ -1251,7 +1251,7 @@ CREATE TABLE IF NOT EXISTS `bagira_objects` (
   `o_to_trash` tinyint(1) NOT NULL,
   PRIMARY KEY (`o_id`),
   KEY `o_class_id` (`o_class_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=1786 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1786 ;
 
 --
 -- Дамп данных таблицы `bagira_objects`
@@ -1440,7 +1440,7 @@ CREATE TABLE IF NOT EXISTS `bagira_pages` (
   KEY `template_id` (`template_id`),
   KEY `domain_id` (`domain_id`),
   KEY `bagira_pages_fk4` (`template2_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira_pages`
@@ -1533,7 +1533,7 @@ CREATE TABLE IF NOT EXISTS `bagira_register` (
   `r_description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`r_id`),
   KEY `r_section_id` (`r_section_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=1302 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1302 ;
 
 --
 -- Дамп данных таблицы `bagira_register`
@@ -1631,7 +1631,7 @@ CREATE TABLE IF NOT EXISTS `bagira_rels` (
   KEY `r_field_id` (`r_field_id`),
   KEY `r_parent_id` (`r_parent_id`),
   KEY `r_children_id` (`r_children_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira_rels`
@@ -1875,7 +1875,7 @@ CREATE TABLE IF NOT EXISTS `bagira_revue` (
   `rev_ip` varchar(15) NOT NULL,
   PRIMARY KEY (`rev_id`),
   KEY `rev_obj_id` (`rev_obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1889,7 +1889,7 @@ CREATE TABLE IF NOT EXISTS `bagira_rights` (
   `r_group_id` int(11) DEFAULT NULL,
   KEY `r_obj_id` (`r_obj_id`),
   KEY `r_group_id` (`r_group_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira_rights`
@@ -1984,7 +1984,7 @@ CREATE TABLE IF NOT EXISTS `bagira_search_rankings` (
   KEY `sr_obj_id` (`sr_obj_id`),
   KEY `sr_domain_id` (`sr_domain_id`),
   KEY `sr_lang_id` (`sr_lang_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira_search_rankings`
@@ -6200,7 +6200,7 @@ CREATE TABLE IF NOT EXISTS `bagira_search_words` (
   `w_id` int(11) NOT NULL AUTO_INCREMENT,
   `w_name` varchar(50) NOT NULL,
   PRIMARY KEY (`w_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=11015 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11015 ;
 
 --
 -- Дамп данных таблицы `bagira_search_words`
@@ -8845,7 +8845,7 @@ CREATE TABLE IF NOT EXISTS `bagira_tags` (
   `t_name` varchar(100) NOT NULL,
   `t_count` int(11) NOT NULL,
   PRIMARY KEY (`t_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
 
 --
 -- Дамп данных таблицы `bagira_tags`
@@ -8889,7 +8889,7 @@ CREATE TABLE IF NOT EXISTS `bagira_tags_rels` (
   `tr_obj_id` int(11) NOT NULL,
   KEY `tr_obj_id` (`tr_obj_id`),
   KEY `tr_tag_id` (`tr_tag_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira_tags_rels`
@@ -8934,7 +8934,7 @@ CREATE TABLE IF NOT EXISTS `bagira_template` (
   PRIMARY KEY (`t_id`),
   KEY `t_domain_id` (`t_domain_id`),
   KEY `t_lang_id` (`t_lang_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=47 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=47 ;
 
 --
 -- Дамп данных таблицы `bagira_template`
@@ -8979,7 +8979,7 @@ CREATE TABLE IF NOT EXISTS `bagira___answer` (
   `obj_id` int(11) NOT NULL,
   `count` int(11) NOT NULL,
   KEY `bagira___answer_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___answer`
@@ -9019,7 +9019,7 @@ CREATE TABLE IF NOT EXISTS `bagira___category` (
   `image` varchar(255) NOT NULL,
   `addto` tinyint(1) NOT NULL,
   KEY `bagira___category_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___category`
@@ -9046,7 +9046,7 @@ CREATE TABLE IF NOT EXISTS `bagira___category_faq` (
   `image` varchar(255) NOT NULL,
   `addto` tinyint(1) NOT NULL,
   KEY `bagira___category_faq_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___category_faq`
@@ -9066,7 +9066,7 @@ CREATE TABLE IF NOT EXISTS `bagira___category_review` (
   `image` varchar(255) NOT NULL,
   `addto` tinyint(1) NOT NULL,
   KEY `bagira___category_review_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -9076,10 +9076,10 @@ CREATE TABLE IF NOT EXISTS `bagira___category_review` (
 
 CREATE TABLE IF NOT EXISTS `bagira___eshop_delivery_method` (
   `obj_id` int(11) NOT NULL,
-  `notice` text NOT NULL,
+  `notice` mediumtext NOT NULL,
   `price` float(11,2) NOT NULL,
   KEY `bagira___delivery_method_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___eshop_delivery_method`
@@ -9101,7 +9101,7 @@ CREATE TABLE IF NOT EXISTS `bagira___eshop_goods` (
   `cost` float(11,2) NOT NULL,
   `goods_id` int(11) NOT NULL,
   KEY `bagira___eshop_goods_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___eshop_goods`
@@ -9132,17 +9132,17 @@ CREATE TABLE IF NOT EXISTS `bagira___eshop_order` (
   `obj_id` int(11) NOT NULL,
   `date` datetime NOT NULL,
   `email` varchar(255) NOT NULL,
-  `notice` text NOT NULL,
+  `notice` mediumtext NOT NULL,
   `payment_date` datetime NOT NULL,
   `delivery_name` varchar(255) NOT NULL,
   `delivery_surname` varchar(255) NOT NULL,
   `delivery_phone` varchar(255) NOT NULL,
-  `delivery_address` text NOT NULL,
-  `delivery_notice` text NOT NULL,
+  `delivery_address` mediumtext NOT NULL,
+  `delivery_notice` mediumtext NOT NULL,
   `payment_cost` float(11,2) NOT NULL,
   `is_payment` tinyint(1) NOT NULL,
   KEY `bagira___order_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___eshop_order`
@@ -9165,9 +9165,9 @@ INSERT INTO `bagira___eshop_order` (`obj_id`, `date`, `email`, `notice`, `paymen
 
 CREATE TABLE IF NOT EXISTS `bagira___eshop_payment_method` (
   `obj_id` int(11) NOT NULL,
-  `notice` text NOT NULL,
+  `notice` mediumtext NOT NULL,
   KEY `bagira___eshop_payment_method_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___eshop_payment_method`
@@ -9190,11 +9190,11 @@ CREATE TABLE IF NOT EXISTS `bagira___eshop_status` (
   `email_title` varchar(255) NOT NULL,
   `email_msg` longtext NOT NULL,
   `info` tinyint(1) NOT NULL,
-  `notice` text NOT NULL,
+  `notice` mediumtext NOT NULL,
   `number` int(11) NOT NULL,
   `is_delete` tinyint(1) NOT NULL,
   KEY `bagira___eshop_status_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___eshop_status`
@@ -9214,13 +9214,13 @@ INSERT INTO `bagira___eshop_status` (`obj_id`, `email_title`, `email_msg`, `info
 CREATE TABLE IF NOT EXISTS `bagira___faq` (
   `obj_id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `content` text NOT NULL,
+  `content` mediumtext NOT NULL,
   `answer` longtext NOT NULL,
   `form_id` int(11) NOT NULL,
   `send_answer_to_user` tinyint(1) NOT NULL,
   `addto` tinyint(1) NOT NULL,
   KEY `bagira___faq_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___faq`
@@ -9242,13 +9242,13 @@ INSERT INTO `bagira___faq` (`obj_id`, `email`, `content`, `answer`, `form_id`, `
 CREATE TABLE IF NOT EXISTS `bagira___feedback` (
   `obj_id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `content` text NOT NULL,
+  `content` mediumtext NOT NULL,
   `answer` longtext NOT NULL,
   `form_id` int(11) NOT NULL,
   `send_answer_to_user` tinyint(1) NOT NULL,
   `addto` tinyint(1) NOT NULL,
   KEY `bagira___feedback_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -9278,7 +9278,7 @@ CREATE TABLE IF NOT EXISTS `bagira___feedback_form` (
   `answer_template` longtext NOT NULL,
   `any_sections` tinyint(1) NOT NULL,
   KEY `bagira___feedback_form_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___feedback_form`
@@ -9299,7 +9299,7 @@ CREATE TABLE IF NOT EXISTS `bagira___file` (
   `file` varchar(255) NOT NULL,
   `addto` tinyint(1) NOT NULL,
   KEY `bagira___file_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -9312,7 +9312,7 @@ CREATE TABLE IF NOT EXISTS `bagira___gallery` (
   `image` varchar(255) NOT NULL,
   `addto` tinyint(1) NOT NULL,
   KEY `bagira___gallery_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___gallery`
@@ -9344,7 +9344,7 @@ CREATE TABLE IF NOT EXISTS `bagira___goods` (
   `moshchnost` varchar(255) NOT NULL,
   `addto` tinyint(1) NOT NULL,
   KEY `bagira___goods_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___goods`
@@ -9393,7 +9393,7 @@ CREATE TABLE IF NOT EXISTS `bagira___hall` (
 CREATE TABLE IF NOT EXISTS `bagira___handbook` (
   `obj_id` int(11) NOT NULL,
   KEY `bagira___handbook_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -9404,7 +9404,7 @@ CREATE TABLE IF NOT EXISTS `bagira___handbook` (
 CREATE TABLE IF NOT EXISTS `bagira___list_color` (
   `obj_id` int(11) NOT NULL,
   KEY `bagira___list_color_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___list_color`
@@ -9429,7 +9429,7 @@ INSERT INTO `bagira___list_color` (`obj_id`) VALUES
 CREATE TABLE IF NOT EXISTS `bagira___list_garantiya` (
   `obj_id` int(11) NOT NULL,
   KEY `bagira___list_garantiya_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___list_garantiya`
@@ -9450,7 +9450,7 @@ INSERT INTO `bagira___list_garantiya` (`obj_id`) VALUES
 CREATE TABLE IF NOT EXISTS `bagira___list_strana_proizvoditel` (
   `obj_id` int(11) NOT NULL,
   KEY `bagira___list_strana_proizvoditel_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___list_strana_proizvoditel`
@@ -9511,7 +9511,7 @@ CREATE TABLE IF NOT EXISTS `bagira___news` (
   `author` varchar(255) NOT NULL,
   `addto` tinyint(1) NOT NULL,
   KEY `bagira___news_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___news`
@@ -9538,7 +9538,7 @@ CREATE TABLE IF NOT EXISTS `bagira___news_feed` (
   `image` varchar(255) NOT NULL,
   `addto` tinyint(1) NOT NULL,
   KEY `bagira___news_feed_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___news_feed`
@@ -9559,7 +9559,7 @@ CREATE TABLE IF NOT EXISTS `bagira___page` (
   `content` longtext NOT NULL,
   `addto` tinyint(1) NOT NULL,
   KEY `bagira___page_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___page`
@@ -9594,7 +9594,7 @@ CREATE TABLE IF NOT EXISTS `bagira___photo` (
   `image` varchar(255) NOT NULL,
   `addto` tinyint(1) NOT NULL,
   KEY `bagira___photo_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___photo`
@@ -9638,14 +9638,14 @@ CREATE TABLE IF NOT EXISTS `bagira___price_group` (
 CREATE TABLE IF NOT EXISTS `bagira___review` (
   `obj_id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `content` text NOT NULL,
+  `content` mediumtext NOT NULL,
   `answer` longtext NOT NULL,
   `form_id` int(11) NOT NULL,
   `send_answer_to_user` tinyint(1) NOT NULL,
   `user_rate` int(11) NOT NULL,
   `addto` tinyint(1) NOT NULL,
   KEY `bagira___user_review_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___review`
@@ -9685,7 +9685,7 @@ CREATE TABLE IF NOT EXISTS `bagira___section` (
   `obj_id` int(11) NOT NULL,
   `addto` tinyint(1) NOT NULL,
   KEY `bagira___section_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -9709,7 +9709,7 @@ CREATE TABLE IF NOT EXISTS `bagira___session` (
 CREATE TABLE IF NOT EXISTS `bagira___sex` (
   `obj_id` int(11) NOT NULL,
   KEY `bagira___sex_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___sex`
@@ -9735,7 +9735,7 @@ CREATE TABLE IF NOT EXISTS `bagira___subscribe_msg` (
   `error_iteration_num` int(11) NOT NULL,
   `part_count` int(11) NOT NULL,
   KEY `bagira___soobshchenie_rassylki_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___subscribe_msg`
@@ -9757,7 +9757,7 @@ CREATE TABLE IF NOT EXISTS `bagira___subscribe_user` (
   `first_name` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
   KEY `bagira___subscribe_user_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___subscribe_user`
@@ -9778,7 +9778,7 @@ INSERT INTO `bagira___subscribe_user` (`obj_id`, `second_name`, `first_name`, `u
 CREATE TABLE IF NOT EXISTS `bagira___subscription` (
   `obj_id` int(11) NOT NULL,
   `active` tinyint(1) NOT NULL,
-  `admin_notice` text NOT NULL,
+  `admin_notice` mediumtext NOT NULL,
   `lang` int(11) NOT NULL,
   `domain` int(11) NOT NULL,
   `last_subscribe` datetime NOT NULL,
@@ -9788,7 +9788,7 @@ CREATE TABLE IF NOT EXISTS `bagira___subscription` (
   `back_name` varchar(255) NOT NULL,
   `name_format` int(11) NOT NULL,
   KEY `bagira___subscription_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___subscription`
@@ -9841,7 +9841,7 @@ CREATE TABLE IF NOT EXISTS `bagira___user` (
   `no_buy_booking_count` int(11) NOT NULL,
   `place_limit` int(11) NOT NULL,
   KEY `bagira___user_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___user`
@@ -9860,9 +9860,9 @@ INSERT INTO `bagira___user` (`obj_id`, `email`, `password`, `surname`, `login`, 
 CREATE TABLE IF NOT EXISTS `bagira___user_group` (
   `obj_id` int(11) NOT NULL,
   `active` tinyint(1) NOT NULL,
-  `notice` text NOT NULL,
+  `notice` mediumtext NOT NULL,
   KEY `bagira___user_group_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___user_group`
@@ -9885,11 +9885,11 @@ CREATE TABLE IF NOT EXISTS `bagira___vote` (
   `obj_id` int(11) NOT NULL,
   `publ_date` date NOT NULL,
   `close` tinyint(1) NOT NULL,
-  `question` text NOT NULL,
+  `question` mediumtext NOT NULL,
   `multiselect` tinyint(1) NOT NULL,
   `addto` tinyint(1) NOT NULL,
   KEY `bagira___vote_fk_obj_id` (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bagira___vote`
