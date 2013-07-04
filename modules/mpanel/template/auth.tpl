@@ -20,7 +20,8 @@ $TEMPLATE['frame'] = <<<END
 
 <a class="logo" target="_blank" href="http://www.bagira-cms.ru" title="Bagira.CMS" tabindex="5"></a><span class="clear"></span>
 
-
+<div id="error" style="display: none;">%error%</div>
+	
 <form id="auth_form" action="%url%" method="post" onsubmit="return (wrongL);">
 
 	<label id="logintext" for="login">Адрес электронной почты</label>

@@ -13,7 +13,7 @@ class controller {
         // Попытка авторизации
         if(!empty($_POST['enter']))
             if (!user::auth($_POST['login'], $_POST['passw']))
-               $this->showAuthForm();
+               $this->showAuthForm('Вы ввели неправильный логин или пароль!');
             else
                 header("Location: ".$_SERVER["HTTP_REFERER"]);
 
@@ -292,11 +292,13 @@ class controller {
             return $sub_menu;
     }
 
-    private function showAuthForm(){
+    private function showAuthForm($error = ''){
     	if (file_exists(MODUL_DIR.'/mpanel/template/auth.tpl')) {
 			include(MODUL_DIR.'/mpanel/template/auth.tpl');
 
 			page::assign('title', lang::get('CMF'));
+			
+			page::assign('error', $error);
 
 			if (user::isGuest()) {
 

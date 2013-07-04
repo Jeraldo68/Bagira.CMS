@@ -19,6 +19,9 @@ jQuery(document).ready(function() {
 
     $("#login").focus();
 
+	if ($('#error').html() != '')
+		alert($('#error').html());
+
 });
 
 function testlogin(){
