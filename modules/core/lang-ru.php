@@ -50,9 +50,6 @@ $LANG['CONFIG_FORM_FIELD'][36] = 'Запрет на удаление Мини-Т
 $LANG['CONFIG_FORM_FIELD'][37] = 'Запрет использования IE8';
 
 
-
-$LANG['CONFIG_FORM_FIELD'][4] = '';
-
 $LANG['CONFIG_SAVE_OK'] = 'Изменения сохранены';
 $LANG['CONFIG_SAVE_OK_MSG'] = 'Глобальные настройки системы были изменены.';
 
