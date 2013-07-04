@@ -86,6 +86,7 @@ class system {
         page::globalVar('title', '');
         page::globalVar('site_name', domains::curDomain()->getSiteName());
         page::globalVar('base_email', domains::curDomain()->getEmail());
+		page::globalVar('site_url', $_SERVER['HTTP_HOST']);
         page::globalVar('user_id', user::get('id'));
         page::globalVar('pre_lang', languages::pre());
         page::globalVar('time', time());
