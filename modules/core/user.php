@@ -173,6 +173,26 @@ class user {
         return false;
     }
 
+
+	/**
+	 * @return string
+	 * @param string $length - указываем длинну пароля
+	 * @param string $register - 1 с учетом регистра, 0 - без учета регистра
+	 * @desc Возвращает сгенерированный пароль
+	 */
+	
+	static function genPass($length = 6, $register = 0) {
+		$chars = "qazxswedcvfrtgbnhyujmkiolp1234567890QAZXSWEDCVFRTGBNHYUJMKIOLP";
+		$chars = ($register == 0) ? strtolower($chars) : $chars;
+		$size = StrLen($chars) - 1;
+
+		$pass = '';
+		while($length--) $pass .= $chars[rand(0,$size)];
+
+		return $pass;
+	}
+	
+
 	/**
 	 * @return string
 	 * @param string $count - указываем какое количество байт из IP адреса вернуть
