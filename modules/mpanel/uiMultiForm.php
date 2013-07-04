@@ -265,8 +265,8 @@ class uiMultiForm extends uiTableFunctions {
 	            } else {
 
 					$check = false;
-					foreach ($fields as $val) {
-						if (!empty($val)) $check = true;
+					foreach ($fields as $key => $val) {
+						if (!empty($val) && $key != 'd_def_lang') $check = true;
 					} 
 
 	            	if ($check) {
