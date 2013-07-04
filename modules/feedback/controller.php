@@ -69,7 +69,9 @@ class controller {
                 $obj_id = $obj->save();
 
                 if ($obj_id) {
-
+					
+					$obj = new ormPage($obj_id);
+					
                     $obj->pseudo_url = $obj_id;
                     $obj->save();
 
