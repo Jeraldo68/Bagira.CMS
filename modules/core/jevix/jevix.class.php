@@ -1162,21 +1162,21 @@ class Jevix{
 		if($this->curCh<>'&') return false;
 		$this->saveState();
 		$this->matchCh('&');
-		if($this->matchCh('#')){
+		if($this->matchCh('#')) {
 			$entityCode = 0;
-			if(!$this->number($entityCode) || !$this->matchCh(';')){
+			if(!$this->number($entityCode) || !$this->matchCh(';')) {
 				$this->restoreState();
 				return false;
 			}
-			$entityCh = html_entity_decode("&#$entityCode;", ENT_COMPAT, 'UTF-8');
+			$entityCh = "&#$entityCode;"; //html_entity_decode("&#$entityCode;", ENT_COMPAT, 'UTF-8');
 			return true;
-		} else{
+		} else {
 			$entityName = '';
-			if(!$this->name($entityName) || !$this->matchCh(';')){
+			if(!$this->name($entityName) || !$this->matchCh(';')) {
 				$this->restoreState();
 				return false;
 			}
-			$entityCh = html_entity_decode("&$entityName;", ENT_COMPAT, 'UTF-8');
+			$entityCh = "&$entityName;"; //html_entity_decode("&$entityName;", ENT_COMPAT, 'UTF-8');
 			return true;
 		}
 	}
