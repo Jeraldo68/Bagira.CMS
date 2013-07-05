@@ -1000,6 +1000,10 @@ class structureMacros {
 					else if ($field->getType() == 75 && !file_exists(ROOT_DIR.$value))
 		    			// Тип изображение
 		    			$value = '';
+					else if ($field->getType() == 25)
+						$value = ($value == '0000-00-00') ? '' : $value;
+					else if ($field->getType() == 32)
+						$value = ($value == '0000-00-00 00:00:00') ? '' : $value;
 
 	            	page::assign('obj.id', $obj->id);
 		            page::assign('obj.name', $obj->name);

@@ -229,9 +229,10 @@ class ormObject extends innerErrorList {
 
             // Дата
             case 25:
-
                 if (!empty($value))
                     $tmp = system::checkVar($value, isDate);
+				else
+					$tmp = '0000-00-00';
 
                 break;
 
@@ -244,6 +245,9 @@ class ormObject extends innerErrorList {
             case 32:
                 if (!empty($value))
                     $tmp = system::checkVar($value, isDateTime);
+				else
+					$tmp = '0000-00-00 00:00:00';
+				
                 break;
 
 			// Большой текст
