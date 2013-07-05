@@ -63,7 +63,8 @@ jQuery(document).ready(function() {
 			ShowAlert($('#baseMessageBox').attr("title"));
 
 	$("#lightBox a[rel^='prettyPhoto']").prettyPhoto({
-	  	theme: 'dark_rounded'
+	  	theme: 'dark_rounded',
+		social_tools: ''
 	});
 
 

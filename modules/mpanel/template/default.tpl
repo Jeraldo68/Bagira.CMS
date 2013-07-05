@@ -17,8 +17,8 @@
 <script type="text/javascript" src="/css_mpanel/jquery-ui-1.8.13.custom.min.js"></script>
 <script src="/css_mpanel/i18n/jquery.ui.datepicker-ru.js"></script>
 
-<link rel="stylesheet" href="/css_mpanel/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
-<script src="/css_mpanel/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="/css_mpanel/prettyPhoto/css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
+<script src="/css_mpanel/prettyPhoto/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
 
 <script type="text/javascript" src="/css_mpanel/lang-ru.js"></script>
 <script type="text/javascript" src="/css_mpanel/main.js"></script>
