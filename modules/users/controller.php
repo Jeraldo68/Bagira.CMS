@@ -5,7 +5,7 @@ class controller {
     // Обработчик авторизации пользователя
     public function authAction() {
 
-   		if (!user::auth(system::POST('login'), system::POST('passw'))) {
+   		if (!user::auth(trim(system::POST('login')), trim(system::POST('passw')))) {
 
             if (system::isAjax()) {
 
