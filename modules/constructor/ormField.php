@@ -11,7 +11,7 @@
 class ormField extends innerErrorList {
 
     private $id, $group_id, $copy_to, $class_id, $is_clone, $position;
-    private $name, $sname, $hint, $type, $list_id, $view, $search, $inherit, $filter, $required, $system, $jevix, $uniqum, $quick_add, $max_size, $relation, $spec;
+    private $name, $sname, $hint, $type, $list_id, $view, $search, $inherit, $filter, $required, $system, $jevix, $root_id, $uniqum, $quick_add, $max_size, $relation, $spec;
 
     private $old_pos, $old_type, $old_sname, $old_group_id, $old_system, $inher_flag = false;
 
@@ -64,6 +64,8 @@ class ormField extends innerErrorList {
             $this->relation = $row['f_relation'];
             $this->spec = $row['f_spec'];
 
+			$this->root_id = $row['f_root_id'];
+
             $this->class_id = $row['fg_class_id'];
 
         } else {
@@ -102,6 +104,8 @@ class ormField extends innerErrorList {
                     $this->is_clone = $row['f_is_clone'];
                     $this->spec = $row['f_spec'];
 
+					$this->root_id = $row['f_root_id'];
+
                     $this->uniqum = $row['f_uniqum'];
                     $this->quick_add = $row['f_quick_add'];
                     $this->relation = $row['f_relation'];
@@ -136,7 +140,7 @@ class ormField extends innerErrorList {
         }
 
         $this->system = 0;
-        $this->jevix = 0;
+        //$this->jevix = 0;
         $this->is_clone = 1;
     }
 
@@ -364,6 +368,14 @@ class ormField extends innerErrorList {
 		$this->jevix = system::checkVar($value, isBool);
 	}
 
+	// root_id
+	public function getRootId(){
+		return $this->root_id;
+	}
+
+	public function setRootId($value){
+		$this->root_id = system::checkVar($value, isInt);
+	}
 
     // Уникальность значения
     public function getUniqum(){
@@ -536,7 +548,8 @@ class ormField extends innerErrorList {
 							f_uniqum = "'.$this->uniqum.'",
 							f_spec = "'.$this->spec.'",
 							f_system = "'.$this->system.'",
-							f_jevix = "'.$this->jevix.'"
+							f_jevix = "'.$this->jevix.'",
+							f_root_id = "'.$this->root_id.'"
 							'.$sql_pos.'
 						WHERE f_id = "'.$this->id.'";';
         else
@@ -557,6 +570,7 @@ class ormField extends innerErrorList {
 							f_quick_add = "'.$this->quick_add.'",
 							f_system = "'.$this->system.'",
 							f_jevix = "'.$this->jevix.'",
+							f_root_id = "'.$this->root_id.'",
 							f_relation = "'.$this->relation.'"
 							'.$sql_pos.'
 						WHERE f_id = "'.$this->id.'";';
@@ -664,6 +678,7 @@ class ormField extends innerErrorList {
 							f_required = "'.$this->required.'",
 							f_system = "'.$this->system.'",
 							f_jevix = "'.$this->jevix.'",
+							f_root_id = "'.$this->root_id.'",
 							f_is_clone = "'.$this->is_clone.'",
 							f_max_size = "'.$this->max_size.'",
 							f_spec = "'.$this->spec.'",

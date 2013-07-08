@@ -73,7 +73,7 @@ jQuery(document).ready(function() {
 
 		current_ObjectLink = $(this).attr('id');
 
-        $("#objectLinkTree").attr('src', $("#admin_url").val() + '/getObjectLinksTree/'+$(this).attr('id'));
+        $("#objectLinkTree").attr('src', $("#admin_url").val() + '/getObjectLinksTree/'+$(this).attr('id')+'/'+$(this).attr('data-root_id'));
 
         $("#objectLinkDiv").dialog({
 				autoOpen: false,

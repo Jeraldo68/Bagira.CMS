@@ -41,6 +41,9 @@ class __field {
             $relation = $obj->getRelType();
             $spec = $obj->getSpec();
 
+			$root_id = $obj->getRootId();
+			page::assign('root_id', $root_id);
+			
             $fr = ($obj->getSName() == 'name') ? '_name' : '';
 
 			page::assign('right', 'field_proc_upd');
@@ -132,6 +135,7 @@ class __field {
 	    $obj->setQuickAdd(system::POST('quick_add'));
         $obj->setRelType(system::POST('reltype'));
         $obj->setSpec(system::POST('spec'));
+		$obj->setRootId(system::POST('root_id'));
 
         // Работа с привязанным справочником
 	    if (system::POST('type') == 95 || system::POST('type') == 90 || system::POST('type') == 97) {

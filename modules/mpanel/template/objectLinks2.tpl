@@ -6,7 +6,7 @@ $TEMPLATE['frame'] = <<<END
     <span id="%field_id%" class="tree addObjectLink"></span>
 
 <input name="%field_name%[]" type="hidden" value="">
- 	<ul class="objectsLink" id="objectsLinkList_%field_id%" rel="%field_name%">%list%</ul>
+ 	<ul class="objectsLink" id="objectsLinkList_%field_id%" rel="%field_name%" data-root_id="%field_root_id%">%list%</ul>
 
 END;
 
@@ -39,8 +39,9 @@ $TEMPLATE['tree_frame'] = <<<END
 	<script type="text/javascript" src="/css_mpanel/jquery.cookie.js"></script>
 	<link type="text/css" href="/css_mpanel/ui-lightness/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
 <script type="text/javascript" src="/css_mpanel/jquery-ui-1.8.13.custom.min.js"></script>
-	<link rel="stylesheet" href="/css_mpanel/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
-	<script src="/css_mpanel/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+
+	<link rel="stylesheet" href="/css_mpanel/prettyPhoto/css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
+	<script src="/css_mpanel/prettyPhoto/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
 
 	<script type="text/javascript" src="/css_mpanel/lang-ru.js"></script>
 	<script type="text/javascript" src="/css_mpanel/main.js"></script>

@@ -864,6 +864,7 @@ class ui {
             if (($field instanceof ormField) && !$field->issetErrors()) {
 
                 page::assign('field_id', $field->getSName().$prefix);
+				page::assign('field_root_id', $field->getRootId());
                 page::assign('ol_width', $width);
 
                 if (empty($fname))
@@ -926,7 +927,12 @@ class ui {
             $tree = new ormTree(457, 0);
             $tree->miniStyle();
             $tree->setClass('ormPage');
-            $tree->setRoot(0, reg::getKey(ormPages::getPrefix().'/title_prefix'));
+			if (system::url(2) != '' && is_numeric(system::url(2))) {
+				$tmp_obj = new ormPage(system::url(2));
+				$tree->setRoot(system::url(2), $tmp_obj->name);
+			} else {
+				$tree->setRoot(0, reg::getKey(ormPages::getPrefix().'/title_prefix'));
+			}
             $tree->setRightAjaxLoad('tree');
 
             page::assign('tree', $tree->getHTML());

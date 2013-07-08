@@ -31,6 +31,11 @@ $TEMPLATE['frame'] = <<<END
 	%reltype%
 	</div>
 
+	<div class="field_box" id="divRootId" %sh3%>
+	<label>%text.21%</label>
+	<input type="text" class="input" name="root_id" value="%root_id%">
+	</div>
+
 	<div class="field_box" id="divList" %sh%>
 	<label> %text.5% </label>
 	%list_id%

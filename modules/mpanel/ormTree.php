@@ -169,11 +169,12 @@ class ormTree {
 
     private function getTreeObject($section_id) {
         if ($this->isPagesTree) {
-            if ($page = ormPages::getPageOfSection($section_id, $this->orm_classes))
+            if ($page = ormPages::getPageOfSection($section_id, $this->orm_classes)) {
                 if ($page->isEditable())
                     return $page;
                 else
                     return $this->getTreeObject($section_id);
+			}
         }
     }
 
@@ -311,10 +312,13 @@ class ormTree {
             page::assign('item.notice', '');
             page::assign('obj.ico', '/css_mpanel/tree/images/classes/core.png');
             page::assign('obj.url', '');
-            page::assign('close', (empty($subm)) ? '' : ' open');
+			//вторая тернарка нужна на тот случай если обхекты не образуют структуру сайта и ветку можно было открыть.
+            page::assign('close', (empty($subm)) ? (ormPages::issetChildren($this->root_id) ? ' closed' : '') : ' open'); 
             page::fParse('items', $TEMPLATE['items']);
             page::fParse('frame_items', $TEMPLATE['frame_items']);
 
+			
+			
             // Выводим список прав для веточек
             $item = '';
             $zagl_width = 0;
