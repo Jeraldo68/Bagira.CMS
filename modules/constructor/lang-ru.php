@@ -97,6 +97,7 @@ $LANG['CONSTR_TYPE_LIST'][95] = 'Справочник - Множественны
 $LANG['CONSTR_TYPE_LIST'][97] = 'Подчиненный справочник';
 $LANG['CONSTR_TYPE_LIST'][100] = 'Связь с объектом';
 $LANG['CONSTR_TYPE_LIST'][105] = 'Теги';
+$LANG['CONSTR_TYPE_LIST'][200] = 'Drag&Drop файловый загрузчик';
 
 
 $LANG['CONSTR_TYPE_LIST_name'][10] = 'Строка - Текстовое поле';

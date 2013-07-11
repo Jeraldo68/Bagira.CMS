@@ -850,7 +850,7 @@ class ormField extends innerErrorList {
 
             $type = 'LONGTEXT';
 
-            // Выпадающий список   Список c множественным выбором  	Ссылка на дерево
+            // Выпадающий список   Список c множественным выбором  	Ссылка на дерево   Drag&Drop file uploader
         } else $type = false;
 
         return $type;

@@ -257,8 +257,16 @@ $TEMPLATE['field_105'] = <<<END
 END;
 
 
-
-
+$TEMPLATE['field_200'] = <<<END
+<div class="fieldBox" style="width: 950px;">
+	<div id="dropZone" data-id="%obj.id%">
+		Для загрузки, перетащите файлы сюда.
+	</div>
+	<div class="dropZoneList">
+		%element%
+	</div>
+</div>
+END;
 
 
 ?>

@@ -659,3 +659,14 @@ a.social-ok { padding-left:20px;margin-left:30px; background: url(/css_mpanel/i/
 .social-auth-block a {text-decoration:none;}
 .social-auth-block a:hover {text-decoration:underline;}
 .first label {cursor:pointer;}
+
+#dropZone { color: #8D8E97; font-size: 18px; text-align: center; width: 434px; padding: 32px 0; margin: 10px 0; margin-right: 40px; background: #eee; float: left;
+	border: 1px dashed #ccc; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;}
+#dropZone.hover {background: #ddd; border-color: #aaa; color: white;}
+#dropZone.drop {background: #afa; border-color: #0f0; color: white; text-shadow: 1px 1px 0 grey;}
+#dropZone.error {background: #faa; border-color: #f00; color: red;}
+.dropZoneList{float: left; background: white; overflow-y: scroll; width: 434px; height: 78px; margin: 10px 0; margin-left: 20px; border: 1px solid #ABADB3;}
+.dropListDel{float: right; margin-left: 10px; background: url("/css_mpanel/i/i11.png") left -614px no-repeat; width: 16px; height: 16px; text-indent: -9999px; cursor: pointer;}
+.dropListIco{float: left; margin-right: 10px;}
+.dropListItem{padding: 5px 10px; max-width: 400px;}
+.dropListItem:hover{background: #F3F3F3;}

@@ -1,7 +1,83 @@
 <?php
 
 class controller {
+	
+	public function uploaderAction() {
+		if (user::isAdmin()) {
 
+			$parent_id = system::url(2);
+			
+			if ($parent_id != '' && is_numeric($parent_id)) {
+
+				$img_arr = array('png', 'jpg', 'jpeg', 'bmp');
+				
+				if (isset($_FILES['file']['name'])){
+
+					$ext = system::fileExt($_FILES['file']['name']);
+					
+
+					$obj = new ormPage();
+					$obj->setParent($parent_id);
+					
+					//картинки
+					if (system::fileExtIs($_FILES['file']['name'], $img_arr)) {
+						$_FILES['file_image'] = $_FILES['file'];
+						$obj->setClass("photo");
+						$obj->image = 1;
+					} else { //фалйы
+						$_FILES['file_file'] = $_FILES['file'];
+						$obj->setClass("file");
+						$obj->file = 1;
+					}
+
+
+					$obj->template_id = 1;
+					$obj->template2_id = 0;
+
+					$obj->name = $_FILES['file']['name'];
+					$obj->h1 = $_FILES['file']['name'];
+					$obj->title = $_FILES['file']['name'];
+					$obj->pseudo_url = rand(10000, 99999);
+
+					$obj->view_in_menu = 1;
+					$obj->view_submenu = 1;
+					$obj->active = 1;
+					$obj->in_search = 0;
+					$obj->in_index = 1;
+					
+					if ($obj->save()) {
+
+						$obj = ormPages::get($obj->id);
+						
+						if (file_exists(MODUL_DIR.'/mpanel/template/uploader_list.tpl')) {
+
+							include(MODUL_DIR.'/mpanel/template/uploader_list.tpl');
+
+							
+							$class = $obj->getClass()->getSName();
+
+							if ($class == 'file') {
+								page::assign('drop.url', $obj->file);
+							} else if ($class == 'photo') {
+								page::assign('drop.url', $obj->image);
+							}
+
+							page::assign('drop.ico', $class);
+							page::assign('drop.name', $obj->name);
+							page::assign('drop.id', $obj->id);
+							if (isset($TEMPLATE['item_'.$class]))
+								print_r(page::parse($TEMPLATE['item_'.$class]));
+						}
+					}
+				}
+				
+			}
+
+			system::stop();
+		}
+		
+		return ormPages::get404();
+	}
 
 	public function defAction() {
 

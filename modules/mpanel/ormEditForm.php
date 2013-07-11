@@ -575,6 +575,40 @@ class ormEditForm {
   			// Связь с объектом
       		page::assign('element', ui::objectLinks($this->obj, $field['f_id']));
 
+		} else if ($field['f_type'] == 200) {
+
+			if (file_exists(MODUL_DIR.'/mpanel/template/uploader_list.tpl')) {
+
+				include(MODUL_DIR.'/mpanel/template/uploader_list.tpl');
+
+				
+				$sel = new ormSelect('file|photo');
+				$sel->where('parents', '=', $this->obj->id);
+				$sel->orderBy('position', asc);
+
+				$items = '';
+				
+				while ($item = $sel->getObject()) {
+					$class = $item->getClass()->getSName();
+					
+					if ($class == 'file') {
+						page::assign('drop.url', $item->file);
+					} else if ($class == 'photo') {
+						page::assign('drop.url', $item->image);
+					}
+
+					page::assign('drop.ico', $class);
+					page::assign('drop.name', $item->name);
+					page::assign('drop.id', $item->id);
+					if (isset($TEMPLATE['item_'.$class]))
+						$items .= page::parse($TEMPLATE['item_'.$class]);
+					
+				}
+				
+				page::assign('list', $items);
+				page::assign('element', page::parse($TEMPLATE['frame_view']));
+				
+			}
 		}
 
 

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: openserver:3306
--- Время создания: Июл 08 2013 г., 12:52
+-- Время создания: Июл 11 2013 г., 10:42
 -- Версия сервера: 5.1.63-community-log
 -- Версия PHP: 5.2.17
 
@@ -277,7 +277,7 @@ CREATE TABLE IF NOT EXISTS `bagira_fields` (
   PRIMARY KEY (`f_id`),
   KEY `f_group_id` (`f_group_id`),
   KEY `f_list_id` (`f_list_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1785 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1786 ;
 
 --
 -- Дамп данных таблицы `bagira_fields`
@@ -876,7 +876,8 @@ INSERT INTO `bagira_fields` (`f_id`, `f_group_id`, `f_position`, `f_name`, `f_sn
 (1780, 129, 1, 'Общее количество броней', 'booking_count', '', 40, NULL, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (1781, 129, 2, 'Количество выкупленных броней', 'buy_booking_count', '', 40, NULL, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (1782, 129, 3, 'Количество не выкупленных броней', 'no_buy_booking_count', '', 40, NULL, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(1783, 50, 15, 'Ограничение на кол-во бронируемых мест', 'place_limit', '', 40, NULL, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+(1783, 50, 15, 'Ограничение на кол-во бронируемых мест', 'place_limit', '', 40, NULL, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(1785, 96, 10, 'test', 'test', '', 200, NULL, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1252,7 +1253,7 @@ CREATE TABLE IF NOT EXISTS `bagira_objects` (
   `o_to_trash` tinyint(1) NOT NULL,
   PRIMARY KEY (`o_id`),
   KEY `o_class_id` (`o_class_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1786 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1818 ;
 
 --
 -- Дамп данных таблицы `bagira_objects`
@@ -1305,7 +1306,7 @@ INSERT INTO `bagira_objects` (`o_id`, `o_name`, `o_class_id`, `o_create_date`, `
 (1597, 'Фотография 7', 48, '2011-03-17 22:51:47', '2011-03-17 22:51:47', 0),
 (1598, 'Фотография 8', 48, '2011-03-17 22:52:07', '2011-03-17 22:52:07', 0),
 (1600, 'Фотография 10', 48, '2011-03-17 22:52:49', '2011-06-07 08:28:50', 0),
-(1601, 'Зеленые луга', 61, '2011-03-17 22:55:27', '2012-06-22 14:44:02', 0),
+(1601, 'Зеленые луга', 61, '2011-03-17 22:55:27', '2013-07-10 18:57:30', 0),
 (1602, 'Фотография 1', 48, '2011-03-17 22:55:53', '2011-03-17 22:55:53', 0),
 (1603, 'Фотография 2', 48, '2011-03-17 22:56:14', '2011-03-17 22:56:14', 0),
 (1611, 'Обзор мобильной ОС Windows Phone', 47, '2011-03-17 23:39:50', '2011-06-22 09:24:00', 0),
@@ -1666,12 +1667,12 @@ INSERT INTO `bagira_rels` (`r_field_id`, `r_parent_id`, `r_children_id`, `r_posi
 (NULL, 339, 1585, 4),
 (NULL, 338, 1586, 1),
 (NULL, 1570, 1590, 1),
-(NULL, 1590, 1597, 8),
-(NULL, 1590, 1598, 9),
-(NULL, 1590, 1600, 11),
+(NULL, 1590, 1597, 18),
+(NULL, 1590, 1598, 19),
+(NULL, 1590, 1600, 21),
 (NULL, 1570, 1601, 2),
-(NULL, 1601, 1602, 1),
-(NULL, 1601, 1603, 2),
+(NULL, 1601, 1602, 23),
+(NULL, 1601, 1603, 24),
 (NULL, 1568, 1611, 3),
 (NULL, 350, 1612, 4),
 (NULL, NULL, 1624, 13),
@@ -1876,7 +1877,7 @@ CREATE TABLE IF NOT EXISTS `bagira_revue` (
   `rev_ip` varchar(15) NOT NULL,
   PRIMARY KEY (`rev_id`),
   KEY `rev_obj_id` (`rev_obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=69 ;
 
 -- --------------------------------------------------------
 
@@ -1963,11 +1964,11 @@ INSERT INTO `bagira_rights` (`r_obj_id`, `r_state`, `r_group_id`) VALUES
 (347, 2, NULL),
 (348, 2, NULL),
 (1590, 2, NULL),
-(1601, 2, NULL),
 (350, 2, NULL),
 (1569, 2, NULL),
 (1784, 2, NULL),
-(1785, 2, NULL);
+(1785, 2, NULL),
+(1601, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -6134,8 +6135,6 @@ INSERT INTO `bagira_search_rankings` (`sr_word_id`, `sr_rank`, `sr_obj_id`, `sr_
 (9900, 22, 1568, 1, 1),
 (10976, 22, 1570, 1, 1),
 (10729, 22, 1590, 1, 1),
-(10243, 22, 1601, 1, 1),
-(10977, 22, 1601, 1, 1),
 (10978, 22, 350, 1, 1),
 (8412, 22, 350, 1, 1),
 (10374, 22, 1628, 1, 1),
@@ -6189,7 +6188,9 @@ INSERT INTO `bagira_search_rankings` (`sr_word_id`, `sr_rank`, `sr_obj_id`, `sr_
 (11004, 22, 1648, 1, 1),
 (11005, 22, 1649, 1, 1),
 (11006, 22, 1649, 1, 1),
-(11007, 22, 1649, 1, 1);
+(11007, 22, 1649, 1, 1),
+(10243, 22, 1601, 1, 1),
+(10977, 22, 1601, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -6201,7 +6202,7 @@ CREATE TABLE IF NOT EXISTS `bagira_search_words` (
   `w_id` int(11) NOT NULL AUTO_INCREMENT,
   `w_name` varchar(50) NOT NULL,
   PRIMARY KEY (`w_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11015 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11018 ;
 
 --
 -- Дамп данных таблицы `bagira_search_words`
@@ -8833,7 +8834,10 @@ INSERT INTO `bagira_search_words` (`w_id`, `w_name`) VALUES
 (11011, 'Wide'),
 (11012, 'B207FVQA'),
 (11013, 'Gorenje'),
-(11014, '20');
+(11014, '20'),
+(11015, 'qV6MC8DUsK8'),
+(11016, 'jpg'),
+(11017, 'VneK8YZXU5M');
 
 -- --------------------------------------------------------
 
