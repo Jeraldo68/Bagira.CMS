@@ -126,7 +126,7 @@ class controller {
                     for($i = 0; $i < count($this->files); $i++)
                        $mail->AddAttachment($this->files[$i][0], $this->files[$i][1]);
                     */
-                    $mail->AddAddress($form_obj->mailing_list);
+                    $mail->AddAddress($this->parse($form_obj->mailing_list));
                     $mail->WordWrap = 50;
                     $mail->IsHTML(true);
 
