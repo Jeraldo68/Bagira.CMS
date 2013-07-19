@@ -1089,11 +1089,14 @@ class ormObject extends innerErrorList {
                 }
 
                 // Удаляем КЭШ рисунков, если были изменения
-				// Если файл был загружен через выбор на сервере, не удаляем его
-                if (system::fileName($value) != system::fileName($cur_file) && strpos($cur_file, '/upload/custom/') === false) {
+                if (system::fileName($value) != system::fileName($cur_file) ) {
                     $this->preResizeJpeg($value);
                     $this->deleteCacheImages(system::filePathToPrefix($cur_file).system::fileName($cur_file));
-					@unlink(ROOT_DIR.$cur_file); //удаляем прошлый файл
+
+					// Если файл был загружен через выбор на сервере, не удаляем его
+					if (strpos($cur_file, '/upload/custom/') === false) {
+						@unlink(ROOT_DIR.$cur_file); //удаляем прошлый файл
+					}
                 }
 
                 return '`'.$field.'` = "'.$value.'", ';
@@ -1377,7 +1380,9 @@ class ormObject extends innerErrorList {
 			foreach ($this->getClass()->loadFields() as $name => $field) {
 				if (in_array($field['f_type'], array(70, 75, 80, 85))) {
 					
-					@unlink(ROOT_DIR.$this->$name);
+					if (strpos($this->$name, '/upload/custom/') === false) {
+						@unlink(ROOT_DIR.$this->$name);
+					}
 					
 					if ($field['f_type'] == 75) {
 						$this->deleteCacheImages(system::filePathToPrefix($this->$name).system::fileName($this->$name));

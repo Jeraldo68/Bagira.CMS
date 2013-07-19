@@ -533,13 +533,15 @@ class system {
 
 	//вернет префикс файла по его пути
 	static function filePathToPrefix($file_name) {
-		if (file_exists(ROOT_DIR.$file_name)) {
-			$pref = dirname($file_name);
-			$pref = str_replace ("/", "_", $pref);
-			$pref = substr($pref, 1).'_';
-		} else
-			$pref = '';
+
+		if (system::checkVar($file_name, isAbsUrl))
+			return '';
 		
+		$pref = dirname($file_name);
+		$pref = str_replace ("/", "_", $pref);
+		$pref = substr($pref, 1);
+		$pref = empty($pref) ? '' : $pref.'_';
+
 		return $pref;
 	}
 
