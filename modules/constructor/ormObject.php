@@ -1052,8 +1052,9 @@ class ormObject extends innerErrorList {
                     $tmp = system::copyFile($_FILES['file_'.$field]['tmp_name'], $_FILES['file_'.$field]['name'], $dirname);
                     $value = (empty($tmp)) ? $value : $tmp;
                 }
-				
-                if (system::fileName($value) != system::fileName($cur_file)) {
+
+				// Если файл был загружен через выбор на сервере, не удаляем его
+                if (system::fileName($value) != system::fileName($cur_file) && strpos($cur_file, '/upload/custom/') === false) {
 					@unlink(ROOT_DIR.$cur_file); //удаляем прошлый файл
                 }
 				
@@ -1083,14 +1084,15 @@ class ormObject extends innerErrorList {
 					if (!file_exists(ROOT_DIR.$dirname)) {
 						mkdir(ROOT_DIR.$dirname);
 					}
-                    $tmp = system::copyFile($_FILES['file_'.$field]['tmp_name'], $this->id.'_'.$_FILES['file_'.$field]['name'], $dirname);
+                    $tmp = system::copyFile($_FILES['file_'.$field]['tmp_name'], $_FILES['file_'.$field]['name'], $dirname);
                     $value = (empty($tmp)) ? $value : $tmp;
                 }
 
                 // Удаляем КЭШ рисунков, если были изменения
-                if (system::fileName($value) != system::fileName($cur_file)) {
+				// Если файл был загружен через выбор на сервере, не удаляем его
+                if (system::fileName($value) != system::fileName($cur_file) && strpos($cur_file, '/upload/custom/') === false) {
                     $this->preResizeJpeg($value);
-                    $this->deleteCacheImages(system::fileName($cur_file));
+                    $this->deleteCacheImages(system::filePathToPrefix($cur_file).system::fileName($cur_file));
 					@unlink(ROOT_DIR.$cur_file); //удаляем прошлый файл
                 }
 
@@ -1112,7 +1114,8 @@ class ormObject extends innerErrorList {
                     $value = (empty($tmp)) ? $value : $tmp;
                 }
 
-				if (system::fileName($value) != system::fileName($cur_file)) {
+				// Если файл был загружен через выбор на сервере, не удаляем его
+				if (system::fileName($value) != system::fileName($cur_file) && strpos($cur_file, '/upload/custom/') === false) {
 					@unlink(ROOT_DIR.$cur_file); //удаляем прошлый файл
                 }
 				
@@ -1133,7 +1136,8 @@ class ormObject extends innerErrorList {
                     $value = (empty($tmp)) ? $value : $tmp;
                 }
 
-				if (system::fileName($value) != system::fileName($cur_file)) {
+				// Если файл был загружен через выбор на сервере, не удаляем его
+				if (system::fileName($value) != system::fileName($cur_file) && strpos($cur_file, '/upload/custom/') === false) {
 					@unlink(ROOT_DIR.$cur_file); //удаляем прошлый файл
                 }
 				
@@ -1376,7 +1380,7 @@ class ormObject extends innerErrorList {
 					@unlink(ROOT_DIR.$this->$name);
 					
 					if ($field['f_type'] == 75) {
-						$this->deleteCacheImages(system::fileName($this->$name));
+						$this->deleteCacheImages(system::filePathToPrefix($this->$name).system::fileName($this->$name));
 					}
 				}
 			}

@@ -27,8 +27,9 @@ class coreMacros {
 	            $scale = (!is_numeric($scale_type)) ? constant($scale_type) : $scale_type;
 
 				$dir = '/cache/img/'.$scale_type.'_'.$width.'x'.$height.'_'.$watermark;
-	            $new_file = $dir.'/'.system::fileName($file_name);
 
+	            $new_file = $dir.'/'.system::filePathToPrefix($file_name).system::fileName($file_name);
+				
 				if (!file_exists(ROOT_DIR.$new_file)) {
 
 	                if (!is_dir(ROOT_DIR.$dir)) @mkdir(ROOT_DIR.$dir, 0777);
@@ -41,8 +42,8 @@ class coreMacros {
 					$img->save(ROOT_DIR.$new_file);
 	            }
 
-	            if (file_exists(ROOT_DIR.$new_file))
-	            	return $new_file;
+				if (file_exists(ROOT_DIR.$new_file))
+					return $new_file;
             }
  	}
 

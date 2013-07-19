@@ -531,6 +531,17 @@ class system {
 
     // +++	Работа с файловой системой	+++
 
+	//вернет префикс файла по его пути
+	static function filePathToPrefix($file_name) {
+		if (file_exists(ROOT_DIR.$file_name)) {
+			$pref = dirname($file_name);
+			$pref = str_replace ("/", "_", $pref);
+			$pref = substr($pref, 1).'_';
+		} else
+			$pref = '';
+		
+		return $pref;
+	}
 
     // Выделяет из пути к файлу - имя файла с расширением
 	static function fileName($file_name) {
