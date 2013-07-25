@@ -8,7 +8,7 @@ RewriteRule ^robots\.txt$ index.php?way=%{THE_REQUEST} [L]
 RewriteRule ^sitemap\.xml$ index.php?way=%{THE_REQUEST} [L]
 RewriteRule ^([^\.]*)$ index.php?way=%{THE_REQUEST} [L,QSA]
 
-<FilesMatch "\.(log)$">
+<FilesMatch "\.(log|rar|sql|zip|tar|gzip)$">
 Order allow,deny
 Deny from all
 </FilesMatch>
