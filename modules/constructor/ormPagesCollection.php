@@ -691,7 +691,7 @@ class ormPages {
 //		$text .= 'Disallow: /booking'.Chr(13);
 //		$text .= 'Allow: /booking/schedule'.Chr(13);
 
-        $text .= 'Host: www.'.domains::curDomain()->getName().Chr(13);
+        $text .= 'Host: '.domains::curDomain()->getName().Chr(13);
         $text .= 'Sitemap: http://'.domains::curDomain()->getName().'/sitemap.xml'.Chr(13);
 
         return $text;

@@ -2,6 +2,11 @@ php_value display_errors 1
 php_value error_reporting 2047
 RewriteEngine On
 
+#RewriteCond %{HTTP_HOST} ^www.yourdomain.ru$ [NC]
+#RewriteRule ^(.*)$ http://yourdomain.ru/$1 [R=301,L]
+#RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/
+#RewriteRule ^index\.php$ http://yourdomain.ru/ [R=301,L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 
 RewriteRule ^robots\.txt$ index.php?way=%{THE_REQUEST} [L]
