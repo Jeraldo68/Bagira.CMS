@@ -1392,6 +1392,8 @@ class ormObject extends innerErrorList {
 			
             $ret = db::q('DELETE FROM <<objects>> WHERE o_id = "'.$this->id.'";');
 
+			system::log(lang::get('USER_DEL_OBJECT').' "'.$this->name.'" (id: '.$this->id.')', info);
+			
             if($ret === false) {
                 $this->newError(12, 'Ошибка в SQL запросе!');
                 return false;

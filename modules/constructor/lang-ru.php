@@ -25,6 +25,8 @@ $LANG['BTN_NEW_CLASS'] = 'Добавить класс данных';
 $LANG['BTN_NEW_FGROUP'] = 'Добавить группу полей';
 $LANG['BTN_NEW_LIST'] = 'Добавить';
 
+$LANG['USER_DEL_OBJECT'] = 'Удалил объект';
+
 $LANG['CONSTR_LIST'] = 'Справочник: ';
 
 $LANG['CONSTR_FORM_FIELD'][1] = 'Имя класса';
