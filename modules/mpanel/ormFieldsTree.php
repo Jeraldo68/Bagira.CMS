@@ -202,15 +202,15 @@ class ormFieldsTree {
 
         while (list($key, $right) = each ($rights)){
 
-            if ($field_name == 'name' && $right['name'] == 'field_del')
+            if ($field_name == 'name' && $right != 'empty' && $right['name'] == 'field_del') {
 
                 $fieldRights .= page::parse($parse['item_right_null']);
 
-            else if ($right == 'empty' || !user::issetRight($right['name']))
+			} else if ($right == 'empty' || !user::issetRight($right['name'])) {
 
                 $fieldRights .= ($right != 'empty') ? '' : page::parse($parse['item_right_null']);
 
-            else {
+			} else {
 
                 page::assign('title', $right['title']);
                 page::assign('image_style', $right['class']);

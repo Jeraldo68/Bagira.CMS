@@ -205,9 +205,11 @@ class page {
         if (is_array($data)) $data = implode("", $data);
 
         reset(self::$assign);
-        while (list($key, $val) = each (self::$assign))
-            $data = preg_replace("/".self::$delimiters[0]."\s*".preg_quote($key)."\s*".self::$delimiters[1]."/", "$val", $data);
-
+        while (list($key, $val) = each (self::$assign)) {
+			if (!is_array($val))
+            	$data = preg_replace("/".self::$delimiters[0]."\s*".preg_quote($key)."\s*".self::$delimiters[1]."/", "$val", $data);
+		}
+			
         if ($type == 1){
             preg_match_all("/".self::$delimiters[0]."([a-z]*[0-9]*[_]*[.]*)+".self::$delimiters[1]."/", $data, $mass);
             while (list($key, $val) = each ($mass[0])) {

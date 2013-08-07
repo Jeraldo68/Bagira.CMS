@@ -316,20 +316,18 @@ class ormTree {
             page::assign('close', (empty($subm)) ? (ormPages::issetChildren($this->root_id) ? ' closed' : '') : ' open'); 
             page::fParse('items', $TEMPLATE['items']);
             page::fParse('frame_items', $TEMPLATE['frame_items']);
-
-			
 			
             // Выводим список прав для веточек
             $item = '';
             $zagl_width = 0;
             while (list($key, $right) = each ($this->rights)){
 
-                if ($right['java'] == 1)
+                if ($right != 'empty' && $right['java'] == 1)
                     $zagl_width += 20;
 
-                if ($right == 'empty' || (!user::issetRight($right['name']) && $right['name'] != 'getUrl()'))
+                if ($right == 'empty' || (!user::issetRight($right['name']) && $right['name'] != 'getUrl()')) {
                     $item .= ($right != 'empty') ? '' : page::parse($TEMPLATE['item_right_null']);
-                else {
+				} else {
                     page::assign('title', $right['title']);
                     page::assign('image_style', $right['class']);
                     page::assign('url', $main_url.$right['name'].'/');

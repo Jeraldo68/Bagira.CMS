@@ -179,7 +179,7 @@ class ormClasses {
      * @param integer $level - Уровень вложенности вызовов. Используется для организации рекурсии.
      * @desc Получаем список ORM-классов для объектов ormPage для вывода в списках с иерархией
      */
-    public function getPagesClassList($parent = '', $class_list = array(), $ret_list = array(), $level = '') {
+    public static function getPagesClassList($parent = '', $class_list = array(), $ret_list = array(), $level = '') {
 
         if (empty($class_list)) {
             $classes = self::get('section')->getAllInheritors();
