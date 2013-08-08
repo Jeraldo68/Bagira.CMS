@@ -941,10 +941,15 @@ class system {
     // Проверяет имеет ли указанное поле(пришедшее через POST) значение равное коду капчи.
     static function validCapcha($field_name) {
 
-        $ret = (system::POST($field_name) == $_SESSION['core_secret_number']);
-        $_SESSION['core_secret_number'] = '';
-        
-        return $ret;
+		$ret = true;
+		$confirm_code = trim(system::POST($field_name));
+
+		if ($confirm_code != $_SESSION['core_secret_number'] || $confirm_code == '') {
+			$ret = false;
+		}
+
+		$_SESSION['core_secret_number'] = '';
+		return $ret;
     }
 
     // Вернет в браузер ответ в формате Json. $param - список параметров ответа.
