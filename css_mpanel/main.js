@@ -162,6 +162,13 @@ jQuery(document).ready(function() {
 	/********************************************/
 	
 	
+	//область клика по чекбоксу
+	$('.basictable .pointer2').on('click', function(e) {
+		if ($(e.target).hasClass('pointer2')) {
+			var obj = $(this).find('input[type="checkbox"]:first');
+			obj.is(':checked') ? obj.removeAttr('checked') : obj.attr('checked', 'checked');
+		}
+	});
 	
     $("input#file_image, input#file_file").change(function() {
         if (!$("input#name").val()){
@@ -258,7 +265,7 @@ jQuery(document).ready(function() {
 		    },
 		});
 	});
-
+	
 
     // Форматируем поля типа время для удобства пользователя 
     $(".check_time").keyup( function(){
