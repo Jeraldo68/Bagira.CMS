@@ -161,15 +161,6 @@ jQuery(document).ready(function() {
 
 	/********************************************/
 	
-	
-	//область клика по чекбоксу
-	$('.basictable').on('click', '.pointer2',function(e) {
-		if ($(e.target).hasClass('pointer2')) {
-			var obj = $(this).find('input[type="checkbox"]:first');
-			obj.is(':checked') ? obj.removeAttr('checked') : obj.attr('checked', 'checked');
-		}
-	});
-	
     $("input#file_image, input#file_file").change(function() {
         if (!$("input#name").val()){
             var str = $(this).val();
