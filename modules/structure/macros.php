@@ -1034,9 +1034,10 @@ class structureMacros {
 	* @param string $field_name - Системное имя поля для которого будет выводится список значений справочника
 	* @param int $obj_id - ID объекта для которого формируется список
 	* @param string $templ_name - Шаблон оформления списка, структура шаблона аналогична структуре макроса %structure.objList()%
+	* @param int $max_count - Максимальное количество элементов в списке
 	* @desc МАКРОС: Выводит список значений справочника, соотвествующих указанному объекту
 	*/
- 	public function getPropertyList($field_name, $obj_id, $templ_name = 'default') {
+ 	public function getPropertyList($field_name, $obj_id, $templ_name = 'default', $max_count = 0) {
 
         $list = '';
 
@@ -1080,6 +1081,9 @@ class structureMacros {
 					        		$fields_str .= (empty($fields_str)) ? $val : ', '.$val;
 				        $sel->fields($fields_str);
 
+						if (!empty($max_count))
+							$sel->limit($max_count);
+					
                       // echo $fields_str;
 
 	                    // Перебираем объекты
