@@ -23,15 +23,66 @@ class __grouplist {
 
         ui::newButton(lang::get('BTN_NEW_UGROUP'), "/users/group_add");
 
+		function today($val, $obj) {
+			$sel = new ormSelect('user');
+			$sel->where('parents', '=', $obj->id);
+			$sel->where('create_date', '>=', date('Y-m-d 00:00:00'));
+			$sel->where('create_date', '<', date('Y-m-d 00:00:00', strtotime('+1 day')));
 
+			$count = $sel->getCount();
+
+			return $count > 0 ? '+'.$count : $count;
+		}
+
+		function yesterday($val, $obj) {
+			$sel = new ormSelect('user');
+			$sel->where('parents', '=', $obj->id);
+			$sel->where('create_date', '>=', date('Y-m-d 00:00:00', strtotime('-1 day')));
+			$sel->where('create_date', '<', date('Y-m-d 00:00:00'));
+
+			$count = $sel->getCount();
+
+			return $count > 0 ? '+'.$count : $count;
+		}
+
+		function curMonth($val, $obj) {
+			$sel = new ormSelect('user');
+			$sel->where('parents', '=', $obj->id);
+			$sel->where('create_date', '>=', date('Y-m-1 00:00:00'));
+
+			$count = $sel->getCount();
+
+			return $count > 0 ? '+'.$count : $count;
+		}
+
+		function prevMonth($val, $obj) {
+			$sel = new ormSelect('user');
+			$sel->where('parents', '=', $obj->id);
+			$sel->where('create_date', '>=', date('Y-m-1 00:00:00', strtotime('-1 month')));
+			$sel->where('create_date', '<', date('Y-m-1 00:00:00'));
+
+			$count = $sel->getCount();
+
+			return $count > 0 ? '+'.$count : $count;
+		}
+
+		function blackHole() {
+			return '';
+		}
+		
         $sel = new ormSelect('user_group');
 		$sel->orderBy('name', asc);
 
 		$table = new uiTable($sel);
 		$table->showSearch(true);
 
-        $table->addColumn('name', lang::get('USERS_TABLE_FIELD_5'), 0, true);
+        $table->addColumn('name', lang::get('USERS_TABLE_FIELD_5'), 0, true, true);
         $table->addColumn('children', lang::get('USERS_TABLE_FIELD_6'), 0, true, true, 'count');
+		$table->addColumn('', lang::get('USERS_NEW_TITLE'), 0, false, true, 'blackHole');
+        $table->addColumn('', lang::get('USERS_NEW_TODAY'), 0, false, true, 'today');
+        $table->addColumn('', lang::get('USERS_NEW_YESTARDAY'), 0, false, true, 'yesterday');
+        $table->addColumn('', lang::get('USERS_NEW_CUR_MONTH'), 0, false, true, 'curMonth');
+        $table->addColumn('', lang::get('USERS_NEW_PREV_MONTH'), 0, false, true, 'prevMonth');
 
         $table->defaultRight('userlist');
       	$table->addRight('userlist', 'users', single);

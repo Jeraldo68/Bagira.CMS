@@ -58,6 +58,12 @@ $LANG['USERS_TABLE_FIELD_7'] = 'Дата регистрации';
 $LANG['USERS_TABLE_FIELD_5'] = 'Название группы';
 $LANG['USERS_TABLE_FIELD_6'] = 'Количество пользователей';
 
+$LANG['USERS_NEW_TITLE'] = 'Новых:';
+$LANG['USERS_NEW_TODAY'] = 'Сегодня';
+$LANG['USERS_NEW_YESTARDAY'] = 'Вчера';
+$LANG['USERS_NEW_CUR_MONTH'] = 'Текущий месяц';
+$LANG['USERS_NEW_PREV_MONTH'] = 'Предыдущий месяц';
+
 $LANG['USERS_DEL_TITLE'] = 'Удаление пользователя';
 $LANG['USERS_DEL_TEXT'] = 'Вы действительно хотите удалить пользователя <b>&name&</b>?';
 
