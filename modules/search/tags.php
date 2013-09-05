@@ -180,6 +180,7 @@ class tags {
 	            			) and
 	            			('.$q_tags.') and
 	            			tr_obj_id = o_id and
+	            			o_to_trash = 0 and
 	            			o_id = p_obj_id and
 	            			active = 1 '.$cf.'
 	            		GROUP BY tr_obj_id) t;';
@@ -201,6 +202,7 @@ class tags {
 		            			) and
 		            			('.$q_tags.') and
 		            			tr_obj_id = o_id and
+		            			o_to_trash = 0 and
 		            			o_id = p_obj_id and
 		            			active = 1 '.$cf.'
 		            		GROUP BY tr_obj_id';
