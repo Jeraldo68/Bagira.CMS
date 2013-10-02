@@ -264,6 +264,10 @@ class ormFilterForm {
                     }
                 }
       		}
+
+			if (isset($parents) && !empty($parents)) {
+				$this->select->where('parents', '=', $parents, 'AND');
+			}
 		}
     }
 
