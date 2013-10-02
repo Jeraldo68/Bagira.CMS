@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: openserver:3306
--- Время создания: Июл 23 2013 г., 10:53
+-- Время создания: Окт 02 2013 г., 08:20
 -- Версия сервера: 5.1.63-community-log
--- Версия PHP: 5.2.17
+-- Версия PHP: 5.4.3
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -277,7 +277,7 @@ CREATE TABLE IF NOT EXISTS `bagira_fields` (
   PRIMARY KEY (`f_id`),
   KEY `f_group_id` (`f_group_id`),
   KEY `f_list_id` (`f_list_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1786 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1788 ;
 
 --
 -- Дамп данных таблицы `bagira_fields`
@@ -877,7 +877,9 @@ INSERT INTO `bagira_fields` (`f_id`, `f_group_id`, `f_position`, `f_name`, `f_sn
 (1781, 129, 2, 'Количество выкупленных броней', 'buy_booking_count', '', 40, NULL, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (1782, 129, 3, 'Количество не выкупленных броней', 'no_buy_booking_count', '', 40, NULL, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (1783, 50, 15, 'Ограничение на кол-во бронируемых мест', 'place_limit', '', 40, NULL, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(1785, 96, 10, 'test', 'test', '', 200, NULL, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+(1785, 96, 10, 'test', 'test', '', 200, NULL, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(1786, 51, 6, 'Социальный идентификатор', 'social_identity', '', 10, NULL, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(1787, 51, 7, 'Тип социальной сети', 'social_type', '', 10, NULL, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1260,7 +1262,7 @@ CREATE TABLE IF NOT EXISTS `bagira_objects` (
 --
 
 INSERT INTO `bagira_objects` (`o_id`, `o_name`, `o_class_id`, `o_create_date`, `o_change_date`, `o_to_trash`) VALUES
-(29, 'Константин', 34, '2010-07-01 14:22:33', '2013-07-05 10:54:09', 0),
+(29, 'Константин', 34, '2010-07-01 14:22:33', '2013-10-02 11:15:37', 0),
 (30, 'мужчина', 35, '2010-07-01 14:29:47', '2011-06-07 08:22:44', 0),
 (31, 'женщина', 35, '2010-07-01 14:29:57', '2011-06-07 08:22:44', 0),
 (32, 'Супер администраторы', 33, '2010-07-01 14:30:10', '2013-01-18 13:43:15', 0),
@@ -9851,6 +9853,8 @@ CREATE TABLE IF NOT EXISTS `bagira___user` (
   `buy_booking_count` int(11) NOT NULL,
   `no_buy_booking_count` int(11) NOT NULL,
   `place_limit` int(11) NOT NULL,
+  `social_identity` varchar(255) NOT NULL,
+  `social_type` varchar(255) NOT NULL,
   KEY `bagira___user_fk_obj_id` (`obj_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -9858,9 +9862,9 @@ CREATE TABLE IF NOT EXISTS `bagira___user` (
 -- Дамп данных таблицы `bagira___user`
 --
 
-INSERT INTO `bagira___user` (`obj_id`, `email`, `password`, `surname`, `login`, `happy_day`, `active`, `last_visit`, `last_ip`, `avatara`, `error_passw`, `def_modul`, `md5_flag`, `remember_me`, `booking_count`, `buy_booking_count`, `no_buy_booking_count`, `place_limit`) VALUES
-(29, 'test@test.ru', '008fcfd9f7404da93192337640c4b081', 'Константинопольский', 'test@test.ru', '2010-12-30', 1, '2013-07-05 10:54:09', '127.0.0.1', '', 0, 3, '', '081e62e71e9889c6bf3201efdd36d72e', 0, 0, 0, 0),
-(402, 'asdasd@sdasd.ru', '1cee28c2684abd8d3ccf17f4333bfa3f', 'asfsa', 'asdasd@sdasd.ru', '0000-00-00', 1, '0000-00-00 00:00:00', '', '', 0, 0, '', '', 0, 0, 0, 0);
+INSERT INTO `bagira___user` (`obj_id`, `email`, `password`, `surname`, `login`, `happy_day`, `active`, `last_visit`, `last_ip`, `avatara`, `error_passw`, `def_modul`, `md5_flag`, `remember_me`, `booking_count`, `buy_booking_count`, `no_buy_booking_count`, `place_limit`, `social_identity`, `social_type`) VALUES
+(29, 'test@test.ru', '008fcfd9f7404da93192337640c4b081', 'Константинопольский', 'test@test.ru', '2010-12-30', 1, '2013-10-02 11:15:37', '127.0.0.1', '', 0, 3, '', '081e62e71e9889c6bf3201efdd36d72e', 0, 0, 0, 0, '', ''),
+(402, 'asdasd@sdasd.ru', '1cee28c2684abd8d3ccf17f4333bfa3f', 'asfsa', 'asdasd@sdasd.ru', '0000-00-00', 1, '0000-00-00 00:00:00', '', '', 0, 0, '', '', 0, 0, 0, 0, '', '');
 
 -- --------------------------------------------------------
 
