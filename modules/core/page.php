@@ -290,6 +290,12 @@ class page {
             while (list($num, $templ_name) = each ($names)) {
                 $tmp_mas = array();
 
+				$template = '';
+
+				if (isset($templ[$templ_name])) {
+					$template .= $templ[$templ_name];
+				}
+				
                 if (isset($templ['list_'.$templ_name]))
                     $template = $templ['list_'.$templ_name];
                 else if (isset($templ['list']))
