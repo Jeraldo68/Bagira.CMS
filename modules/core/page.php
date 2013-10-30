@@ -76,7 +76,8 @@ class page {
         'core.resize',
 		'booking.bookingList',
 		'booking.form',
-		'booking.printBooking'
+		'booking.printBooking',
+		'core.getProp'
     );
 
 
