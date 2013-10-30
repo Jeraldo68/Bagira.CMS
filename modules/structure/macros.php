@@ -1028,6 +1028,63 @@ class structureMacros {
 	    }
 	}
 
+	function getProp($field_name, $obj_id, $templ_block = 0, $templ_name = '_properties') {
+
+		$templ_file = '/structure/objects/'.$templ_name.'.tpl';
+		$TEMPLATE = page::getTemplate($templ_file);
+
+		if (!is_array($TEMPLATE))
+			return page::errorNotFound('structure.getProperty', $templ_file);
+
+		if (empty($templ_block) && isset($TEMPLATE[$field_name]))
+			$templ_block = $field_name;
+		else if (!isset($TEMPLATE[$templ_block]))
+			$templ_block = 'default';
+
+		if (isset($TEMPLATE[$templ_block]) && $obj = ormPages::get($obj_id)) {
+
+			$value2 = '';
+			$value = $obj->__get($field_name);
+			$field = $obj->getClass()->getField($field_name);
+
+			if ($obj->getClass()->issetField($field_name)){
+
+				if ($field->getType() < 91 && $field->getType() != 73) {
+
+					if ($field->getType() == 90)
+						// Тип выпадающий список
+						$value2 = $obj->__get('_'.$field_name);
+					else if ($field->getType() == 75 && !file_exists(ROOT_DIR.$value))
+						// Тип изображение
+						$value = '';
+					else if ($field->getType() == 25)
+						$value = ($value == '0000-00-00') ? '' : $value;
+					else if ($field->getType() == 32)
+						$value = ($value == '0000-00-00 00:00:00') ? '' : $value;
+
+					page::assign('obj.id', $obj->id);
+					page::assign('obj.name', $obj->name);
+					page::assign('title', $obj->getClass()->getFieldName($field_name));
+
+					if (!empty($value)) {
+
+						page::assign('value', $value);
+						page::assign('value_name', $value2);
+						page::assign('obj.'.$field_name, $value);
+						page::assign('obj._'.$field_name, $value2);
+
+						return page::parse($TEMPLATE[$templ_block]);
+
+					} else if (isset($TEMPLATE[$templ_block.'_empty']))
+						return page::parse($TEMPLATE[$templ_block.'_empty']);
+
+				} else return page::error('structure.getProperty', $field_name, lang::get('ERROR_BAD_TYPE'));
+
+			} else return page::error('structure.getProperty', $field_name, lang::get('ERROR_NOTFOUND_FIELD'));
+
+		}
+	}
+
 
 	/**
 	* @return HTML
