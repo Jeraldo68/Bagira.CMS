@@ -36,6 +36,8 @@ class eShopOrder {
             $this->obj->state = reg::getKey('/eshop/fisrt_state');
             $this->obj->date = date('d-m-Y H:i:s');
             $this->obj->email = user::get('email');
+
+			$this->change_state = true;
         }
     }
 
@@ -61,7 +63,7 @@ class eShopOrder {
         // Определям номер нового заказа
         $sel = new ormSelect('eshop_order');
         $sel->fields('name');
-        $sel->orderBy('name', desc);
+		$sel->orderBy('id', desc);
         $sel->limit(1);
 
         if ($last_order = $sel->getObject())

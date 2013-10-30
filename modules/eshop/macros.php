@@ -250,7 +250,7 @@ class eshopMacros {
 
         $sel = new ormSelect('eshop_order');
         $sel->where('parents', '=', user::get('id'));
-        $sel->orderBy('name', desc);
+        $sel->orderBy('id', desc);
 
         $list = '';
         while ($obj = $sel->getObject()) {
