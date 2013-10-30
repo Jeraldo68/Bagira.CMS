@@ -23,7 +23,7 @@ class commentsMacros {
             $TEMPLATE = page::getTemplate($templ_file);
 
             if (!is_array($TEMPLATE))
-                return page::errorNotFound('comments.count', $templ_file);
+				return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
             // Получаем список комментариев
             $count = comments::getAllCount($page_id);
@@ -56,7 +56,7 @@ class commentsMacros {
 	    $TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
-		    return page::errorNotFound('comments.form', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
         page::assign('obj_id', $page_id);
 
@@ -140,7 +140,7 @@ class commentsMacros {
             $TEMPLATE = page::getTemplate($templ_file);
 
             if (!is_array($TEMPLATE))
-                return page::errorNotFound('comments.tree', $templ_file);
+				return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
             // Получаем список комментариев
             $tree = new comments($page_id);
@@ -176,7 +176,7 @@ class commentsMacros {
 	    $TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
-		    return page::errorNotFound('comments.view', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
         if ($comment = comments::get($comment_id))
             if ($comment->isActive() || reg::getKey('/comments/show_noactive')) {

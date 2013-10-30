@@ -62,7 +62,7 @@ class coreMacros {
 		$TEMPLATE = page::getTemplate($templ_file);
 
 		if(!is_array($TEMPLATE))
-			return page::errorNotFound('structure.getProperty', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
 		if(empty($templ_block) && isset($TEMPLATE[$field_name]))
 			$templ_block = $field_name;
@@ -289,7 +289,7 @@ class coreMacros {
 	        $TEMPLATE = page::getTemplate($templ_file);
 
 		    if (!is_array($TEMPLATE))
-		    	return page::errorNotFound('core.objList', $templ_file);
+				return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
         }
 
         // Формируем выборку объектов

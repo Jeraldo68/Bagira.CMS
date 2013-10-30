@@ -14,7 +14,7 @@ class subscriptionMacros {
         $TEMPLATE = page::getTemplate($templ_file);
 
 	    if (!is_array($TEMPLATE))
-	    	return page::errorNotFound('subscription.form', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
         $list = '';
 

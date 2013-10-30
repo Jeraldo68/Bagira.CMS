@@ -30,7 +30,7 @@ class votingMacros {
             } else $TEMPLATE = $templ_name;
 
             if (!is_array($TEMPLATE))
-                return page::errorNotFound('voting.viewVote', $templ_file);
+				return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
             if (is_array($obj_id))
                 $obj = ormPages::get($obj_id);
@@ -131,7 +131,7 @@ class votingMacros {
         $TEMPLATE = page::getTemplate($templ_file);
 
 	    if (!is_array($TEMPLATE))
-	    	return page::errorNotFound('voting.objList', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
         $key = 'vote-list'.$obj_id.$templ_name.$max_count;
 

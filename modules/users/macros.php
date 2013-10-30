@@ -14,7 +14,7 @@ class usersMacros {
         $TEMPLATE = page::getTemplate($templ_file);
 
 	    if (!is_array($TEMPLATE))
-	    	return page::errorNotFound('users.authForm', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
 	   	if (user::isGuest()) {
 
@@ -65,7 +65,7 @@ class usersMacros {
         $TEMPLATE = page::getTemplate($templ_file);
 
 	    if (!is_array($TEMPLATE))
-	    	return page::errorNotFound('users.recover', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
 	   	if (user::isGuest()) {
 
@@ -91,7 +91,7 @@ class usersMacros {
 	        $TEMPLATE = page::getTemplate($templ_file);
 
 		    if (!is_array($TEMPLATE))
-		    	return page::errorNotFound('users.editForm', $templ_file);
+				return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
 
 	        $user = user::getObject();
@@ -128,7 +128,7 @@ class usersMacros {
         $TEMPLATE = page::getTemplate($templ_file);
 
 	    if (!is_array($TEMPLATE))
-	    	return page::errorNotFound('users.changePassword', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
 	   	if (!user::isGuest()) {
 
@@ -155,7 +155,7 @@ class usersMacros {
 	        $TEMPLATE = page::getTemplate($templ_file);
 
 		    if (!is_array($TEMPLATE))
-		    	return page::errorNotFound('users.addForm', $templ_file);
+				return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
             // Парсим все поля
             $fields = ormClasses::get('user')->loadFields();
@@ -185,7 +185,7 @@ class usersMacros {
         $TEMPLATE = page::getTemplate($templ_file);
 
         if (!is_array($TEMPLATE))
-            return page::errorNotFound('users.socialAuthConfirm', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
         if (user::isGuest() && !empty($_SESSION['SOCIAL_AUTH_USER_INFO'])) {
 

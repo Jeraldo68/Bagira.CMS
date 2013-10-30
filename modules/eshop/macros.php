@@ -8,7 +8,7 @@ class eshopMacros {
 	    $TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
-		    return page::errorNotFound('eshop.button', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
         if ($goods = ormPages::get($goods_id, 'goods')) {
 
@@ -33,7 +33,7 @@ class eshopMacros {
 	    $TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
-		    return page::errorNotFound('eshop.miniBasket', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
         $count = basket::getCount();
 
@@ -55,7 +55,7 @@ class eshopMacros {
 	    $TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
-		    return page::errorNotFound('eshop.basket', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
 
         $fields = page::getFields('obj', $TEMPLATE['list']);
@@ -113,7 +113,7 @@ class eshopMacros {
 	    $TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
-		    return page::errorNotFound('eshop.basket', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
         if (user::isGuest()) {
             page::assign('order.cost', basket::getTotalCost());
@@ -194,7 +194,7 @@ class eshopMacros {
 	    $TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
-		    return page::errorNotFound('eshop.orderOk', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
         if ($obj = ormObjects::get($order_id, 'eshop_order')){
 
@@ -213,7 +213,7 @@ class eshopMacros {
 	    $TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
-		    return page::errorNotFound('eshop.orderVeiw', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
         if ($obj = ormObjects::get($order_id, 'eshop_order')){
 
@@ -246,7 +246,7 @@ class eshopMacros {
 	    $TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
-		    return page::errorNotFound('eshop.orderList', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
         $sel = new ormSelect('eshop_order');
         $sel->where('parents', '=', user::get('id'));
@@ -279,7 +279,7 @@ class eshopMacros {
 	    $TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
-		    return page::errorNotFound('eshop.goodsList', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
         if ($order = ormObjects::get($order_id, 'eshop_order')){
 

@@ -15,7 +15,7 @@ class searchMacros {
 	    $TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
-		    return page::errorNotFound('search.tags', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
         $tags = tags::getTagsForObject($obj_id);
 

@@ -17,7 +17,7 @@ class structureMacros {
         $TEMPLATE = page::getTemplate($templ_file);
 
 	    if (!is_array($TEMPLATE))
-	    	return page::errorNotFound('structure.menu', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 	    else {
 
             ormPages::reset();
@@ -168,7 +168,7 @@ class structureMacros {
 		$TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
-			return page::errorNotFound('structure.getList', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
 		$list = '';
 
@@ -210,7 +210,7 @@ class structureMacros {
 	        $TEMPLATE = page::getTemplate($templ_file);
 
 		    if (!is_array($TEMPLATE))
-		    	return page::errorNotFound('structure.objView', $templ_file);
+				return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
 	        $class = $page->getClass()->getSName();
 	        $templ = 'frame_'.$class;
@@ -267,7 +267,7 @@ class structureMacros {
 	    $TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
-		    return page::errorNotFound('structure.filterABC', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
         // Определяем текущий раздел
         $info = ormPages::getSectionByPath($section);
@@ -305,7 +305,7 @@ class structureMacros {
 	    $TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
-		    return page::errorNotFound('structure.filter', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
         // Определяем текущий раздел
         $info = ormPages::getSectionByPath($section);
@@ -654,7 +654,7 @@ class structureMacros {
 	        $TEMPLATE = page::getTemplate($templ_file);
 
 		    if (!is_array($TEMPLATE))
-		    	return page::errorNotFound('structure.objList', $templ_file);
+				return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
         }
 
         // Формируем выборку объектов
@@ -792,7 +792,7 @@ class structureMacros {
                 if (isset($TEMPLATE['frame_list']))
                     $list = page::parse($TEMPLATE['frame_list']);
                 else
-                    $list = page::errorBlock('structure.objList', $templ_file, 'frame_list');
+                    $list = page::errorBlock(__CLASS__.'.'.__FUNCTION__, $templ_file, 'frame_list');
 
             } else if(isset($TEMPLATE['empty']))
                 $list = page::parse($TEMPLATE['empty']);
@@ -843,7 +843,7 @@ class structureMacros {
 	        $TEMPLATE = page::getTemplate($templ_file);
 
 		    if (!is_array($TEMPLATE))
-		    	return page::errorNotFound('structure.objListByTags', $templ_file);
+				return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
         }
 
         // Формируем выборку объектов
@@ -953,7 +953,7 @@ class structureMacros {
                 if (isset($TEMPLATE['frame_list']))
                     $list = page::parse($TEMPLATE['frame_list']);
                 else
-                    $list = page::errorBlock('structure.objListByTags', $templ_file, 'frame_list');
+                    $list = page::errorBlock(__CLASS__.'.'.__FUNCTION__, $templ_file, 'frame_list');
 
             } else if(isset($TEMPLATE['empty']))
                 $list = page::parse($TEMPLATE['empty']);
@@ -977,7 +977,7 @@ class structureMacros {
 		$TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
-			return page::errorNotFound('structure.getProperty', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
         if (empty($templ_block) && isset($TEMPLATE[$field_name]))
         	$templ_block = $field_name;
@@ -1021,9 +1021,9 @@ class structureMacros {
 			    	} else if (isset($TEMPLATE[$templ_block.'_empty']))
 			    		return page::parse($TEMPLATE[$templ_block.'_empty']);
 
-                } else return page::error('structure.getProperty', $field_name, lang::get('ERROR_BAD_TYPE'));
+                } else return page::error(__CLASS__.'.'.__FUNCTION__, $field_name, lang::get('ERROR_BAD_TYPE'));
 
-            } else return page::error('structure.getProperty', $field_name, lang::get('ERROR_NOTFOUND_FIELD'));
+            } else return page::error(__CLASS__.'.'.__FUNCTION__, $field_name, lang::get('ERROR_NOTFOUND_FIELD'));
 
 	    }
 	}
@@ -1034,7 +1034,7 @@ class structureMacros {
 		$TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
-			return page::errorNotFound('structure.getProperty', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
 		if (empty($templ_block) && isset($TEMPLATE[$field_name]))
 			$templ_block = $field_name;
@@ -1078,9 +1078,9 @@ class structureMacros {
 					} else if (isset($TEMPLATE[$templ_block.'_empty']))
 						return page::parse($TEMPLATE[$templ_block.'_empty']);
 
-				} else return page::error('structure.getProperty', $field_name, lang::get('ERROR_BAD_TYPE'));
+				} else return page::error(__CLASS__.'.'.__FUNCTION__, $field_name, lang::get('ERROR_BAD_TYPE'));
 
-			} else return page::error('structure.getProperty', $field_name, lang::get('ERROR_NOTFOUND_FIELD'));
+			} else return page::error(__CLASS__.'.'.__FUNCTION__, $field_name, lang::get('ERROR_NOTFOUND_FIELD'));
 
 		}
 	}
@@ -1103,7 +1103,7 @@ class structureMacros {
 	    $TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
-		    return page::errorNotFound('structure.getPropertyList', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
         if ($page = ormPages::get($obj_id)) {
 
@@ -1199,9 +1199,9 @@ class structureMacros {
 			    	} else if (isset($TEMPLATE['empty']))
                         $list = page::parse($TEMPLATE['empty']);
 
-				} else return page::error('structure.getPropertyList', $field_name, lang::get('ERROR_BAD_TYPE'));
+				} else return page::error(__CLASS__.'.'.__FUNCTION__, $field_name, lang::get('ERROR_BAD_TYPE'));
 
-			} else return page::error('structure.getPropertyList', $field_name, lang::get('ERROR_NOTFOUND_FIELD'));
+			} else return page::error(__CLASS__.'.'.__FUNCTION__, $field_name, lang::get('ERROR_NOTFOUND_FIELD'));
     	}
 
     	return $list;
@@ -1222,7 +1222,7 @@ class structureMacros {
         $TEMPLATE = page::getTemplate($templ_file);
 
 	    if (!is_array($TEMPLATE))
-	    	return page::errorNotFound('structure.navibar', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 	    else {
 
             $pages = ormPages::getActiveId();
@@ -1269,7 +1269,7 @@ class structureMacros {
         $TEMPLATE = page::getTemplate($templ_file);
 
 	    if (!is_array($TEMPLATE))
-	    	return page::errorNotFound('structure.navigation', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 	    else {
 
 	        $current_num = system::getCurrentNavNum();
@@ -1370,7 +1370,7 @@ class structureMacros {
         $TEMPLATE = page::getTemplate($templ_file);
 
 	    if (!is_array($TEMPLATE))
-	    	return page::errorNotFound('structure.navigation', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
         if ($next = ormPages::getNext($page_id)) {
 
@@ -1399,7 +1399,7 @@ class structureMacros {
         $TEMPLATE = page::getTemplate($templ_file);
 
 	    if (!is_array($TEMPLATE))
-	    	return page::errorNotFound('structure.navigation', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
         if ($next = ormPages::getPrevious($page_id)) {
 
@@ -1487,7 +1487,7 @@ class structureMacros {
 	    $TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
-		    return page::errorNotFound('structure.fieldList', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
         $fields = $obj = '';
         
@@ -1558,7 +1558,7 @@ class structureMacros {
 		$TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
-			return page::errorNotFound('structure.getLinkCounter', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
         if (empty($templ_block) && isset($TEMPLATE[$field_name]))
         	$templ_block = $field_name;
@@ -1597,7 +1597,7 @@ class structureMacros {
         $TEMPLATE = page::getTemplate($templ_file);
 
         if (!is_array($TEMPLATE))
-            return page::errorNotFound('structure.rssList', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
         // Формируем выборку объектов
         $sel = new ormSelect('news_feed');
@@ -1660,7 +1660,7 @@ class structureMacros {
             if (isset($TEMPLATE['frame_list']))
                 $list = page::parse($TEMPLATE['frame_list']);
             else
-                $list = page::errorBlock('structure.rssList', $templ_file, 'frame_list');
+                $list = page::errorBlock(__CLASS__.'.'.__FUNCTION__, $templ_file, 'frame_list');
 
         } else if(isset($TEMPLATE['empty']))
             $list = page::parse($TEMPLATE['empty']);
@@ -1681,7 +1681,7 @@ class structureMacros {
         $TEMPLATE = page::getTemplate($templ_file);
 
         if (!is_array($TEMPLATE))
-            return page::errorNotFound('structure.rss', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
 
         $cur_domain = 'http://'.domains::curDomain()->getName();
@@ -1762,7 +1762,7 @@ class structureMacros {
             if (isset($TEMPLATE['frame_list']))
                 $list = page::parse($TEMPLATE['frame_list']);
             else
-                return page::errorBlock('structure.rss', $templ_file, 'frame_list');
+                return page::errorBlock(__CLASS__.'.'.__FUNCTION__, $templ_file, 'frame_list');
         }
 
         return $list;

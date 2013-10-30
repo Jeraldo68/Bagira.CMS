@@ -13,7 +13,7 @@ class feedbackMacros {
         $TEMPLATE = page::getTemplate($templ_file);
 
 	    if (!is_array($TEMPLATE))
-	    	return page::errorNotFound('feedback.form', $templ_file);
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
         if (!user::isGuest()) {
             page::assign('feedback.name', user::get('surname') .' '. user::get('name'));
