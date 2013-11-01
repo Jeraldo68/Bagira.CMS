@@ -3,4 +3,4 @@
 /upload/file/*
 !/cache/img/*.gitignore
 !/upload/file/*.gitignore
-/revue.log
+/logs/revue.log

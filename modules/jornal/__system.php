@@ -26,7 +26,7 @@ class __system {
 
 
         $mas = array();
-	    $system_file = ROOT_DIR.'/revue.log';
+	    $system_file = ROOT_DIR.'/logs/revue.log';
 
 	    if (file_exists($system_file)) {
 

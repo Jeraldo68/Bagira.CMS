@@ -480,7 +480,13 @@ class system {
 
         $znaks = array(info => 'info', error => 'error', warning => 'warning');
 
-        $file = @fopen(ROOT_DIR."/revue.log", "a");
+		$file_name = ROOT_DIR."/logs/revue.log";
+		
+		if (filesize($file_name) >= 1024*1024) {  //1Mb
+			rename($file_name, ROOT_DIR."/logs/revue.".date('Y-m-d_His').".log");
+		}
+		
+        $file = @fopen($file_name, "a");
 
         if (isset($_SESSION['curUser']['name']) && $_SESSION['curUser']['name'] != 'none')
             $skobka = "[".$_SESSION['curUser']['login']."]";
