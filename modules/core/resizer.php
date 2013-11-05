@@ -105,26 +105,15 @@ class resizer {
                  if (!empty($this->width) && !empty($this->height)) {
 
                     // Масштабируем по двум размерам сразу (width и height)
-                    $tmp = round($h_src /($w_src / $this->width));
-                    $tmp2 = round($w_src /($h_src / $this->height));
-
-
-
-                    if ($w_src < $h_src)
-
-                    	if ($tmp >= $this->height)
-	                    	$ratio = $w_src / $this->width;
-	                    else
-	                    	$ratio = $h_src / $this->height;
-
-                    else if ($w_src > $h_src)
-
-                    	if ($tmp2 >= $this->width)
-	                    	$ratio = $h_src / $this->height;
-	                    else
-	                    	$ratio = $w_src / $this->width;
-                        
-                     else $ratio = 1;
+					$tmp_w = $w_src / $this->width;
+					$tmp_h = $h_src / $this->height;
+					
+					
+					if ($tmp_w > $tmp_h) {
+						$ratio = $tmp_h;
+					} else {
+						$ratio = $tmp_w;
+					}
 
 
                     $w_dest = round($w_src / $ratio);
