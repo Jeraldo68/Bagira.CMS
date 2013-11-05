@@ -482,7 +482,7 @@ class system {
 
 		$file_name = ROOT_DIR."/logs/revue.log";
 		
-		if (filesize($file_name) >= 1024*1024) {  //1Mb
+		if (@filesize($file_name) >= 1024*1024) {  //1Mb
 			rename($file_name, ROOT_DIR."/logs/revue.".date('Y-m-d_His').".log");
 		}
 		
