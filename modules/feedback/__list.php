@@ -14,6 +14,10 @@ class __list {
         		return $obj->getClass()->getName();
         }
 
+		function sendToMail($val, $obj) {
+			return !empty($val) ? '<center><div class="pic_confirm"></div></center>' : '<center><div class="pic_affirm"></div></center>';
+		}
+		
         $sel = new ormSelect('feedback');
         $sel->findInPages();
         $sel->where('form_id', '<>', 0);
@@ -23,7 +27,8 @@ class __list {
         $table = new uiTable($sel);
         $table->showSearch(true);
         $table->formatValues(true);
-        $table->addColumn('content', 'Текст сообщения', 300);
+		$table->addColumn('send_answer_to_user', 'Ответ<br>отправлен?', 30, 0, 1, 'sendToMail');
+        $table->addColumn('content', 'Текст сообщения', 270);
         $table->addColumn('name', 'Имя пользователя', 120);
         $table->addColumn('email', 'E-mail', 120);
         $table->addColumn('create_date', 'Дата публикации', 120);

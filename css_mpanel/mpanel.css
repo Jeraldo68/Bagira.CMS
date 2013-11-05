@@ -8,6 +8,10 @@ form{ margin:0px; padding:0px;}
 .swc0 {	margin: 0 auto;	display: table;	width:100%;}
 .swc1 {	display: table-cell;vertical-align: middle;}
 
+.pic_confirm, .pic_affirm{display: inline-block; height: 16px; width: 16px; background: url(/css_mpanel/images/icons.png) no-repeat; margin-top: 5px;}
+.pic_confirm{background-position: 0 -317px;}
+.pic_affirm{background-position: 0 -339px;}
+
 /* для формы авторизации */
 .width_auth{width:280px;height:260px;margin:0 auto; border:1px solid #ebebeb;position:relative; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;  -khtml-border-radius: 5px; background: url("../css_mpanel/i/i2.png") right bottom no-repeat; padding:30px 30px 25px 30px; font:14px Arial, Helvetica, sans-serif;}
 .width_auth i, .width_auth ins, .width_auth code, .width_auth b{position:absolute; width:5px; height:5px; line-height:0px;display:block;background:url("../css_mpanel/i/i3.png") no-repeat; }
