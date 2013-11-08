@@ -493,7 +493,19 @@ class system {
         else
             $skobka = "[SYSTEM]";
 
-        $stroka = $_SERVER['REMOTE_ADDR']."\t[".date("d.m.Y H:i:s")."]\t[".$znaks[$state]."]\t".$skobka."\t".$text."\n";
+		$ip = $_SERVER['REMOTE_ADDR'];
+		$length = strlen($ip);
+
+		if ($length < 15) {
+			$count = 15 - $length;
+
+			while ($count > 0) {
+				$ip .= ' ';
+				$count--;
+			}
+		}
+
+		$stroka = $ip."\t[".date("d.m.Y H:i:s")."]\t[".$znaks[$state]."]\t".$skobka."\t".$text."\n";
 
         @fwrite ($file, $stroka);
         @fclose ($file);
