@@ -650,9 +650,8 @@ class uiTable extends uiTableFunctions {
 		
 			// Просчитывает какие страницы показывать
 			$niz = $current_num - $smeshenie;
-			
-			if ($niz < 1) $niz = 1;
 			$verx = $current_num + $smeshenie;
+			if ($niz < 1) $niz = 1;
 			if ($verx > $count_page) $verx = $count_page;
 			
 			// Определяемся с левым блоком
@@ -660,22 +659,49 @@ class uiTable extends uiTableFunctions {
 			page::assign('first_num', 1);
 			page::assign('num_r', $current_num + 1);
 			page::assign('last_num', $count_page);
+
+			page::fParse('left_block',$TEMPLATE['left_block']);
+			page::fParse('right_block', $TEMPLATE['right_block']);
 			
-			if ($current_num == 1 && isset($TEMPLATE['left_block'])) {
+			if ($current_num == 1) {
 				page::fParse('left_block',$TEMPLATE['noact_left_block']);
-				page::fParse('first_block', $TEMPLATE['noact_first_block']);
-				page::fParse('right_block', $TEMPLATE['right_block']);
-				page::fParse('last_block', $TEMPLATE['last_block']);
-			} else if ($current_num == $count_page && isset($TEMPLATE['right_block'])) {
-				page::fParse('left_block',$TEMPLATE['left_block']);
-				page::fParse('first_block', $TEMPLATE['first_block']);
+			}
+			
+			if ($current_num == $count_page) {
 				page::fParse('right_block', $TEMPLATE['noact_right_block']);
-				page::fParse('last_block', $TEMPLATE['noact_last_block']);
-			} else {
-				page::fParse('left_block',$TEMPLATE['left_block']);
-				page::fParse('first_block', $TEMPLATE['first_block']);
-				page::fParse('right_block', $TEMPLATE['right_block']);
-				page::fParse('last_block', $TEMPLATE['last_block']);
+			}
+
+			page::assign('first_block', '');
+			page::assign('last_block', '');
+
+			$first_block = $last_block = '';
+
+			$shift_l = $current_num - 1 - $smeshenie;
+			$shift_l = ($shift_l > 3) ? 3 : $shift_l;
+			
+			if ($shift_l > 0) {
+				for ($i = 1; $i <= $shift_l; $i++) {
+					page::assign('page_num', $i);
+					$first_block .= page::parse($TEMPLATE['pages_na']);
+				}
+			}
+
+			$shift_r = $count_page - ($current_num + $smeshenie);
+			$shift_r = ($shift_r > 3) ? 3 : $shift_r;
+
+			if ($shift_r > 0) {
+				for ($i = ($count_page - $shift_r + 1); $i <= $count_page; $i++) {
+					page::assign('page_num', $i);
+					$last_block .= page::parse($TEMPLATE['pages_na']);
+				}
+			}
+
+			if (!empty($first_block)) {
+				page::assign('first_block', $first_block.' ... &nbsp;&nbsp; ');
+			}
+
+			if (!empty($last_block)) {
+				page::assign('last_block', ' ... &nbsp;&nbsp; '.$last_block);
 			}
 			
 			// Вывод списка страниц

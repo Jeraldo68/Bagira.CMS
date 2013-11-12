@@ -586,7 +586,7 @@ ul.objectsLink li a.new {    float:left;    display:block;    margin-left:10px;}
 .basictable .pointer2 input[type="checkbox"]{width: 32px; height: 30px;}
 #bigcheck{height: 20px; width: 25px;}
 
-.navigate{color:#000000; font-size:12px; margin-left:20px; width:480px; display:inline; float:left; height:23px; padding-top:7px;}
+.navigate{color:#000000; font-size:12px; margin-left:20px; width:600px; display:inline; float:left; height:23px; padding-top:7px;}
 .navigate a,  .navigate a:link,   .navigate a:visited { cursor: pointer; color: #005ad3; font-size:12px;  text-decoration:underline; }
 .navigate a:hover {  color: #e33729;}
 .navigate strong{ color:#000000;}
