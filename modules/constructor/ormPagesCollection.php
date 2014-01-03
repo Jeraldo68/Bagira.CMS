@@ -810,7 +810,7 @@ class ormPages {
                     $section_id = substr($str, 0, $pos);
                 } else $class_name = '';
 
-                $section = self::getAllSubSections($section_id);
+				$section = self::getAllSubSections($section_id, array($section_id));
 
             } else if (strpos($path, '>')) {
 
