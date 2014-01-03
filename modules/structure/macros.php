@@ -159,11 +159,13 @@ class structureMacros {
 
 	/**
 	 * @return HTML список значений справочника
-	 * @param int $list_id - ID справочника.
+	 * @param int $list_id - ID справочника
 	 * @param string $templ_name - шаблон
+	 * @param int $max_count - количество элементов
+	 * @param int $start_pos - начальная позиция
 	 * @desc МАКРОС: Возвращает список значений справочника
 	 */
-	public function getList($list_id, $templ_name = 'default') {
+	public function getList($list_id, $templ_name = 'default', $max_count = 0, $start_pos = 0) {
 		$templ_file = '/structure/objects/'.$templ_name.'.tpl';
 		$TEMPLATE = page::getTemplate($templ_file);
 
@@ -173,6 +175,11 @@ class structureMacros {
 		$list = '';
 
 		$sel = new ormSelect($list_id);
+
+		if (!empty($max_count)) {
+			$sel->limit($start_pos, $max_count);
+		}
+		
 		while ($obj = $sel->getObject()) {
 			page::assign('obj.id', $obj->id);
 			page::assign('obj.name', $obj->name);
@@ -180,11 +187,8 @@ class structureMacros {
 		}
 
 		page::assign('list', $list);
-		if ($list != '') {
-			$ret = page::parse($TEMPLATE['frame_list']);
-		} else {
-			$ret = page::parse($TEMPLATE['empty']);
-		}
+		$block = ($list != '') ? 'frame_list' : 'empty';
+		$ret = page::parse($TEMPLATE[$block]);
 		return $ret;
 	}
 	
