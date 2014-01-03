@@ -486,7 +486,7 @@ class system {
 			rename($file_name, ROOT_DIR."/logs/revue.".date('Y-m-d_His').".log");
 		}
 		
-        $file = @fopen($file_name, "a");
+		$log = new Logger($file_name);
 
         if (isset($_SESSION['curUser']['name']) && $_SESSION['curUser']['name'] != 'none')
             $skobka = "[".$_SESSION['curUser']['login']."]";
@@ -505,10 +505,10 @@ class system {
 			}
 		}
 
-		$stroka = $ip."\t[".date("d.m.Y H:i:s")."]\t[".$znaks[$state]."]\t".$skobka."\t".$text."\n";
+		$stroka = $ip."\t[".date("d.m.Y H:i:s")."]\t[".$znaks[$state]."]\t".$skobka."\t".$text;
 
-        @fwrite ($file, $stroka);
-        @fclose ($file);
+		$log->add($stroka);
+		$log->save();
 	}
 
     /**
