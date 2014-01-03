@@ -1717,7 +1717,7 @@ class ormObject extends innerErrorList {
             $this->getParents();
             reset($this->parents);
             while (list($obj_id, $val) = each($this->parents)) {
-                if ($val['parent_class'] == $class->id())
+				if (isset($val['parent_class']) && ($val['parent_class'] == $class->id()))
                     if ($class->isPage())
                         return ormPages::get($obj_id);
                     else
