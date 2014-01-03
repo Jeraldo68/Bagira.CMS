@@ -461,7 +461,26 @@ class system {
     }
 
 
+	/**
+	* @return string
+	* @param string $str - Исходная строка
+	* @param int $length - Размер результирующей строки
+	* @desc Дополняем строку до нужного размера
+	*/
+	static function fitLine($str, $length) {
+		$str_length = strlen($str);
 
+		if ($str_length < $length) {
+			$count = $length - $str_length;
+
+			while ($count > 0) {
+				$str .= ' ';
+				$count--;
+			}
+		}
+
+		return $str;
+	}
 
 
 
@@ -493,17 +512,7 @@ class system {
         else
             $skobka = "[SYSTEM]";
 
-		$ip = $_SERVER['REMOTE_ADDR'];
-		$length = strlen($ip);
-
-		if ($length < 15) {
-			$count = 15 - $length;
-
-			while ($count > 0) {
-				$ip .= ' ';
-				$count--;
-			}
-		}
+		$ip = self::fitLine($_SERVER['REMOTE_ADDR'], 15);
 
 		$stroka = $ip."\t[".date("d.m.Y H:i:s")."]\t[".$znaks[$state]."]\t".$skobka."\t".$text;
 
