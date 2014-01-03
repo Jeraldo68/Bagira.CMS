@@ -679,8 +679,15 @@ class ormEditForm {
       	if ($field['f_type'] == 47)
       		$this->java .= page::parse('rules.push("price_only,%field.sname%,'.lang::get('CONSTR_BASE_FIELD_E8').'");');
 
-        if (isset($TEMPLATE['field_'.$field['f_type']]))
-       		return page::parse($TEMPLATE['field_'.$field['f_type']]);
+		$block = 'field_'.$field['f_type'];
+
+		//если объект еще не создан, файловым загрузчиком воспользоваться нельзя
+		if (($field['f_type'] == 200) && ($this->obj->id == '')) {
+			$block .= '_new';
+		}
+		
+        if (isset($TEMPLATE[$block]))
+       		return page::parse($TEMPLATE[$block]);
        	else
        		return str_replace('%title%', $field['f_sname'], lang::get('CONSTR_BASE_FIELD_E5'));
 

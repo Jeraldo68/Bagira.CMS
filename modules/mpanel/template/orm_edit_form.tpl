@@ -346,8 +346,24 @@ END;
 
 $TEMPLATE['field_200'] = <<<END
 <div class="fieldBox" style="width: 950px;">
-	<div id="dropZone" data-id="%obj.id%">
-		Для загрузки, перетащите файлы сюда.
+	<div id="dropZone" class="dropZone" data-id="%obj.id%">
+		<div class="dropZone_in">
+			Для загрузки, перетащите файлы сюда.
+		</div>
+	</div>
+	<div class="dropZoneList">
+		%element%
+	</div>
+</div>
+END;
+
+
+$TEMPLATE['field_200_new'] = <<<END
+<div class="fieldBox" style="width: 950px;">
+	<div class="dropZone inactive" data-id="%obj.id%">
+		<div class="dropZone_in">
+			Чтобы воспользоваться загрузчиком, нужно сохранить объект.
+		</div>
 	</div>
 	<div class="dropZoneList">
 		%element%
