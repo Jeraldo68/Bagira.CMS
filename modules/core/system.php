@@ -59,6 +59,11 @@ class system {
     public static $isAdmin = false;
 
 
+	//проверяет переменную сразу и на существование и на пустоту
+	static function isEmpty(&$p) {
+		return (!isset($p) || empty($p)) ? true : false;
+	}
+	
     // Метод, запускающий систему
     static function start(){
 
