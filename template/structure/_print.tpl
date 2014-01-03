@@ -3,10 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>%title%</title>
-<link rel="stylesheet" type="text/css" href="/css_js/style.css"/>
-<script type="text/javascript" src="/css_js/jquery.js"></script>
-<script type="text/javascript" src="/css_js/jquery-ui.js"></script>
-<script type="text/javascript" src="/css_js/function.js"></script>
+<link rel="stylesheet" type="text/css" href="%core.unCache(/css_js/style.css)%"/>
+<script type="text/javascript" src="%core.unCache(/css_js/jquery.js)%"></script>
+<script type="text/javascript" src="%core.unCache(/css_js/function.js)%"></script>
 </head>
 <body style="background:none !important;">
 <div id="print">

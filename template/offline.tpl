@@ -3,7 +3,7 @@
 <head>
 <meta charset=utf-8 />
 <title>%title%</title>
-<link rel="stylesheet" type="text/css" href="/css_mpanel/mpanel.css"/>
+<link rel="stylesheet" type="text/css" href="%core.unCache(/css_mpanel/mpanel.css)%"/>
 <link rel="icon" href="/css_mpanel/i/favicon.ico" type="image/x-icon"/>
 <!--[if lt IE 8]><style>.swc1 {text-align: center;}.swc2, .swc3 {vertical-align: middle;}.swc2 {display: inline;_height: 0;	zoom: 1;text-align: left; width:100%;}.swc3 {height: 100%; zoom: 1;}</style><![endif]-->
 <style> html, body, .swc0, .swc1{	height: 100%;} </style>

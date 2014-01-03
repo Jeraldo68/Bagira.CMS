@@ -49,6 +49,21 @@ class coreMacros {
 
 
 	/**
+	 * @return stirng - путь до файла с get строкой (последнего времени редактирования файла)
+	 * @param string $file_path - Путь до файла (/css_js/style.css)
+	 * @desc МАКРОС: Добавляет суффикс к файлу, для того что бы он не кешировался браузером,
+	 * суффикс определяется по последней дате редактирования файла
+	 */
+	public function unCache($file_path) {
+		$full_path = ROOT_DIR.$file_path;
+
+		$suffix = is_file($full_path) ? filemtime($full_path) : 'not_found';
+
+		return $file_path.'?'.$suffix;
+	}
+	
+
+	/**
 	 * @return HTML
 	 * @param string $field_name - Системное имя поля
 	 * @param int $obj_id - ID объекта

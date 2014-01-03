@@ -6,18 +6,18 @@
 	<meta name="description" content="%description%"/>
 	<meta name="keywords" content="%keywords%"/>
 		
-	<link rel="stylesheet" type="text/css" href="/css_js/style.css"/>
-	<link rel="stylesheet" type="text/css" href="/css_js/_minitext.css"/>
-	<link rel="stylesheet" href="/css_mpanel/prettyPhoto/css/prettyPhoto.css" type="text/css" media="screen" charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="%core.unCache(/css_js/style.css)%"/>
+	<link rel="stylesheet" type="text/css" href="%core.unCache(/css_js/_minitext.css)%"/>
+	<link rel="stylesheet" type="text/css" href="%core.unCache(/css_mpanel/prettyPhoto/css/prettyPhoto.css)%" media="screen" charset="utf-8" />
 		
-	<script type="text/javascript" src="/css_js/jquery.js"></script>
-	<script type="text/javascript" src="/css_js/jquery.raty.min.js"></script>
-	<script type="text/javascript" src="/css_js/users/auth.js"></script>
-	<script type="text/javascript" src="/css_js/function.js"></script>
-	<script type="text/javascript" src="/css_js/_voting.js"></script>
-	<script type="text/javascript" src="/css_js/_subscribe.js"></script>
-	<script type="text/javascript" src="/css_js/_minitext.js"></script>
-	<script type="text/javascript" src="/css_mpanel/prettyPhoto/jquery.prettyPhoto.js" charset="utf-8"></script>
+	<script type="text/javascript" src="%core.unCache(/css_js/jquery.js)%"></script>
+	<script type="text/javascript" src="%core.unCache(/css_js/jquery.raty.min.js)%"></script>
+	<script type="text/javascript" src="%core.unCache(/css_js/users/auth.js)%"></script>
+	<script type="text/javascript" src="%core.unCache(/css_js/function.js)%"></script>
+	<script type="text/javascript" src="%core.unCache(/css_js/_voting.js)%"></script>
+	<script type="text/javascript" src="%core.unCache(/css_js/_subscribe.js)%"></script>
+	<script type="text/javascript" src="%core.unCache(/css_js/_minitext.js)%"></script>
+	<script type="text/javascript" src="%core.unCache(/css_mpanel/prettyPhoto/jquery.prettyPhoto.js)%" charset="utf-8"></script>
 </head>
 <body>
 	<div id="megawrapper">

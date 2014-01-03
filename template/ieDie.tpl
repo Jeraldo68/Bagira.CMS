@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Internet Explorer">
 <meta name="keywords" content="Internet Explorer">
-<link rel="stylesheet" type="text/css" href="/css_mpanel/styleIEDie.css">
+<link rel="stylesheet" type="text/css" href="%core.unCache(/css_mpanel/styleIEDie.css)%">
 <link rel="SHORTCUT ICON" href="/favicon.ico">
 </head>
 <body>
