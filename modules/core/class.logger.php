@@ -8,6 +8,7 @@ class Logger {
 	
 	private $file_name = ''; //путь до файла
 	private $lines = array(); //массив строк
+	private $max_file_size = 1; //максимально допустимый размер файла (Мб)
 	public $error = 0; //номер ошибки
 	
 	//инициализация
@@ -47,6 +48,12 @@ class Logger {
 			
 			foreach ($this->lines as $line) {
 				$result .= $line."\n";
+			}
+			
+			if ($this->max_file_size > 0) {
+				if (@filesize($this->file_name) >= 1024*1024*$this->max_file_size) {
+					rename($this->file_name, $this->file_name.'.'.date('Y-m-d_His'));
+				}
 			}
 			
 			$file = @fopen($this->file_name, "a");
