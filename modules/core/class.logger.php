@@ -52,7 +52,11 @@ class Logger {
 			
 			if ($this->max_file_size > 0) {
 				if (@filesize($this->file_name) >= 1024*1024*$this->max_file_size) {
-					rename($this->file_name, $this->file_name.'.'.date('Y-m-d_His'));
+					$i = 1;
+					while (file_exists($this->file_name.'.'.$i)) {
+						$i++;
+					}
+					rename($this->file_name, $this->file_name.'.'.$i);
 				}
 			}
 			
