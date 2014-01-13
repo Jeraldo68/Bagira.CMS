@@ -10,7 +10,7 @@ class controller {
 		 if (file_exists(MODUL_DIR.'/core/random_image.php'))
               include(MODUL_DIR.'/core/random_image.php');
  	}
-
+	
 }
 
 ?>

@@ -32,7 +32,7 @@ class coreMacros {
 				
 				if (!file_exists(ROOT_DIR.$new_file)) {
 
-	                if (!is_dir(ROOT_DIR.$dir)) @mkdir(ROOT_DIR.$dir, 0777);
+	                if (!is_dir(ROOT_DIR.$dir)) @mkdir(ROOT_DIR.$dir, 0777, true);
 
 					$img = new resizer($file_name, $scale, $width, $height);
 
@@ -46,6 +46,82 @@ class coreMacros {
 					return $new_file;
             }
  	}
+
+
+	/**
+	 * @return stirng - Путь до заресайзенного изображения
+	 * @param string $file_name - Исходное изображение
+	 * @param CONST $scale_type - Способ масштабирования рисунка
+			0	-	Масштабирование с учетом пропорций, относительно $width или $height
+			1    - 	Растягивает изображение
+	 * @param int $width - Ширина конечного изображения, если == 0 не учитывается
+	 * @param int $height - Высота конечного изображения, если == 0 не учитывается
+	 * @param int $bg - Задает фон (HEX), если 0 оставляет прозрачным
+	 * @param string $watermark - Способ наложения водяного знака. Одно из нескольких значений:
+			0 		- 	Водяной знак не накладывается
+			1-9 	-	Водяной знак накладывается в одну из 9 позиций квадрата (см. документацию)
+	 * @desc МАКРОС: При необходимости масштабирует изображение под заданные параметры и
+	возвращает путь до кешированного файла.
+	 */
+	public function resizeImage($file_name, $width = 0, $height = 0, $bg = 0, $scale_type = 0, $watermark = 0) {
+
+		if (empty($file_name))
+			return '';
+
+		if (system::checkVar($file_name, isAbsUrl))
+			return $file_name;
+
+		$scale_type = ($scale_type != 1) ? 0 : 1; //может быть только 0 или 1
+		
+		$dir = '/cache/img/'.$width.'x'.$height.'_'.$scale_type.'_'.$watermark.'_'.str_replace('#', '', $bg);
+		$resize_file_name = $dir.'/'.system::filePathToPrefix($file_name).system::fileName($file_name);
+
+		$width = empty($width) ? NULL : $width;
+		$height = empty($height) ? NULL : $height;
+		
+		if (!file_exists(ROOT_DIR.$resize_file_name)) {
+			if (!is_dir(ROOT_DIR.$dir)) @mkdir(ROOT_DIR.$dir, 0777, true);
+
+			$img = WideImage::load(ROOT_DIR.$file_name);
+			
+			$fit = ($scale_type == 1) ? 'fill' : 'outside';
+			$img = $img->resize($width, $height, $fit);
+
+			if (!empty($bg)) {
+				$bg = $img->allocateColor(system::hex2rgb($bg));
+				$img->fill(0,0,$bg);
+			}
+			
+			if (($width != 0) && ($height != 0)) {
+				$img = $img->crop('center', 'center', $width, $height);
+			}
+
+			$wimage = reg::getKey('/core/watermark');
+			if (is_numeric($watermark) && $watermark > 0 && !empty($wimage)) {
+				if (file_exists(ROOT_DIR.$wimage)) {
+					$wimage = WideImage::load(ROOT_DIR.$wimage);
+					$ver = $hor = 'center';
+					
+					if ($watermark <= 3) {
+						$ver = 'top + 10';
+					} else if ($watermark >= 7) {
+						$ver = 'bottom - 10';
+					}
+
+					if (in_array($watermark, array(1,4,7))) {
+						$hor = 'left + 10';
+					} else if (in_array($watermark, array(3,6,9))) {
+						$hor = 'right - 10';
+					}
+					$img = $img->merge($wimage, $hor, $ver, 100);
+				}
+			}
+			
+			$img->saveToFile(ROOT_DIR.$resize_file_name);
+		}
+
+		return $resize_file_name;
+	}
 
 
 	/**
