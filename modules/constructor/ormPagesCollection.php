@@ -171,29 +171,18 @@ class ormPages {
     static function initIssetList(){
     	if (empty(self::$issetList)) {
 
-         	$sql = 'SELECT obj.r_parent_id id
-					FROM <<pages>>,
-						(
-						 	SELECT obj.r_parent_id, obj.o_id
-							FROM <<rights>>,
-							 	(
-								 	SELECT r_parent_id, o_id
-								 	FROM <<objects>>, <<rels>>, <<classes>>
-								 	WHERE r_field_id IS NULL
-										AND r_children_id = o_id
-										AND o_to_trash = 0 and
-										  c_id = o_class_id and
-										  c_is_page = 1
-									GROUP BY r_parent_id
-							 	) obj
-							WHERE o_id = o_id '.str_replace('GROUP BY o_id', '', self::getSqlForRights()).'
-							GROUP BY obj.r_parent_id
-					 	) obj
-					WHERE lang_id = "'.languages::curId().'"
-        				AND domain_id = "'.domains::curId().'"
-						AND p_obj_id = obj.o_id
-					GROUP BY obj.r_parent_id;';
+			$rights = str_replace('GROUP BY o_id', '', self::getSqlForRights());
 
+			$sql = 'SELECT p_obj_id id
+					FROM <<pages>>, <<rights>>, <<objects>>, (SELECT r_parent_id 
+									FROM <<rels>> 
+									WHERE r_field_id IS NULL
+									GROUP BY r_parent_id) parent
+					WHERE p_obj_id = parent.r_parent_id 
+							AND p_obj_id = o_id
+							AND o_to_trash = 0
+							AND lang_id = "'.languages::curId().'" 
+							AND domain_id = "'.domains::curId().'" '.$rights;
 
         	$tmp = db::q($sql, records);
             self::$issetList = array();
