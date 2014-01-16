@@ -574,6 +574,13 @@ class system {
 		return $rgb; // returns an array with the rgb values
 	}
 
+	/**
+	 * @param mixed $p - информация для вывода
+	 * @desc Вспомогательная функция для дебага
+	 */
+	static function pre($p) {
+		echo "<pre>"; print_r($p); echo "</pre>";
+	}
 	
 	
     // +++	Работа с файловой системой	+++
