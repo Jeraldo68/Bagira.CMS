@@ -430,13 +430,13 @@ class ormPages {
 				$parent_id_sql = ($parent_id == 0) ? 'IS NULL' : '= "'.$parent_id.'"';
 				
 				// Проверяем есть ли контентная страница
-				$sql = 'SELECT *
-						FROM <<objects>>, <<pages>>, <<rels>>
+				$sql = 'SELECT *, MAX(r_state) r_state
+						FROM <<objects>>, <<pages>>, <<rels>>, <<rights>>
 						WHERE pseudo_url = "'.$val.'" and
 							r_parent_id '.$parent_id_sql.' and
 							o_id = r_children_id and
 							o_id = p_obj_id and
-							o_to_trash = 0
+							o_to_trash = 0 '.self::getSqlForRights().'
 						LIMIT 1;';
 
 				$mas = db::q($sql, record);
