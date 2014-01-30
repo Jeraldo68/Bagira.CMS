@@ -634,6 +634,15 @@ class structureMacros {
 
         if ($independent) {
 
+			//функционал исключения объекта из выборки
+			//@{id} - id ненужной страницы
+			$not_pos = strpos($section, '@');
+
+			if ($not_pos !== false) {
+				$not = substr($section, $not_pos+1, strlen($section));
+				$section = substr($section, 0, $not_pos-1);
+			}
+			
             $info = ormPages::getSectionByPath($section);
             //print_r($info);
             
@@ -684,6 +693,10 @@ class structureMacros {
             $section_id = 'NULL';
         }
 
+		if ( isset($not) && is_numeric($not) ) {
+			$sel->where('id', '<>', $not);
+		}
+		
         $sel->where('active', '=', 1);
         //$sel->where('view_in_menu', '=', 1);
 
