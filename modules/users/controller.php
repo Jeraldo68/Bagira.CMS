@@ -428,6 +428,26 @@ class controller {
             $answer = array('msg' => $obj->getErrorListText(' '), 'field' => $tmp['focus']);
 		}
 
+		//если включен флаг на проверку подписки пользователя
+		if (!system::isEmpty($_POST['check_subscribe'])) {
+			$sel = new ormSelect('subscription');
+			$sel->where('lang', '=', languages::curId());
+			$sel->where('domain', '=', domains::curId());
+
+			$user_subscribe = array();
+			if (isset($_POST['user_subscribe'])) {
+				$user_subscribe = $_POST['user_subscribe'];
+			}
+
+			while ($sub = $sel->getObject()) {
+				if (in_array($sub->id, $user_subscribe)) {
+					mailingProcess::addEmail($obj->email, array($sub->id), true);
+				} else {
+					mailingProcess::delEmail($obj->email, $sub->id);
+				}
+			}
+		}
+		
         if (!system::isAjax()){
 
             system::saveErrorToSession('edit_user', $answer);
