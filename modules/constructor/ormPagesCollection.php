@@ -417,12 +417,21 @@ class ormPages {
 	// Вернет ID страницы по указанному URL`y
 	static function getPageIdByUrl($page_url){
 
+		$arr = array('@', '"', "'", '$', '{', '}', '[', ']', '\\');
+
+		foreach ($arr as $char) {
+			if (strpos($page_url, $char) !== false) {
+				system::log('Попытка внедрения SQL инъекции на странице: '.$page_url, warning);
+				return 0;
+			}
+		}
+		
     	self::init();
 
         $parent_id = 0;
     	$url = explode('/', $page_url);
     	$pages_active = array();
-
+		
     	while (list($key, $val) = each($url))
 
     		if (!empty($val)) {
