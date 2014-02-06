@@ -126,61 +126,66 @@ class usersMacros {
 	 */
 	function subscribe($mailing = 'all', $templ_name = 'default') {
 
-		if (!user::isGuest()) {
+		$templ_file = '/users/subscribe/'.$templ_name.'.tpl';
+		$TEMPLATE = page::getTemplate($templ_file);
 
-			$templ_file = '/users/subscribe/'.$templ_name.'.tpl';
-			$TEMPLATE = page::getTemplate($templ_file);
+		if (!is_array($TEMPLATE))
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
-			if (!is_array($TEMPLATE))
-				return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
+		$mailing = trim($mailing);
 
+		$arr = array();
+		if ($mailing == 'all') {
+			$sel = new ormSelect('subscription');
+			$sel->where('active', '=', 1);
+			$sel->where('lang', '=', languages::curId());
+			$sel->where('domain', '=', domains::curId());
 
-			$user = user::getObject();
-
-			$mailing = trim($mailing);
-
-			$arr = array();
-			if ($mailing == 'all') {
-				$sel = new ormSelect('subscription');
-				$sel->where('active', '=', 1);
-				$sel->where('lang', '=', languages::curId());
-				$sel->where('domain', '=', domains::curId());
-
-				while ($obj = $sel->getObject()) {
-					$arr[] = $obj->id;
-				}
-			} else {
-				$arr = explode(' ', $mailing);
+			while ($obj = $sel->getObject()) {
+				$arr[] = $obj->id;
 			}
+		} else {
+			$arr = explode(' ', $mailing);
+		}
 
-			$list = '';
+		$list = '';
 
-			foreach ($arr as $id) {
-				if ($sub = ormObjects::get($id, 'subscription')) {
+		foreach ($arr as $id) {
+			if ($sub = ormObjects::get($id, 'subscription')) {
+
+				$sub_check = false;
+				
+				if (!user::isGuest()) {
+					$user = user::getObject();
+
 					$sel = new ormSelect('subscribe_user');
 					$sel->where('name', '=', $user->email);
 					$sel->where('parents', '=', $id);
 					$sel->limit(1);
-
-					page::assign('obj.name', $sub->name);
-					page::assign('obj.id', $sub->id);
-
+					
 					if ($sel->getObjectCount() > 0) {
-						$list .= page::parse($TEMPLATE['list_active']);
-					} else {
-						$list .= page::parse($TEMPLATE['list']);
+						$sub_check = true;
 					}
 				}
-			}
 
-			if (!empty($list)) {
-				page::assign('list', $list);
-				return page::parse($TEMPLATE['frame_list']);
+				page::assign('obj.name', $sub->name);
+				page::assign('obj.id', $sub->id);
+				
+				if ($sub_check) {
+					$list .= page::parse($TEMPLATE['list_active']);
+				} else {
+					$list .= page::parse($TEMPLATE['list']);
+				}
 			}
+		}
 
-			if (isset($TEMPLATE['empty'])) {
-				return page::parse($TEMPLATE['empty']);
-			}
+		if (!empty($list)) {
+			page::assign('list', $list);
+			return page::parse($TEMPLATE['frame_list']);
+		}
+
+		if (isset($TEMPLATE['empty'])) {
+			return page::parse($TEMPLATE['empty']);
 		}
 
 		return '';

@@ -278,7 +278,25 @@ class controller {
 					user::authHim($obj);
                 }
 
-                
+
+				//если включен флаг на проверку подписки пользователя
+				if (!system::isEmpty($_POST['check_subscribe'])) {
+					$sel = new ormSelect('subscription');
+					$sel->where('lang', '=', languages::curId());
+					$sel->where('domain', '=', domains::curId());
+
+					$user_subscribe = array();
+					if (isset($_POST['user_subscribe'])) {
+						$user_subscribe = $_POST['user_subscribe'];
+					}
+
+					while ($sub = $sel->getObject()) {
+						if (in_array($sub->id, $user_subscribe)) {
+							mailingProcess::addEmail($obj->email, array($sub->id), true);
+						}
+					}
+				}
+				
 
                 // Все хорошо. Пользователь добавлен.
                 if (system::isAjax())
