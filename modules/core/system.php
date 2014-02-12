@@ -89,14 +89,12 @@ class system {
 
         page::globalVar('h1', '');
         page::globalVar('title', '');
-        page::globalVar('site_name', domains::curDomain()->getSiteName());
-        page::globalVar('base_email', domains::curDomain()->getEmail());
-		page::globalVar('site_url', $_SERVER['HTTP_HOST']);
-        page::globalVar('user_id', user::get('id'));
-        page::globalVar('pre_lang', languages::pre());
-        page::globalVar('time', time());
-        page::globalVar('current_url', self::getCurrentUrl());
-        page::globalVar('current_url_pn', self::getCurrentUrlPN());
+        page::assign('site_name', domains::curDomain()->getSiteName());
+        page::assign('base_email', domains::curDomain()->getEmail());
+		page::assign('site_url', $_SERVER['HTTP_HOST']);
+        page::assign('user_id', user::get('id'));
+        page::assign('pre_lang', languages::pre());
+        page::assign('time', time());
         page::assign('current_url', self::getCurrentUrl());
         page::assign('current_url_pn', self::getCurrentUrlPN());
 
@@ -137,8 +135,8 @@ class system {
         page::callAjaxMacros();
 
         // Парсим мето-информацию "по умолчанию"
-        page::globalVar('keywords', reg::getKey(ormPages::getPrefix().'/keywords'));
-		page::globalVar('description', reg::getKey(ormPages::getPrefix().'/description'));
+        page::getGlobalVar('keywords', reg::getKey(ormPages::getPrefix().'/keywords'));
+		page::getGlobalVar('description', reg::getKey(ormPages::getPrefix().'/description'));
 
 
         // Загрузка необходимого функционала в зависимости от адреса
