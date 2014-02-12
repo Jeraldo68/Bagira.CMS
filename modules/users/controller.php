@@ -465,6 +465,31 @@ class controller {
 				}
 			}
 		}
+
+		if (!system::isEmpty($_POST['current_password'])) {
+			$cur_password = system::POST('current_password', isPassword);
+			$new_passw = system::POST('password', isPassword);
+			$new_passw2 = system::POST('password2', isPassword);
+
+			if ($cur_password == user::get('password')) {
+
+				if ( $new_passw && ($new_passw == $new_passw2) ) {
+					$obj->password = system::POST('password');
+
+					if (!$obj->save()) {
+						$answer = array('msg' => $obj->getErrorListText(' '), 'field' => $tmp['focus']);
+					}
+					
+				} else {
+					
+					$answer = array('msg' => lang::get('USERS_NEWPASS_CONFIRM_ERROR'), 'field' => 'password');
+					
+				}
+
+			} else {
+				$answer = array('msg' => lang::get('USERS_CHANGE_PSW_MSG'), 'field' => 'current_password');
+			}
+		}
 		
         if (!system::isAjax()){
 
@@ -498,7 +523,7 @@ class controller {
 
         if ($cur_password == user::get('password')) {
 
-            if ($new_passw && $new_passw == $new_passw2)
+            if ($new_passw && $new_passw == $new_passw2) {
 
                 if ($user = user::getObject()) {
 
@@ -512,6 +537,17 @@ class controller {
                             system::redirect('/users/change_password/ok');
                     }
                 }
+			} else {
+				$answer = array('msg' => lang::get('USERS_NEWPASS_CONFIRM_ERROR'), 'field' => 'password');
+
+				if (!system::isAjax()) {
+
+					system::saveErrorToSession('change_password', $answer);
+					system::redirect('/users/change_password');
+
+				} else
+					system::json($answer);
+			}
 
         } else {
 
