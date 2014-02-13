@@ -229,8 +229,8 @@ class coreMacros {
 	 * @desc МАКРОС: Форматирует число по разрядности, аналог PHP-функции number_format()
 	 */
 	function capacity($number, $dec = 0, $point = ',', $sep = ' ') {
-
-		return number_format($number, $dec, $point, $sep);
+		$number = number_format($number, $dec, $point, $sep);
+		return str_replace(" ", "&nbsp;", $number);
 	}
 
     /**
