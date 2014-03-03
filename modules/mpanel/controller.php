@@ -87,11 +87,19 @@ class controller {
 
 
         // Попытка авторизации
-        if(!empty($_POST['enter']))
-            if (!user::auth($_POST['login'], $_POST['passw']))
-               $this->showAuthForm('Вы ввели неправильный логин или пароль!');
-            else
-                header("Location: ".$_SERVER["HTTP_REFERER"]);
+        if(!empty($_POST['enter'])) {
+			$auth = user::auth($_POST['login'], $_POST['passw']);
+
+			if ($auth === 1) {
+				$this->showAuthForm('Такого пользователя не существует!');
+			} else if ($auth === 2) {
+				$this->showAuthForm('Аккаунт заблокирован на 5 минут!');
+			} else if ($auth === 3) {
+				$this->showAuthForm('Неправильная пара логин/пароль!');
+			} else {
+				header("Location: ".$_SERVER["HTTP_REFERER"]);
+			}
+		}     
 
         // Если пользователь не админ, показываем форму авторизации
         if (!user::isAdmin())

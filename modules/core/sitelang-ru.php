@@ -75,7 +75,7 @@ $LANG['USERS_CHANGE_MSG'] = 'Ваши данные изменены!';
 $LANG['USERS_CHANGE_PSW_H1'] = 'Смена пароля';
 $LANG['USERS_CHANGE_PSW_MSG'] = 'Пароль, который вы указали - не верный!';
 $LANG['USERS_NEWPASS_CONFIRM_ERROR'] = 'Вы указали неправильное подтверждение нового пароля!';
-$LANG['USERS_NO_AUTH'] = 'Неправильная пара логин-пароль!';
+$LANG['USERS_NO_AUTH'] = 'Вход на сайт';
 $LANG['USERS_DISABLE_AUTH'] = 'К сожалению, ваша учетная запись отключена, обратитесь к администратору сайта!';
 
 

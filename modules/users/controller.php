@@ -5,19 +5,29 @@ class controller {
     // Обработчик авторизации пользователя
     public function authAction() {
 
-   		if (!user::auth(trim(system::POST('login')), trim(system::POST('passw')))) {
+		$error = '';
+		$auth = user::auth(system::POST('login'), system::POST('passw'));
+		
+   		if ($auth === 1) {
+			$error = 'Такого пользователя не существует!';
+   		} else if ($auth === 2) {
+			$error = 'Аккаунт заблокирован на 5 минут!';
+		} else if ($auth === 3) {
+			$error = 'Неправильная пара логин/пароль!';
+		}
 
-            if (system::isAjax()) {
-
-                system::json(array('error' => 1));
-                
-            } else {
-
-                $_SESSION['auth_error'] = system::POST('login');
-                system::redirect('/users/auth-page');
-            }
-   		}
-
+		if (!empty($error)) {
+			
+			if (system::isAjax()) {
+				system::json(array('error' => 1, 'text' => $error));
+			} else {
+				$_SESSION['auth_login'] = system::POST('login');
+				$_SESSION['auth_error'] = $error;
+				system::redirect('/users/auth-page');
+			}
+			
+		}
+		
         if (system::isAjax()) {
 
             $param = array(
@@ -57,10 +67,16 @@ class controller {
  		page::globalVar('h1', lang::get('USERS_NO_AUTH'));
  	    page::globalVar('title', lang::get('USERS_NO_AUTH'));
 
-        if (!empty($_SESSION['auth_error']))
-            page::assign('login', $_SESSION['auth_error']);
-        else
-            page::assign('login', '');
+		page::assign('error', '');
+        if (isset($_SESSION['auth_error'])) {
+            page::assign('error', $_SESSION['auth_error']);
+			unset($_SESSION['auth_error']);
+		}
+
+		page::assign('login', '');
+		if (isset($_SESSION['auth_login'])) {
+			page::assign('login', $_SESSION['auth_login']);
+		}
 
    		return page::macros('users')->authForm('auth_page');
 

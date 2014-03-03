@@ -3,6 +3,7 @@
 $TEMPLATE['frame_form'] = <<<END
 
 <div class="registration">
+	<b style="color: red;">%error%</b> <br>
     <b>Проверьте раскладку клавиатуры, не нажата ли клавиша «Caps Lock», и
 попробуйте ввести логин и пароль еще раз.</b>
                     <form id="authFormError" action="%pre_lang%/users/auth" method="post">

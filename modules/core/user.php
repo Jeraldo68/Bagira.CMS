@@ -148,6 +148,7 @@ class user {
             self::$obj->last_visit = date('Y-m-d H:i:s');
             self::$obj->last_ip = $_SERVER['REMOTE_ADDR'];
             self::$obj->error_passw = 0;
+			self::$obj->send_email_block = 0;
             self::$obj->save();
 
             // Загружаем данные и обновляем сессию
@@ -240,7 +241,9 @@ class user {
     // Авторизация
     static function auth($login, $password) {
 
-    	$ret = false;
+		$login = trim($login);
+		$password = trim($password);
+		
      	$login = system::checkVar($login, isString);
 
 		$sel = new ormSelect('user');
@@ -253,39 +256,45 @@ class user {
 		);
         $sel->limit(1);
 
-  		if(self::$obj = $sel->getObject()) {
+		if ( !(self::$obj = $sel->getObject()) ) {
+			return 1;
+		}
 
-    		if (self::$obj->password == system::checkVar($password, isPassword)) {
+		$max_error = reg::getKey('/users/errorCountBlock');
+		
+		$passw_date = self::$obj->passw_date;
+		$five_min = strtotime('-5 minute');
 
-                $ret = self::authHim(self::$obj);
+		//Смотрим, если у юзера уже N неправильных паролей, то блокируем его на 5 минут
+		if ( (self::$obj->error_passw >= $max_error) && ($passw_date != '0000-00-00 00:00:00') && !empty($passw_date) && (strtotime($passw_date) > $five_min) ) {
+			
+			//записываем что пользователь заблокирован по своей дурости из-за не знания пароля
+			system::log(str_replace('%user%', $login, str_replace('%count%', $max_error, lang::get('BLOCKED_USER'))), error);
+			
+			if (!self::$obj->send_email_block) {
+				self::sendMailBlock(self::$obj);
+				self::$obj->send_email_block = 1;
+			}
+			
+			return 2;
+		}
 
-      		} else {
+		if (self::$obj->password != system::checkVar($password, isPassword)) {
 
-        		$max_error = reg::getKey('/users/errorCountBlock');
+			self::$obj->passw_date = date('Y-m-d H:i:s');
+			self::$obj->error_passw++;
+			self::$obj->save();
 
-          		//Смотрим, если у юзера уже N неправильных паролей, то блокируем его
-            	if ((self::$obj->error_passw + 1) >= $max_error && $max_error > 0) {
-             		self::$obj->active = 0;
-             		self::sendMailBlock(self::$obj);
-                }
-
-                self::$obj->error_passw++;
-                self::$obj->save();
-
-                if (!self::$obj->active) {
-
-                	//записываем что пользователь заблокирован по своей дурости из-за не знания пароля
-                 	system::log(str_replace('%user%', $login, str_replace('%count%', $max_error, lang::get('BLOCKED_USER'))), error);
-
-                } else {
-
-                	//Записываем в журнал о неправильном вводе пароля
-                 	system::log(str_replace('%user%', $login, lang::get('ERROR_PASSWORD')), error);
-                }
-            }
-        }
-
-        return $ret;
+			//Записываем в журнал о неправильном вводе пароля
+			system::log(str_replace('%user%', $login, lang::get('ERROR_PASSWORD')), error);
+			
+			return 3;
+		}
+		
+		
+		
+		return $ret = self::authHim(self::$obj);
+		
     }
 
     public static function socialAuth($service_name){
