@@ -24,7 +24,7 @@ class ormField extends innerErrorList {
 
     // Создаем поле
     public function __construct($id = 0) {
-
+		
         $this->is_clone = 0;
         if (!empty($id))
             $this->Load($id);
@@ -203,6 +203,11 @@ class ormField extends innerErrorList {
         if ($this->position === false)
             $this->newError(2, 'Неправильное значение позиции поля!');
     }
+
+	//получаем позицию
+	public function getPosition(){
+		return $this->position;
+	}
 
     // Название поля
     public function getName(){
@@ -489,6 +494,19 @@ class ormField extends innerErrorList {
             }
         }
 
+		/**** правка позиции поля из-за недоработки в функции удаления  ****/
+		$fields = db::q('SELECT f_id FROM <<fields>>
+		 		WHERE f_group_id = "'.$this->group_id.'"
+		 		ORDER BY f_position ASC;', records);
+		
+		$i=0;
+		foreach ($fields as $field) {
+			$i++;
+			db::q('UPDATE <<fields>> SET f_position = '.$i.'
+	                           WHERE f_id = "'.$field['f_id'].'";');
+		}
+		/*********************************************************************/
+		
         // Вычисляем позицию поля
         if (!empty($this->position)) {
 
@@ -508,7 +526,7 @@ class ormField extends innerErrorList {
 	                                 f_group_id = "'.$this->old_group_id.'";');
 
                 } else if ($this->position < $this->old_pos) {
-
+					
                     // Если перенесли ниже по списку
                     db::q('UPDATE <<fields>> SET f_position = f_position + 1
 	                           WHERE f_position >= "'.$this->position.'" and
@@ -516,7 +534,7 @@ class ormField extends innerErrorList {
 	                                 f_group_id = "'.$this->group_id.'";');
 
                 } else if ($this->position > $this->old_pos) {
-
+					
                     // Если перенесли выше по списку
                     db::q('UPDATE <<fields>> SET f_position = f_position - 1
 	                            WHERE f_position <= "'.$this->position.'" and

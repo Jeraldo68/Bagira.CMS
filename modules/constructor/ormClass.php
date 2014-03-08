@@ -707,7 +707,7 @@ class ormClass extends innerErrorList {
             $inherit = (!empty($inherit)) ? ' and f_inherit = 1' : '';
 
             $sql =  '/* Загрузка всех полей */
-		        		SELECT f_id, f_group_id, f_name, f_sname, f_type, f_view, f_required, f_system, f_is_clone, f_jevix
+		        		SELECT f_id, f_group_id, f_name, f_sname, f_type, f_view, f_required, f_system, f_is_clone, f_jevix, f_position
 		  				 FROM <<fgroup>>, <<fields>>
 		        		 WHERE fg_class_id = "'.$this->id.'" and
 		        		 		fg_id = f_group_id '.$inherit.'

@@ -375,7 +375,7 @@ function doSort() {
 
             var field_id = $(ui.item).attr("name");
             var group_id = $(ui.item).parent().attr("name");
-
+			
             var num = curr_pos = 0;
             $("#fgroup_"+group_id+" > li").each(function(){
                 num++;
@@ -400,7 +400,7 @@ $(function () {
 			stop: function(event, ui) {
 
 			    var group_id = $(ui.item).attr("name");
-
+				
                 var num = curr_pos = 0;
                 $("#groupsSortable > li").each(function(){
                 	num++;

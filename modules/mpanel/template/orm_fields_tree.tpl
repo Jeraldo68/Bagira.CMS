@@ -48,7 +48,7 @@ $TEMPLATE['frame_items'] = <<<END
 END;
 
 $TEMPLATE['field_edit'] = <<<END
-<li id="field_%item.id%" name="%item.id%">
+<li id="field_%item.id%" name="%item.id%" data-pos="%item.position%">
 
 	<div class="titl">
 		<i>%star%</i> <a href="javascript:%item.url%" class="%sh%">%item.name%</a>
@@ -63,7 +63,7 @@ $TEMPLATE['field_edit'] = <<<END
 END;
 
 $TEMPLATE['field_not_edit'] = <<<END
-<li id="field_%item.id%" name="%item.id%">
+<li id="field_%item.id%" name="%item.id%" data-pos="%item.position%">
 
 	<div class="titl">
 		<i>%star%</i> <div class="%sh%">%item.name%</div>
@@ -79,7 +79,7 @@ END;
 
 $TEMPLATE['separator'] = <<<END
 
-<li id="field_%item.id%" name="%item.id%">
+<li id="field_%item.id%" name="%item.id%" data-pos="%item.position%">
 
 	<div class="titl">
 		<div class="%sh%">%item.name%</div>

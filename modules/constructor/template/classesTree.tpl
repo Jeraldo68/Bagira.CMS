@@ -2,7 +2,7 @@
 
 $TEMPLATE['frame'] = <<<END
 
-<script type="text/javascript" src="/css_mpanel/class_tree.js"></script>
+
 <div class="otstup"></div>
 
 <div style="width: 988px; overflow: hidden;">
@@ -12,6 +12,8 @@ $TEMPLATE['frame'] = <<<END
 </div>
 
 <div class="otstup"></div>
+
+<script type="text/javascript" src="/css_mpanel/class_tree.js"></script>
 
 END;
 

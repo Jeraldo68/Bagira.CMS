@@ -247,7 +247,8 @@ class ormFieldsTree {
             page::assign('item.id', $obj->id());
             page::fParse('item.url', $this->rightEdit);
             page::assign('item.sname', $obj->getSName());
-
+            page::assign('item.position', $obj->getPosition());
+			
             if ($obj->getName() != '')
                 page::assign('item.name', $obj->getName());
             else
@@ -326,6 +327,7 @@ class ormFieldsTree {
                             page::assign('item.name', $field['f_name']);
                             page::assign('item.sname', $field['f_sname']);
                             page::assign('item.type', lang::get('CONSTR_TYPE_LIST', $field['f_type']));
+							page::assign('item.position', $field['f_position']);
 
                             page::assign('star', (($field['f_required']) ? '*' : ''));
                             page::assign('sh', (($field['f_view']) ? 'lshow' : 'lhide'));
