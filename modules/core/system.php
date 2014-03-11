@@ -320,9 +320,9 @@ class system {
 	}
 
 	// Выводит статистику по количеству запросов и времени обработки страницы
-    private static function printStat(){
+    private static function printStat($forced = 0){
 
-		if (SHOW_SPEED && !self::isAjax()) {
+		if ( (SHOW_SPEED && !self::isAjax()) || $forced ) {
 
 	    	echo '<br clear="all" />';
 
@@ -342,8 +342,8 @@ class system {
     }
 
     // Метод, завершающий работу системы
-    static function stop(){
-        self::printStat();
+    static function stop($forced = 0){
+        self::printStat($forced);
     	db::close();
     	die;
     }
