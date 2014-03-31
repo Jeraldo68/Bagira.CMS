@@ -58,7 +58,9 @@ class __grouplist {
 		function prevMonth($val, $obj) {
 			$sel = new ormSelect('user');
 			$sel->where('parents', '=', $obj->id);
-			$sel->where('create_date', '>=', date('Y-m-1 00:00:00', strtotime('-1 month')));
+			//баг в php (-1 month)
+			$t = date("t");
+			$sel->where('create_date', '>=', date('Y-m-1 00:00:00', strtotime('-'.$t.' day')));
 			$sel->where('create_date', '<', date('Y-m-1 00:00:00'));
 
 			$count = $sel->getCount();
