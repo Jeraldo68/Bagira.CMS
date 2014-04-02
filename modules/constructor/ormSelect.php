@@ -860,10 +860,10 @@ class ormSelect {
         // Выставляем статусы, чтобы знать какие таблицы использовать
         if ($this->find_page && in_array($sname, $this->page_fields))
             $this->isset_page_field = true;
-        else if (!in_array($sname, $this->psevdo) && isset($this->fields[$sname]) && $type != 90 && $type != 95 && $type != 97 && $type != 105 && $type != 100)
+        else if (!in_array($sname, $this->psevdo) && isset($this->fields[$sname]) && $type != 90 && $type != 95 && $type != 97 && $type != 105 && $type != 100 && $type != 200)
             $this->isset_base_field = true;
         //isset($this->fields[$sname])
-        if ($add && !empty($sname) && !in_array($sname, $this->psevdo) && $type != 90 && $type != 95 && $type != 97 && $type != 100 && $type != 105)
+        if ($add && !empty($sname) && !in_array($sname, $this->psevdo) && $type != 90 && $type != 95 && $type != 97 && $type != 100 && $type != 105 && $type != 200)
 
             if ($this->find_page && in_array($sname, $this->page_fields)) {
 

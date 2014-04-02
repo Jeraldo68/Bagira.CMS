@@ -100,7 +100,7 @@ jQuery(document).ready(function() {
 				xhr.upload.addEventListener('progress', uploadProgress, false);
 				xhr.onreadystatechange = stateChange;
 				xhr.open('POST', '/mpanel/uploader/'+$('#dropZone').attr('data-id'));
-				xhr.setRequestHeader('X-FILE-NAME', file[i].name);
+				xhr.setRequestHeader('X-FILE-NAME', encodeURIComponent(file[i].name));
 				var fd = new FormData;
 				fd.append("file", file[i]);
 				xhr.send(fd);
