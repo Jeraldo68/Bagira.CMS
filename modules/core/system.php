@@ -1021,6 +1021,8 @@ class system {
             if (empty($from_name))
 	        	$from_name = domains::curDomain()->getSiteName();
 
+			$from_name = str_replace('&quot;', '"', $from_name);
+			
             // Отправляет письмо с инструкциями
 	        $mail = new phpmailer();
 	        $mail->From = $from;
