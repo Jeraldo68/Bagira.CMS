@@ -13,14 +13,24 @@ class controller {
 
         } else {
 
-            // Загружаем обычную страницу
-        	$page_id = ormPages::getPageIdByUrl(system::getCurrentUrl());
+			// Загружаем обычную страницу
+			$page_id = ormPages::getPageIdByUrl(system::getCurrentUrl());
 
-        	if (!empty($page_id)) {
+			if ($page = ormPages::get($page_id)) {
 
-            	$content = $this->parsePageContent(ormPages::get($page_id));
+				//обработка доп. ссылки у страницы
+				$url = $page->other_link;
 
-        	}
+				if (!empty($url)) {
+					if ($url == '/first_subsection') {
+						$url = $page->_url;
+					}
+					system::redirect($url);
+				}
+
+				$content = $this->parsePageContent($page);
+			}
+			
  		}
 
 		return $content;
