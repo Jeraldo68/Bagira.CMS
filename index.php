@@ -142,7 +142,7 @@
     system::addClass('phpmailer', MODUL_DIR.'/core/phpmailer/class.phpmailer.php');
     system::addClass('SMTP', MODUL_DIR.'/core/phpmailer/class.smtp.php');
     system::addClass('resizer', MODUL_DIR.'/core/resizer.php');
-    system::addClass('WideImage', MODUL_DIR.'/core/WideImage/WideImage.php');
+    system::addClass('AcImage', MODUL_DIR.'/core/ImageToolkit/AcImage.php');
     system::addClass('Jevix', MODUL_DIR.'/core/jevix/jevix.class.php');
 	system::addClass('XML', MODUL_DIR.'/core/xml.class.php');
 	system::addClass('Logger', MODUL_DIR.'/core/class.logger.php');

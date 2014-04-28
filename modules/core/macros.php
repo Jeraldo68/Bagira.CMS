@@ -47,23 +47,23 @@ class coreMacros {
             }
  	}
 
-
+	
 	/**
-	 * @return stirng - Путь до заресайзенного изображения
+	 * @return string - Путь до заресайзенного изображения
 	 * @param string $file_name - Исходное изображение
-	 * @param CONST $scale_type - Способ масштабирования рисунка
-			0	-	Масштабирование с учетом пропорций, относительно $width или $height
-			1    - 	Растягивает изображение
 	 * @param int $width - Ширина конечного изображения, если == 0 не учитывается
 	 * @param int $height - Высота конечного изображения, если == 0 не учитывается
+	 * @param $scale_type - Способ масштабирования рисунка
+	   0	-	Изображение заполняет всю область, лишнее обрезается равномерно со всех сторон
+	   1    - 	Изображение вписывается в заданные рамки, но не обрезается
 	 * @param int $bg - Задает фон (HEX), если 0 оставляет прозрачным
 	 * @param string $watermark - Способ наложения водяного знака. Одно из нескольких значений:
-			0 		- 	Водяной знак не накладывается
-			1-9 	-	Водяной знак накладывается в одну из 9 позиций квадрата (см. документацию)
+	   0 		- 	Водяной знак не накладывается
+	   1-5 	-	Водяной знак накладывается в одну из 5 позиций квадрата (см. документацию)
 	 * @desc МАКРОС: При необходимости масштабирует изображение под заданные параметры и
-	возвращает путь до кешированного файла.
+	   возвращает путь до кешированного файла.
 	 */
-	public function resizeImage($file_name, $width = 0, $height = 0, $bg = 0, $scale_type = 0, $watermark = 0) {
+	public function resizeImage($file_name, $width = 0, $height = 0, $scale_type = 0, $bg = 0, $watermark = 0) {
 
 		if (empty($file_name))
 			return '';
@@ -72,52 +72,54 @@ class coreMacros {
 			return $file_name;
 
 		$scale_type = ($scale_type != 1) ? 0 : 1; //может быть только 0 или 1
-		
+
 		$dir = '/cache/img/'.$width.'x'.$height.'_'.$scale_type.'_'.$watermark.'_'.str_replace('#', '', $bg);
 		$resize_file_name = $dir.'/'.system::filePathToPrefix($file_name).system::fileName($file_name);
 
-		$width = empty($width) ? NULL : $width;
-		$height = empty($height) ? NULL : $height;
-		
 		if (!file_exists(ROOT_DIR.$resize_file_name)) {
 			if (!is_dir(ROOT_DIR.$dir)) @mkdir(ROOT_DIR.$dir, 0777, true);
-
-			$img = WideImage::load(ROOT_DIR.$file_name);
 			
-			$fit = ($scale_type == 1) ? 'fill' : 'outside';
-			$img = $img->resize($width, $height, $fit);
-
-			if (!empty($bg)) {
-				$bg = $img->allocateColor(system::hex2rgb($bg));
-				$img->fill(0,0,$bg);
+			$img = AcImage::createImage(ROOT_DIR.$file_name);
+			
+			if ($bg !== 0) {
+				$bg = system::hex2rgb($bg);
+				$img->setBackgroundColor($bg['red'], $bg['green'], $bg['blue']);
+				$img->setTransparency(false);
+			} else {
+				$img->setTransparency(true);
 			}
 			
-			if (($width != 0) && ($height != 0)) {
-				$img = $img->crop('center', 'center', $width, $height);
+			$img->setQuality(75);
+				
+			if (!empty($width) && !empty($height)) {
+
+				if ($scale_type == 0) {
+					$img->cropCenter($width.'pr', $height.'pr');
+				}
+				
+				$img->resize($width, $height);
+			} else if (!empty($width)) {
+				$img->resizeByWidth($width);
+			} else if (!empty($height)) {
+				$img->resizeByHeight($height);
 			}
 
 			$wimage = reg::getKey('/core/watermark');
 			if (is_numeric($watermark) && $watermark > 0 && !empty($wimage)) {
 				if (file_exists(ROOT_DIR.$wimage)) {
-					$wimage = WideImage::load(ROOT_DIR.$wimage);
-					$ver = $hor = 'center';
-					
-					if ($watermark <= 3) {
-						$ver = 'top + 10';
-					} else if ($watermark >= 7) {
-						$ver = 'bottom - 10';
-					}
 
-					if (in_array($watermark, array(1,4,7))) {
-						$hor = 'left + 10';
-					} else if (in_array($watermark, array(3,6,9))) {
-						$hor = 'right - 10';
+					$watermark = ($watermark > 5) ? 5 : $watermark;
+					
+					$img->setTransparency(true);
+					$img->drawLogo(ROOT_DIR.$wimage, $watermark - 1);
+					if ($bg !== 0) {
+						$img->setTransparency(false);
 					}
-					$img = $img->merge($wimage, $hor, $ver, 100);
 				}
 			}
 			
-			$img->saveToFile(ROOT_DIR.$resize_file_name);
+
+			$img->save(ROOT_DIR.$resize_file_name);
 		}
 
 		return $resize_file_name;
