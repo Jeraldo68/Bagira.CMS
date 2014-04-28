@@ -25,6 +25,7 @@ class controller {
 					if ($url == '/first_subsection') {
 						$url = $page->_url;
 					}
+					header("HTTP/1.1 301 Moved Permanently");
 					system::redirect($url);
 				}
 
