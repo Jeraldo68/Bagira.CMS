@@ -1048,7 +1048,7 @@ class system {
             // Администратору доверяем больше, разрешаем ему втавлять потенциально опасные теги - object, param, embed, video, iframe
 
             // 1. Устанавливаем разрешённые теги. (Все не разрешенные теги считаются запрещенными.)
-            $jevix->cfgAllowTags(array('table', 'tr', 'td', 'th', 'p', 'a', 'img', 'i', 'b', 'u', 'em', 'strong', 'nobr',
+            $jevix->cfgAllowTags(array('table', 'tr', 'td', 'th', 'p', 'a', 'img', 'i', 'b', 'u', 'em', 'strong', 'nobr', 'blockquote',
                                       'li', 'ol', 'ul', 'sup', 'abbr', 'pre', 'acronym', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
                                       'adabracut', 'br', 'code', 'div', 'span', 'object', 'param', 'embed', 'video', 'code', 'iframe', 'hr'));
 
