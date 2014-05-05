@@ -135,8 +135,8 @@ class system {
         page::callAjaxMacros();
 
         // Парсим мето-информацию "по умолчанию"
-        page::getGlobalVar('keywords', reg::getKey(ormPages::getPrefix().'/keywords'));
-		page::getGlobalVar('description', reg::getKey(ormPages::getPrefix().'/description'));
+        page::globalVar('keywords', reg::getKey(ormPages::getPrefix().'/keywords'));
+		page::globalVar('description', reg::getKey(ormPages::getPrefix().'/description'));
 
 
         // Загрузка необходимого функционала в зависимости от адреса
