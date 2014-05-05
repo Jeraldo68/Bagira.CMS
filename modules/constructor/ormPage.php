@@ -756,7 +756,7 @@ class ormPage extends ormObject {
 						$basename = basename($this->$fname);
 						$copy->__set($fname, system::copyFile(ROOT_DIR.$this->$fname, $basename, $dirname));
 					}
-				} else if (!empty($field['f_type']) && $field['f_type'] != 97 && $field['f_relation'] < 2 && $fname != 'pseudo_url' && $fname != 'tags')
+				} else if (!empty($field['f_type']) && $field['f_type'] != 97 && $field['f_type'] != 200 && $field['f_relation'] < 2 && $fname != 'pseudo_url' && $fname != 'tags')
                     $copy->__set($fname, $this->__get($fname));
 
             if (empty($copyTo)) {
