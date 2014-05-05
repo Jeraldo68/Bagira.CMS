@@ -73,6 +73,9 @@ class coreMacros {
 
 		$scale_type = ($scale_type != 1) ? 0 : 1; //может быть только 0 или 1
 
+		$width = intval($width);
+		$height = intval($height);
+		
 		$dir = '/cache/img/'.$width.'x'.$height.'_'.$scale_type.'_'.$watermark.'_'.str_replace('#', '', $bg);
 		$resize_file_name = $dir.'/'.system::filePathToPrefix($file_name).system::fileName($file_name);
 
