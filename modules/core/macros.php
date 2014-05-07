@@ -142,8 +142,24 @@ class coreMacros {
 
 		return $file_path.'?'.$suffix;
 	}
-	
 
+	/**
+	 * @return stirng - человекопонятный размер
+	 * @param int $bytes - размер в байтах
+	 * @desc МАКРОС: Приводит размер в байтах к понятной для человека форме (10 Gb)
+	 */
+	public function niceSize($bytes) {
+		$type = array("", "K", "M", "G", "T", "P", "E", "Z", "Y");
+
+		$i = 0;
+		while($bytes >= 1024) {
+			$bytes /= 1024;
+			$i++;
+		}
+
+		return round($bytes, 1)." ".$type[$i]."b";
+	}
+	
 	/**
 	 * @return HTML
 	 * @param string $field_name - Системное имя поля
