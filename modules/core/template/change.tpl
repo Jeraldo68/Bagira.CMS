@@ -12,6 +12,7 @@ $TEMPLATE['frame'] = <<<END
     	<li><a href="#tabs-main">%text.1%</a><ins></ins></li>
     	<li><a href="#tabs-lang">%text.2%</a><ins></ins></li>
     	<li><a href="#tabs-domain">%text.3%</a><ins></ins></li>
+    	<li><a href="#tabs-info">%text.10%</a><ins></ins></li>
     </ul>
 
 
@@ -69,7 +70,16 @@ $TEMPLATE['frame'] = <<<END
 	<div class="clear"></div>
 </div>
 
+<div id="tabs-info">
+	<div class="ins" style="padding-left:20px;padding-bottom:20px;">
+		<strong style="display: inline-block;">%disk_total_space%</strong> &nbsp;&ndash;&nbsp; %text.50% <br>
+		<strong style="display: inline-block;">%disk_free_space%</strong> &nbsp;&ndash;&nbsp; %text.51% <br>
+		<strong style="display: inline-block;">%upload_size%</strong> &nbsp;&ndash;&nbsp; %text.52% /upload <br>
+	</div><!-- end ins-->
+	<div class="clear"></div>
+</div>
 
+	
 
 
 </div>

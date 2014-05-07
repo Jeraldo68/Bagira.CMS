@@ -69,7 +69,10 @@ class __change {
 
         page::assign('domains', $form->getHTML());
 
-
+		page::assign('disk_total_space', page::macros('core')->niceSize(disk_total_space(ROOT_DIR)));
+		page::assign('disk_free_space', page::macros('core')->niceSize(disk_free_space(ROOT_DIR)));
+		page::assign('upload_size', page::macros('core')->niceSize(system::dirSize(ROOT_DIR.'/upload')));
+		
 		return page::parse($TEMPLATE['frame']);
  	}
 

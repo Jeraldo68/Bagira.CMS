@@ -17,6 +17,7 @@ $LANG['CONFIG_FORM_FIELD'][6] = 'Online *';
 $LANG['CONFIG_FORM_FIELD'][7] = 'Сообщение при откл. сайте';
 $LANG['CONFIG_FORM_FIELD'][8] = 'Сообщение при системной ошибке';
 $LANG['CONFIG_FORM_FIELD'][9] = 'Включить GZIP сжатие для адм. панели';
+$LANG['CONFIG_FORM_FIELD'][10] = 'Информация';
 
 
 $LANG['CONFIG_FORM_FIELD'][12] = 'Удаление объектов только через корзину';
@@ -49,6 +50,11 @@ $LANG['CONFIG_FORM_FIELD'][35] = 'Запрет использования IE7';
 $LANG['CONFIG_FORM_FIELD'][36] = 'Запрет на удаление Мини-Текстов';
 $LANG['CONFIG_FORM_FIELD'][37] = 'Запрет использования IE8';
 $LANG['CONFIG_FORM_FIELD'][38] = 'Количество элементов на странице поиска';
+
+
+$LANG['CONFIG_FORM_FIELD'][50] = 'Общий размер файловой системы';
+$LANG['CONFIG_FORM_FIELD'][51] = 'Свободное дисковое пространство';
+$LANG['CONFIG_FORM_FIELD'][52] = 'Размер папки';
 
 
 $LANG['CONFIG_SAVE_OK'] = 'Изменения сохранены';
