@@ -1685,7 +1685,25 @@ class structureMacros {
         return $list;
     }
 
+	/**
+	 * @return string
+	 * @param int $obj_id - ID страницы 
+	 * @param string $field - Поле которое нужно обработать
+	 * @desc МАКРОС: Форматирует текст для отправки через json (экранирует кавычки и удаляет лишние пробелы)
+	 */
+	function screening($obj_id, $field) {
+		if ($obj = ormPages::get($obj_id)) {
+			$field = trim($field);
+			$str = $obj->$field;
+			$str = addslashes($str);
+			$str = trim($str);
 
+			return $str;
+		}
+
+		return '';
+	}
+	
     /**
      * @return HTML
      * @param int $section_id - ID новостной ленты, для которой необходимо построить RSS-ленту
