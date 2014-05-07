@@ -197,6 +197,9 @@ class searchIndex extends searchRanking {
                 	Пробегаем по всем полям, данные которых участвуют в поиске. Разбиваем их содержимое
                 	на отдельные словоформы и ранжируем в соотвествии с настройками.
                 */
+
+				//зануляем найденные слова от предыдущей страницы
+				self::$words = array();
                 self::parseContent($page->name, 'name');
 	            $fields = $page->getClass()->loadFields();
 	            while(list($fname, $field) = each($fields))
@@ -236,6 +239,8 @@ class searchIndex extends searchRanking {
     // Проверяет имеется ли в индексе указанное слово. Если слово не найдено, оно добавляется в индекс.
     static private function getWordId($word) {
 
+		$word = mb_strtolower($word, 'utf8');
+		
     	$word_id = db::q('SELECT w_id FROM <<search_words>> WHERE w_name = "'.$word.'";', value);
 
     	if (empty($word_id))
@@ -251,6 +256,8 @@ class searchIndex extends searchRanking {
 	*/
  	static function splitString($str) {
 
+		$str = mb_strtolower($str, 'utf8');
+		
         $to_space = Array("&nbsp;", "&quote;", "«", "»", "-", ".", ",", "?", ":", ";", "%", ")", "(", "/", 0x171, 0x187, "<", ">", "'", '"');
 
         $str = str_replace(">", "> ", $str);
@@ -277,6 +284,8 @@ class searchIndex extends searchRanking {
 	*/
 	static function morphGetRoot($word) {
 
+		$word = mb_strtolower($word, 'utf8');
+		
 		$suf = Array();
 
 		$suf[] = 'ование';
