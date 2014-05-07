@@ -617,6 +617,27 @@ class system {
     	return (in_array(self::fileExt($file_name), $exe_array)) ? true : false;
     }
 
+	/**
+	 * @return string
+	 * @param string $path - Путь к папке
+	 * @desc МАКРОС: Вернет размер в байтах для указанной директории
+	 */
+	static function dirSize($path) {
+		$fileSize = 0;
+		$dir = scandir($path);
+
+		foreach($dir as $file)
+		{
+			if (($file!='.') && ($file!='..'))
+				if(is_dir($path . '/' . $file))
+					$fileSize += self::dirSize($path.'/'.$file);
+				else
+					$fileSize += filesize($path . '/' . $file);
+		}
+
+		return $fileSize;
+	}
+	
     /**
 	* @return Результат проверки:
 			true  - Файл существует и отвечает всем требованиям.
