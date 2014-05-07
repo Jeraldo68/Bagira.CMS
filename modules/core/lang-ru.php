@@ -48,6 +48,7 @@ $LANG['CONFIG_FORM_FIELD'][34] = 'Запрет использования IE6';
 $LANG['CONFIG_FORM_FIELD'][35] = 'Запрет использования IE7';
 $LANG['CONFIG_FORM_FIELD'][36] = 'Запрет на удаление Мини-Текстов';
 $LANG['CONFIG_FORM_FIELD'][37] = 'Запрет использования IE8';
+$LANG['CONFIG_FORM_FIELD'][38] = 'Количество элементов на странице поиска';
 
 
 $LANG['CONFIG_SAVE_OK'] = 'Изменения сохранены';

@@ -2,7 +2,7 @@
 
 class __index {
 
-    // �������� �������� ������
+	// Основная страница модуля
 	public function defAction() {
 
         if (file_exists(MODUL_DIR.'/search/template/forms.tpl')) {
@@ -27,7 +27,7 @@ class __index {
         }
  	}
 
- 	// ���������� ���������� ������� �����
+	// Обработчик индексации страниц сайта
 	public function proc() {
 
         if (system::isAjax() && system::issetUrl(2)) {

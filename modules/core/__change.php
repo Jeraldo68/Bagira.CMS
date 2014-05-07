@@ -26,6 +26,8 @@ class __change {
         ui::CheckBox('scaleBigJpeg', 1, reg::getKey('/core/scaleBigJpeg'), lang::get('CONFIG_FORM_FIELD', 33));
         page::assign('sizeBigJpeg', reg::getKey('/core/sizeBigJpeg'));
 
+		page::assign('search_count_msg', lang::get('CONFIG_FORM_FIELD', 38));
+		page::assign('search_count', reg::getKey(ormPages::getPrefix('search').'/max_count'));
 
 
          // Форма редактирования языков
@@ -77,6 +79,7 @@ class __change {
         reg::setKey('/core/delToTrash', system::POST('delToTrash', isBool));
         reg::setKey('/core/scaleBigJpeg', system::POST('scaleBigJpeg', isBool));
         reg::setKey('/core/sizeBigJpeg', system::POST('sizeBigJpeg', isInt));
+		reg::setKey(ormPages::getPrefix('search').'/max_count', system::POST('search_count', isInt));
         reg::setKey('/core/noIE6', system::POST('noIE6', isBool));
         reg::setKey('/core/noIE7', system::POST('noIE7', isBool));
         reg::setKey('/core/noIE8', system::POST('noIE8', isBool));
