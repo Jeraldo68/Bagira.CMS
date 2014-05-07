@@ -4,26 +4,28 @@
 <meta charset=utf-8 />
 <title>%title%</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="icon" href="/css_mpanel/i/favicon.ico" type="image/x-icon"/>
-<link href="/css_mpanel/mpanel.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="/css_mpanel/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="/css_mpanel/jquery.cookie.js"></script>
-<script type="text/javascript" src="/css_mpanel/jquery.rsv.js"></script>
+	
+<link rel="icon" type="image/x-icon" href="%core.unCache(/css_mpanel/i/favicon.ico)%" />
+<link rel="stylesheet" type="text/css" href="%core.unCache(/css_mpanel/mpanel.css)%" />
+	
+<script type="text/javascript" src="%core.unCache(/css_mpanel/jquery-1.7.2.min.js)%"></script>
+<script type="text/javascript" src="%core.unCache(/css_mpanel/jquery.cookie.js)%"></script>
+<script type="text/javascript" src="%core.unCache(/css_mpanel/jquery.rsv.js)%"></script>
 
-<script type="text/javascript" src="/css_mpanel/jquery.autocomplete-min.js"></script>
-<link href="/css_mpanel/jquery.autocomplete.styles.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="%core.unCache(/css_mpanel/jquery.autocomplete-min.js)%"></script>
+<link rel="stylesheet" type="text/css" href="%core.unCache(/css_mpanel/jquery.autocomplete.styles.css)%" />
 
-<link type="text/css" href="/css_mpanel/ui-lightness/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
-<script type="text/javascript" src="/css_mpanel/jquery-ui-1.8.13.custom.min.js"></script>
-<script src="/css_mpanel/i18n/jquery.ui.datepicker-ru.js"></script>
+<link rel="stylesheet" type="text/css" href="%core.unCache(/css_mpanel/ui-lightness/jquery-ui-1.7.2.custom.css)%" />
+<script type="text/javascript" src="%core.unCache(/css_mpanel/jquery-ui-1.8.13.custom.min.js)%"></script>
+<script type="text/javascript" src="%core.unCache(/css_mpanel/i18n/jquery.ui.datepicker-ru.js)%"></script>
 
-<link rel="stylesheet" href="/css_mpanel/prettyPhoto/css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
-<script src="/css_mpanel/prettyPhoto/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="%core.unCache(/css_mpanel/prettyPhoto/css/prettyPhoto.css)%" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
+<script type="text/javascript" src="%core.unCache(/css_mpanel/prettyPhoto/jquery.prettyPhoto.js)%"></script>
 
-<script type="text/javascript" src="/css_mpanel/lang-ru.js"></script>
-<script type="text/javascript" src="/css_mpanel/main.js"></script>
+<script type="text/javascript" src="%core.unCache(/css_mpanel/lang-ru.js)%"></script>
+<script type="text/javascript" src="%core.unCache(/css_mpanel/main.js)%"></script>
 
-<script type="text/javascript" src="/css_mpanel/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="%core.unCache(/css_mpanel/ckeditor/ckeditor.js)%"></script>
 </head>
 
 

@@ -83,7 +83,7 @@ class controller {
 
         // Устанавливаем статус системы "в режиме администрирования".
         system::$isAdmin = true;
-        page::$macros = 0;
+//        page::$macros = 0;
 
 
         // Попытка авторизации
