@@ -91,7 +91,7 @@ class system {
         page::globalVar('title', '');
         page::assign('site_name', domains::curDomain()->getSiteName());
         page::assign('base_email', domains::curDomain()->getEmail());
-		page::assign('site_url', $_SERVER['HTTP_HOST']);
+		page::assign('site_url', domains::curDomain()->getName());
         page::assign('user_id', user::get('id'));
         page::assign('pre_lang', languages::pre());
         page::assign('time', time());
