@@ -449,13 +449,20 @@ class user {
 
             } else if (isset($_GET['code'])){
 
-                $url = "https://api.vkontakte.ru/oauth/access_token?client_id=".$app_id."&client_secret=".$app_secret."&code=".$_GET['code'];
-                $response = json_decode(@file_get_contents($url));
+				$curl = curl_init('https://oauth.vk.com/access_token?');
+				curl_setopt($curl, CURLOPT_POST, 1);
+				curl_setopt($curl, CURLOPT_POSTFIELDS, "client_id=".$app_id."&client_secret=".$app_secret."&code=".$_GET['code']."&redirect_uri=".$back_url);
+				curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+				curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-Type: application/x-www-form-urlencoded"));
+				$s = curl_exec($curl);
+				curl_close($curl);
+
+				$response = json_decode($s, true);
 
                 if (isset($response->error))
                     system::redirect('/');
-    
-                $arrResponse = json_decode(@file_get_contents("https://api.vkontakte.ru/method/getProfiles?uid={$response->user_id}&access_token={$response->access_token}&fields=last_name,photo"))->response;
+
+				$arrResponse = json_decode(file_get_contents("https://api.vk.com/method/getProfiles?uid={$response['user_id']}&access_token={$response['access_token']}&fields=last_name,photo"))->response;
 
                 $user_info = array(
                     'identity' => 'http://vk.com/id'.$arrResponse[0]->uid,
