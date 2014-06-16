@@ -254,6 +254,7 @@ class ormPage extends ormObject {
                         /// $sel->fields('id');
                         $sel->findInPages();
                         $sel->where('parents', '=', $this->id);
+						$sel->where('active', '=', 1);
                         $sel->orderBy('position');
                         $sel->limit(1);
 
