@@ -2,7 +2,7 @@
 
 $TEMPLATE['frame'] = <<<END
 
-%structure.filterABC(350 faq, filter_abc, ru, content)%
+%structure.filterABC(350 faq, abc, ru, content)%
 
 <div id="leftcolumn">
     <ul class="questionanswer">

@@ -107,8 +107,8 @@ class structureMacros {
 	 * @desc МАКРОС: Вернет IFrame с видео, взависимости от видеохостинга
 	 */
 
-	function video($page_id, $field = 'video', $templ_name = '_video_iframes') {
-		$templ_file = '/structure/objects/'.$templ_name.'.tpl';
+	function video($page_id, $field = 'video', $templ_name = 'default') {
+		$templ_file = '/structure/video/'.$templ_name.'.tpl';
 		$TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
@@ -166,7 +166,7 @@ class structureMacros {
 	 * @desc МАКРОС: Возвращает список значений справочника
 	 */
 	public function getList($list_id, $templ_name = 'default', $max_count = 0, $start_pos = 0) {
-		$templ_file = '/structure/objects/'.$templ_name.'.tpl';
+		$templ_file = '/structure/getList/'.$templ_name.'.tpl';
 		$TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
@@ -265,9 +265,9 @@ class structureMacros {
  	}
 
 
-    public function filterABC($section, $templ_name = 'filter_abc', $alphabet = 'ru', $field = 'name') {
+    public function filterABC($section, $templ_name = 'abc', $alphabet = 'ru', $field = 'name') {
 
-        $templ_file = '/structure/objects/'.$templ_name.'.tpl';
+        $templ_file = '/structure/filter/'.$templ_name.'.tpl';
 	    $TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
@@ -303,9 +303,9 @@ class structureMacros {
 
     }
 
-    public function filter($section, $templ_name = 'filter_default') {
+    public function filter($section, $templ_name = 'default') {
 
-        $templ_file = '/structure/objects/'.$templ_name.'.tpl';
+        $templ_file = '/structure/filter/'.$templ_name.'.tpl';
 	    $TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
@@ -1111,12 +1111,12 @@ class structureMacros {
 	* @param int $max_count - Максимальное количество элементов в списке
 	* @desc МАКРОС: Выводит список значений справочника, соотвествующих указанному объекту
 	*/
- 	public function getPropertyList($field_name, $obj_id, $templ_name = 'default', $max_count = 0) {
+ 	public function getPropertyList($field_name, $obj_id, $templ_name = 'similar', $max_count = 0) {
 
         $list = '';
 
         // подгружаем файл шаблона
-	    $templ_file = '/structure/objects/'.$templ_name.'.tpl';
+	    $templ_file = '/structure/getPropList/'.$templ_name.'.tpl';
 	    $TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
@@ -1500,7 +1500,7 @@ class structureMacros {
 	*/
     public function fieldList($obj_id_or_class, $group_name = 0, $spec = 0, $templ_name = '_fields_list') {
 
-        $templ_file = '/structure/objects/'.$templ_name.'.tpl';
+        $templ_file = '/structure/fieldList/'.$templ_name.'.tpl';
 	    $TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
@@ -1569,9 +1569,9 @@ class structureMacros {
 	* @param string $templ_name - Шаблон оформления
 	* @desc МАКРОС: Выводит ссылку на файл, с подсчетом количества скачиваний
 	*/
-    public function getLinkCounter($field_name, $obj_id, $templ_block = 0, $templ_name = '_properties') {
+    public function getLinkCounter($field_name, $obj_id, $templ_block = 0, $templ_name = 'default') {
 
-        $templ_file = '/structure/objects/'.$templ_name.'.tpl';
+        $templ_file = '/structure/getProp/'.$templ_name.'.tpl';
 		$TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
@@ -1789,7 +1789,7 @@ class structureMacros {
             if (isset($TEMPLATE['list']))
                 $list .= page::parse($TEMPLATE['list']);
             else
-                return page::errorBlock('structure.rss', $templ_file, 'list');
+                return page::errorBlock(__CLASS__.'.'.__FUNCTION__, $templ_file, 'list');
         }
 
         if (!empty($list)) {
