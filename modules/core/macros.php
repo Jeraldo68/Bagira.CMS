@@ -168,9 +168,9 @@ class coreMacros {
 	 * @param string $templ_name - Имя файла шаблона оформления
 	 * @desc МАКРОС: Выводит значение поля в указанном оформлении
 	 */
-	function getProp($field_name, $obj_id, $templ_block = 0, $templ_name = '_properties')
+	function getProp($field_name, $obj_id, $templ_block = 0, $templ_name = 'default')
 	{
-		$templ_file = '/structure/objects/' . $templ_name . '.tpl';
+		$templ_file = '/structure/getProp/' . $templ_name . '.tpl';
 		$TEMPLATE = page::getTemplate($templ_file);
 
 		if(!is_array($TEMPLATE))
@@ -219,10 +219,10 @@ class coreMacros {
 						return page::parse($TEMPLATE[$templ_block . '_empty']);
 
 				} else
-					return page::error('structure.getProperty', $field_name, lang::get('ERROR_BAD_TYPE'));
+					return page::error(__CLASS__.'.'.__FUNCTION__, $field_name, lang::get('ERROR_BAD_TYPE'));
 
 			} else
-				return page::error('structure.getProperty', $field_name, lang::get('ERROR_NOTFOUND_FIELD'));
+				return page::error(__CLASS__.'.'.__FUNCTION__, $field_name, lang::get('ERROR_NOTFOUND_FIELD'));
 
 		}
 	}

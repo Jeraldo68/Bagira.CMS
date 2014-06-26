@@ -988,9 +988,9 @@ class structureMacros {
 	* @param string $templ_name - Имя файла шаблона оформления
 	* @desc МАКРОС: Выводит значение поля в указанном оформлении
 	*/
- 	function getProperty($field_name, $obj_id, $templ_block = 0, $templ_name = '_properties') {
+ 	function getProperty($field_name, $obj_id, $templ_block = 0, $templ_name = 'default') {
 
-        $templ_file = '/structure/objects/'.$templ_name.'.tpl';
+        $templ_file = '/structure/getProp/'.$templ_name.'.tpl';
 		$TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
@@ -1045,9 +1045,9 @@ class structureMacros {
 	    }
 	}
 
-	function getProp($field_name, $obj_id, $templ_block = 0, $templ_name = '_properties') {
+	function getProp($field_name, $obj_id, $templ_block = 0, $templ_name = 'default') {
 
-		$templ_file = '/structure/objects/'.$templ_name.'.tpl';
+		$templ_file = '/structure/getProp/'.$templ_name.'.tpl';
 		$TEMPLATE = page::getTemplate($templ_file);
 
 		if (!is_array($TEMPLATE))
