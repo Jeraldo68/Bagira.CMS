@@ -1805,6 +1805,43 @@ class structureMacros {
 
 
 
+	/**
+	 * Вернет ссылку на соседа текущей страницы
+	 * @param string $mode - next|prev
+	 * @param string $sel - какие классы объектов учавствуют в выборке - goods; image|file; *page ( * без наследников)
+	 * @param string $sort - Сортировка родительского раздела (Пример: publ_date desc)
+	 * @param int $obj_id - id текущей страницы, если 0 будет взят id текущей страницы
+	 * @param string $templ_name - Имя шаблона оформления
+	 * @return string
+	 */
+	public function neighbour($mode, $sel = 'section', $sort = 'position asc', $obj_id = 0, $templ_name = 'default') {
+
+		if (!in_array($mode, array('next', 'prev')))
+			return '';
+
+		$templ_file = '/structure/neighbour/'.$templ_name.'.tpl';
+		$TEMPLATE = page::getTemplate($templ_file);
+
+		if (!is_array($TEMPLATE))
+			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
+
+		if (empty($obj_id))
+			$obj_id = ormPages::getCurPageId();
+
+		if ($obj = ormPages::get($obj_id)) {
+			if ($nb = $obj->getNeighbour($mode, $sel, $sort)) {
+				page::assign('obj.url', $nb->_url);
+				page::assign('obj.id', $nb->id);
+				page::assign('obj.name', $nb->name);
+
+				return page::parse($TEMPLATE[$mode]);
+			}
+		}
+
+		return page::parse($TEMPLATE[$mode.'_empty']);
+	}
+
+
 
 }
 

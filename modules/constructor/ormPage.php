@@ -849,6 +849,73 @@ class ormPage extends ormObject {
 
 
 
+	/**
+	 * вернет соседа текущего объекта относительно того же разделе
+	 * @param string $mode - next|prev
+	 * @param string $sel - какие классы объектов учавствуют в выборке - goods; image|file; *page ( * без наследников)
+	 * @param string $sort - сортировка родительского раздела
+	 * @return ormPage|bool
+	 */
+	public function getNeighbour($mode, $sel = 'section', $sort = 'position asc') {
+		$class = $this->getClass()->getSName();
+		$this_id = $this->id;
+
+		if (empty($this_id) || empty($class) || !in_array($mode, array('next', 'prev'))) {
+			return false;
+		}
+
+		if (($parent_id = $this->getParentId()) == false) {
+			return false;
+		}
+
+		$sel = new ormSelect($sel);
+		$sel->where('parents', '=', $parent_id);
+		$sel->where('active', '=', 1);
+
+		$sort = trim($sort);
+		$sort = strtolower($sort);
+		$arr = explode(' ', $sort);
+		$asc = 'asc';
+		if (count($arr) > 1){
+			$param = $arr[0];
+			$asc = $arr[1];
+		}
+
+		if (!in_array($asc, array('asc', 'desc'))) {
+			return false;
+		}
+
+		$cur = $this->{$param};
+
+		if ($cur == '') {
+			return false;
+		}
+
+		if ($asc == 'asc' && $mode == 'next') {
+			$znak = '>';
+		} else if ($asc == 'asc' && $mode == 'prev') {
+			$znak = '<';
+			$asc = 'desc';
+		} else if ($asc == 'desc' && $mode == 'next') {
+			$znak = '<';
+		} else if ($asc == 'desc' && $mode == 'prev') {
+			$znak = '>';
+			$asc = 'asc';
+		}
+
+		$sel->where($param, $znak, $cur);
+		$sel->orderBy($param, $asc);
+		$sel->limit(1);
+
+		if ($obj = $sel->getObject()) {
+			return $obj;
+		}
+
+		return false;
+	}
+
+
+
 }
 
 ?>
