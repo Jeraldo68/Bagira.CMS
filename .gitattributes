@@ -1,4 +1,4 @@
 # Disable LF normalization for all files
 core.autocrlf false
 core.safecrlf false
-core.oel = lf
+core.eol = lf
