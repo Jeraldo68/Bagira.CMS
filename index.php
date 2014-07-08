@@ -3,6 +3,8 @@
     Error_Reporting(E_ALL);
     session_start();
 
+	header( 'Expires: ' . gmdate( 'D, d M Y H:i:s', strtotime('+5 days') ) . ' GMT' );
+
     ini_set('default_socket_timeout', 5);
 
     // Выберите часовой пояс, поже вынесим в настройки

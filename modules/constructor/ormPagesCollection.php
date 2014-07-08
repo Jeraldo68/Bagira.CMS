@@ -737,14 +737,17 @@ class ormPages {
                 $url = self::getPageUrlById($page['o_id']);
                 $priority = ($page['is_home_page']) ? 1 : (1 - ((count(explode('/', $url)) - 1 ) * 0.1));
 
+				$changefreq = ($priority < 0.9) ? 'weekly' : 'daily';
+				
                 $tmp = '';
             	$tmp .= '<loc>http://'.domains::curDomain()->getName().$url.'</loc>';
             	$tmp .= '<lastmod>'.$date.'</lastmod>';
+				$tmp .= '<changefreq>'.$changefreq.'</changefreq>';
             	$tmp .= '<priority>'.$priority.'</priority>';
             	$text .= '<url>'.$tmp.'</url>';
             }
 
-        return '<?xml version="1.0" encoding="UTF-8"?> <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">'.$text.'</urlset>';
+		return '<?xml version="1.0" encoding="UTF-8"?> <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'.$text.'</urlset>';
 	}
 
     // Вывод на экран файла sitemap.xml
