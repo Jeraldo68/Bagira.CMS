@@ -28,11 +28,15 @@ class Logger {
 		} else {
 			$this->lines[] = $data;
 		}
+		
+		return $this;
 	}
 	
 	//очищаем стэк строк
 	public function clear() {
 		$this->lines = array();
+		
+		return $this;
 	}
 	
 	
@@ -47,6 +51,7 @@ class Logger {
 			$result = '';
 			
 			foreach ($this->lines as $line) {
+				$line = str_replace(array("\n", "\r", "\r\n"), "", $line);
 				$result .= $line."\n";
 			}
 			
