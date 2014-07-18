@@ -34,6 +34,15 @@ define('stSquare', 2);
 define('stInSquare', 3);
 
 
+/**
+ * @param mixed $p - информация для вывода
+ * @desc Вспомогательная функция для дебага, доступна везде
+ */
+function pr($p) {
+	echo "<pre>"; print_r($p); echo "</pre>";
+}
+
+
 /*
     Bagira.CMS Copyright 2011
     http://bagira-cms.ru
@@ -571,15 +580,6 @@ class system {
 		//return implode(",", $rgb); // returns the rgb values separated by commas
 		return $rgb; // returns an array with the rgb values
 	}
-
-	/**
-	 * @param mixed $p - информация для вывода
-	 * @desc Вспомогательная функция для дебага
-	 */
-	static function pre($p) {
-		echo "<pre>"; print_r($p); echo "</pre>";
-	}
-	
 	
     // +++	Работа с файловой системой	+++
 
