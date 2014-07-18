@@ -419,7 +419,15 @@ class ormObject extends innerErrorList {
             return $value;
     }
 
-
+	public function __isset($name) {
+		$name = (substr($name, 0, 1) == "_") ? substr($name, 1) : $name;
+		
+		if (array_key_exists($name, $this->fields)) {
+			return true;
+		}
+		return false;
+	}
+	
     // Чтение свойств объекта
     public function __get($name) {
 
@@ -481,35 +489,41 @@ class ormObject extends innerErrorList {
 
                 $this->loadData($this->next_prinud, $name);
                 $this->next_prinud = false;
-
+				
                 // $values2 = (empty($this->cur_prop)) ? 1 : 2;
                 // Если текущих значений у объекта нет, считаем временные значения текущими
                 // и делаем из них выборку
                 $values = (empty($this->cur_prop)) ? $this->new_prop : $this->cur_prop;
 
+				$modify_name = $name;
+				if ($get_name) {
+					$modify_name = '_'.$modify_name;
+				}
+				
                 //if ($name == 'tags')
                 //  print_r($values);
                 //   echo $values2.'!';
-                if (isset($values[$name]) || ($get_name && isset($values['_'.$name]))){
-
-                    // Если значение не прогружено, загружаем все данные объекта
-                    if (!$get_name) {
+				
+                if ( isset($this->cur_prop[$modify_name]) || isset($this->new_prop[$modify_name]) ) {
 
 
-                        if ($values[$name] === $this->empty) {
-                            $this->loadData(true, $name);
-                            $values = $this->cur_prop;
-                        }
+					if (isset($this->new_prop[$modify_name])) {
+						$value = $this->new_prop[$modify_name];
+					} else {
+						$value = $this->cur_prop[$modify_name];
+					}
 
-                        // Отбрасываем лишние нули после запятой для поля типа "Цена"
-                        if ($this->fields[$name]['f_type'] == 47)
-                            $values[$name] += 0;
+					// Если значение не прогружено, загружаем все данные объекта
+					if ($value === $this->empty) {
+						$this->loadData(true, $name);
+						$value = $this->cur_prop[$modify_name];
+					}
 
-                        //if (isset($values[$name]))
-                            return $values[$name];
-
-                    } else if (isset($values['_'.$name]))
-                        return $values['_'.$name];
+					// Отбрасываем лишние нули после запятой для поля типа "Цена"
+					if ($this->fields[$name]['f_type'] == 47)
+						$value += 0;
+					
+					return $value;
 
                 } else  {
 
