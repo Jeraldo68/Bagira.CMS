@@ -108,23 +108,26 @@ class system {
         page::assign('current_url_pn', self::getCurrentUrlPN());
 
 
-        // Заглушка для IE6
-        if(reg::getKey('/core/noIE6') && preg_match( '/msie/i', $_SERVER['HTTP_USER_AGENT']) && !preg_match( '/opera/i', $_SERVER['HTTP_USER_AGENT'])){
-        	$val = explode(" ", stristr($_SERVER['HTTP_USER_AGENT'], 'msie'));
-			if ($val[1] == '6.0;') { page::parseIt('/ieDie.tpl', false, true); system::stop(); }
-		}
+		if (isset($_SERVER['HTTP_USER_AGENT'])) {
+			// Заглушка для IE6
+			if(reg::getKey('/core/noIE6') && preg_match( '/msie/i', $_SERVER['HTTP_USER_AGENT']) && !preg_match( '/opera/i', $_SERVER['HTTP_USER_AGENT'])){
+				$val = explode(" ", stristr($_SERVER['HTTP_USER_AGENT'], 'msie'));
+				if ($val[1] == '6.0;') { page::parseIt('/ieDie.tpl', false, true); system::stop(); }
+			}
 
-		// Заглушка для IE7
-		if(reg::getKey('/core/noIE7') && preg_match( '/msie/i', $_SERVER['HTTP_USER_AGENT']) && !preg_match( '/opera/i', $_SERVER['HTTP_USER_AGENT'])){
-			$val = explode(" ", stristr($_SERVER['HTTP_USER_AGENT'], 'msie'));
-			if ($val[1] == '7.0;') { page::parseIt('/ieDie.tpl', false, true); system::stop(); }
-		}
+			// Заглушка для IE7
+			if(reg::getKey('/core/noIE7') && preg_match( '/msie/i', $_SERVER['HTTP_USER_AGENT']) && !preg_match( '/opera/i', $_SERVER['HTTP_USER_AGENT'])){
+				$val = explode(" ", stristr($_SERVER['HTTP_USER_AGENT'], 'msie'));
+				if ($val[1] == '7.0;') { page::parseIt('/ieDie.tpl', false, true); system::stop(); }
+			}
 
-		// Заглушка для IE8
-		if(reg::getKey('/core/noIE8') && preg_match( '/msie/i', $_SERVER['HTTP_USER_AGENT']) && !preg_match( '/opera/i', $_SERVER['HTTP_USER_AGENT'])){
-			$val = explode(" ", stristr($_SERVER['HTTP_USER_AGENT'], 'msie'));
-			if ($val[1] == '8.0;') { page::parseIt('/ieDie.tpl', false, true); system::stop(); }
+			// Заглушка для IE8
+			if(reg::getKey('/core/noIE8') && preg_match( '/msie/i', $_SERVER['HTTP_USER_AGENT']) && !preg_match( '/opera/i', $_SERVER['HTTP_USER_AGENT'])){
+				$val = explode(" ", stristr($_SERVER['HTTP_USER_AGENT'], 'msie'));
+				if ($val[1] == '8.0;') { page::parseIt('/ieDie.tpl', false, true); system::stop(); }
+			}
 		}
+        
 
         // Оффлайн сообщение
         if (!domains::curDomain()->online() && !user::isAdmin() && !(self::issetUrl(0) && self::url(0) == 'mpanel')){
