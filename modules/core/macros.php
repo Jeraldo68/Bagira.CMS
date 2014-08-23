@@ -85,6 +85,26 @@ class coreMacros {
 			if (!is_dir(ROOT_DIR.$dir)) @mkdir(ROOT_DIR.$dir, 0777, true);
 			
 			$img = AcImage::createImage(ROOT_DIR.$file_name);
+
+			if (!empty($width) && !empty($height)) {
+
+				if ( ($img->getWidth() <= $width) && ($img->getHeight() < $height)) {
+					return $file_name;
+				}
+				
+			} else if (!empty($width)) {
+				
+				if ($img->getWidth() <= $width) {
+					return $file_name;
+				}
+				
+			} else if (!empty($height)) {
+				
+				if ($img->getHeight() <= $height) {
+					return $file_name;
+				}
+				
+			}
 			
 			if ($bg !== 0) {
 				$bg = system::hex2rgb($bg);
