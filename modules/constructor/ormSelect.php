@@ -35,6 +35,8 @@ class ormSelect {
     private $cur_domain_id = 0;
     private $cur_lang_id = 0;
     private $depends_link = -1;
+	
+	static private $link_counter = 1; //начальное значение для генерации связей в запросе
 
     private $cl_fields = array();
 
@@ -534,7 +536,7 @@ class ormSelect {
                 if (isset($this->fields[$field]) && $this->fields[$field]['f_type'] == 95 || $this->fields[$field]['f_type'] == 90) {
 
                     // Если это связь
-                    $num = rand(100, 999);
+					$num = self::$link_counter++;
                     $this->tables[', <<rels>> link_'.$num.'.&.'] = 1;
 
                     if (empty($val2)) $val2 = 'OR'; else if ($val2 != 'OR') $val2 = 'AND';
@@ -728,8 +730,8 @@ class ormSelect {
                 $this->parent_id = $obj_id;
 
             $this->depends_link = $field_id;
-
-            $cn = 'ln'.rand(100, 999);
+			
+            $cn = 'ln'.self::$link_counter++;
 
             $this->tables[', <<rels>> link_'.$cn] = 1;
             $this->tables[', <<objects>> obj_'.$cn] = 1;
@@ -761,8 +763,8 @@ class ormSelect {
     function contains($obj_id, $field_id = 0) {
 
         if (!empty($obj_id)) {
-
-            $cn = 'ln'.rand(100, 999);
+			
+            $cn = 'ln'.self::$link_counter++;
 
             $this->tables[', <<rels>> link_'.$cn] = 1;
             $this->tables[', <<objects>> obj_'.$cn] = 1;
