@@ -1144,11 +1144,7 @@ class ormSelect {
         if ($this->cache['num'] < count($this->cache['data'])) {
             $obj_data = $this->cache['data'][$this->cache['num']];
 
-            if (($class = ormClasses::get($obj_data['o_class_id'])) && $class->isPage())
-                return ormPages::get($obj_data);
-            else
-                return ormObjects::get($obj_data);
-
+			return ormFactory::get($obj_data['o_id']);
         }
 
     }

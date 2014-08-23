@@ -121,6 +121,9 @@
     system::addClass('ormPage', MODUL_DIR.'/constructor/ormPage.php');
     system::addClass('ormSelect', MODUL_DIR.'/constructor/ormSelect.php');
 
+    system::addClass('ormFactory', MODUL_DIR.'/constructor/ormFactory.php');
+    system::addClass('ormDecorator', MODUL_DIR.'/constructor/ormDecorator.php');
+
     // Работа с правами доступа для модулей и страниц
     system::addClass('rights', MODUL_DIR.'/users/rights.php');
 

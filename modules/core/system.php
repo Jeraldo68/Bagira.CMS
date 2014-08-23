@@ -325,9 +325,7 @@ class system {
 
 	// Метод выполняем автозагрузку класса. Используется функцией spl_autoload_register().
 	static function loadClass($class_name){
-		if (!isset(self::$classes[$class_name]))
- 		    trigger_error ('Not found class "'.$class_name.'"', E_USER_ERROR);
- 	    else
+		if (isset(self::$classes[$class_name]))
  	    	include_once(self::$classes[$class_name]);
 	}
 
