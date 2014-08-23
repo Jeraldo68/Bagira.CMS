@@ -39,7 +39,9 @@ class coreMacros {
 					if (is_numeric($watermark) && $watermark > 0)
 						$img->setWatermark(reg::getKey('/core/watermark'), $watermark);
 
-					$img->save(ROOT_DIR.$new_file);
+					if (!$img->save(ROOT_DIR.$new_file)) {
+						return $file_name;
+					}
 	            }
 
 				if (file_exists(ROOT_DIR.$new_file))

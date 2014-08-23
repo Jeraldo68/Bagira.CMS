@@ -56,7 +56,7 @@ class resizer {
 
     // Сохраняет измененное изображение в указанный файл
     function save($file_name){
-        $this->imageResize($file_name);
+        return $this->imageResize($file_name);
     }
 
     // Выводит измененное изображение в браузер
@@ -70,6 +70,8 @@ class resizer {
 
 		if (!empty($this->original_image) && file_exists($this->original_image))  {
 
+			$type = false;
+			
 	        switch (substr($this->original_image, -4)) {
 	        	case '.gif': $type = 1; break;
 	            case '.jpg': $type = 2; break;
@@ -80,11 +82,14 @@ class resizer {
 	        switch ($type) {
 		        case 1: $src = @imagecreatefromgif($this->original_image); break;
 	            case 2: $src = @imagecreatefromjpeg($this->original_image); break;
-	            case 3: $src = @imagecreatefrompng($this->original_image);break;
+	            case 3: $src = @imagecreatefrompng($this->original_image); break;
+				default: $src = false; break;
 	        }
 
-	        if (empty($src))
-	        	die('Can not read file "'.$this->original_image.'"');
+	        if (empty($src)) {
+				//die('Can not read file "'.$this->original_image.'"');
+				return false;
+			}
 
 	        $w_src = imagesx($src);
 	        $h_src = imagesy($src);
@@ -247,7 +252,9 @@ class resizer {
 	        if ($process)
 	        	imagedestroy($src);
 
-		};
+		}
+		
+		return true;
 	}
 
 
