@@ -473,7 +473,7 @@ class ui {
         self::getButtonsHTML();
 
         // Заголовок и Титл страницы
-        page::assign('header', substr(self::$pageHeader, 0, 100));
+        page::assign('header', mb_substr(self::$pageHeader, 0, 100, 'UTF-8'));
         $title = (!empty(self::$pageHeader)) ? self::$pageHeader.' | ' : '';
         page::globalVar("title", $title.'Bagira.CMS');
 
