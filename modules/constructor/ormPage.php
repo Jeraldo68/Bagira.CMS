@@ -151,9 +151,9 @@ class ormPage extends ormObject {
 
 
         if (isset($this->fields[$fname]) && $this->fields[$fname]['f_type'] < 90 &&
-            (!isset($this->cur_prop[$fname]) || $this->cur_prop[$fname] == $this->empty) && $this->no_load) {
+            (!isset($this->cur_prop[$fname]) || $this->cur_prop[$fname] == $this->empty)) {
 
-            if (!in_array($fname, $this->page_fields)) {
+            if (!in_array($fname, $this->page_fields) && $this->no_load) {
 
                 //$prinud = true;
                 $this->no_load = false;
