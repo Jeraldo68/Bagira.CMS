@@ -420,6 +420,12 @@ class ormObject extends innerErrorList {
     }
 
 	public function __isset($name) {
+		$this->loadFields();
+
+		if ($name == 'id') {
+			return true;
+		}
+		
 		$name = (substr($name, 0, 1) == "_") ? substr($name, 1) : $name;
 		
 		if (array_key_exists($name, $this->fields)) {
