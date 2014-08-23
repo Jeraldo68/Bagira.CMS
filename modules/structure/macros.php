@@ -485,6 +485,10 @@ class structureMacros {
         }
         $fields = (!empty($class_name) && ($class = ormClasses::get($class_name))) ? $class->loadFields() : array();
 
+		if (is_array($section_id)) {
+			$section_id = implode('', $section_id);
+		}
+		
         $prefix = md5($class_name.$section_id);
 
         if (isset($_SESSION['filters'][$prefix]))
@@ -782,7 +786,6 @@ class structureMacros {
                 if ($num === 1)
                 	page::assign('first_children_id', $obj->id);
                 page::assign('last_children_id', $obj->id);
-
 
 	            if (isset($TEMPLATE['list_'.$class]))
 	            	$templ = 'list_'.$class;
