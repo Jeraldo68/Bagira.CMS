@@ -39,7 +39,7 @@ define('stInSquare', 3);
  * @desc Вспомогательная функция для дебага, доступна везде
  */
 function pr($p) {
-	echo "<pre>"; print_r($p); echo "</pre>";
+	echo "<pre>"; var_export($p); echo "</pre>";
 }
 
 
