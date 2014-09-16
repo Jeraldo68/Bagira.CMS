@@ -514,14 +514,16 @@ class system {
 
 		$log = new Logger(ROOT_DIR."/logs/revue.log");
 
-        if (isset($_SESSION['curUser']['name']) && $_SESSION['curUser']['name'] != 'none')
-            $skobka = "[".$_SESSION['curUser']['login']."]";
-        else
-            $skobka = "[SYSTEM]";
+		$skobka = "[SYSTEM]";
+        if (isset($_SESSION['curUser']['name']) && $_SESSION['curUser']['name'] != 'none') {
+			$skobka = "[".$_SESSION['curUser']['login']."]";
+		}
 
-		$ip = self::fitLine($_SERVER['REMOTE_ADDR'], 15);
-
-		$stroka = $ip."\t[".date("d.m.Y H:i:s")."]\t[".$znaks[$state]."]\t".$skobka."\t".$text;
+		$stroka = "[".date("d.m.Y H:i:s")."]";
+		$stroka .= "\t".self::fitLine("[".$znaks[$state]."]", 10);
+		$stroka .= "\t".self::fitLine("[".$_SERVER['REMOTE_ADDR']."]", 18);
+		$stroka .= "\t".self::fitLine($skobka, 25);
+		$stroka .= "\t".$text;
 
 		$log->add($stroka);
 		$log->save();
