@@ -34,10 +34,10 @@ class __page {
 
 			if (system::url(2) == 0)
 				system::redirect('/structure/settings');
+			
+            $obj = ormFactory::get(system::url(2));
 
-            $obj = ormPages::get(system::url(2));
-
-			if ($obj instanceof ormPage) {
+			if ($obj->getClass()->isPage()) {
 				$parent_id = $obj->getParentId();
 				ui::setHeader($obj->name);
 	            ui::setNaviBar(lang::get('TEXT_EDIT').$obj->getClass()->getPadej(1));
@@ -58,16 +58,15 @@ class __page {
             	system::redirect('/structure/tree');
 
             if (system::issetUrl(2) && system::url(2) != 0) {
-	            $parent = ormPages::get(system::url(2));
+	            $parent = ormFactory::get(system::url(2));
 	            ui::setNaviBar($parent->name, '/structure/list/'.$parent->id);
             }
             ui::setHeader(lang::get('TEXT_ADD').$class->getPadej(1));
 
 
 			// Если это добавление нового объекта
-			$obj = new ormPage();
+			$obj = ormFactory::create($class->getSName());
 			$obj->setParent(system::url(2));
-            $obj->setClass($class_name);
 
             $obj->view_in_menu = 1;
             $obj->view_submenu = 1;
@@ -129,7 +128,7 @@ class __page {
 		page::assign('right', $right);
 
         // Если произошли ошибки, перенаправляем на главную страницу модуля
-		if (!($obj instanceof ormPage) || $obj->issetErrors())
+		if (!($obj->getClass()->isPage()) || $obj->issetErrors())
 			system::redirect('/structure/tree');
 
 
@@ -247,13 +246,14 @@ class __page {
         if (system::action() == "proc_upd") {
 
             // Говорим какой объект нужно изменить
-			$obj = new ormPage(system::POST('obj_id'));
+			$obj = new ormFactory(system::POST('obj_id'));
 
 		} else if (system::action() == "proc_add") {
 
+			$class = ormClasses::get(system::POST('class_id'));
+			
             // Говорим какой объект нужно создать
-			$obj = new ormPage();
-            $obj->setClass(system::POST('class_id'));
+			$obj = ormFactory::create($class->getSName());
             $obj->setParent(system::POST('obj_id'));
 
 		}
@@ -391,7 +391,7 @@ class __page {
         if (system::issetUrl(2) && is_numeric(system::url(2))) {
 
             // Одиночное удаление
-	    	if ($obj = ormPages::get(system::url(2))){
+	    	if ($obj = ormFactory::get(system::url(2))){
 				$obj->toTrash();
 				echo 'delete';
             }
@@ -403,7 +403,7 @@ class __page {
 
         		if (is_numeric($id)) {
 
-        			if ($obj = ormPages::get($id))
+        			if ($obj = ormFactory::get($id))
 						$obj->toTrash();
 				}
         	}
@@ -418,7 +418,7 @@ class __page {
   	// перемещение объекта          /mpanel/structure/page_proc_moveto
   	public function proc_moveto() {
 
-        if ($obj = ormPages::get(system::url(3))) {
+        if ($obj = ormFactory::get(system::url(3))) {
 
 	        $obj->delParent(system::url(5));
 
@@ -431,7 +431,7 @@ class __page {
 
 	            // Устанавливаем позицию до\после указанного объекта
 	            // Получаем соседа
-	            $neighbor = ormPages::get(system::url(2));
+	            $neighbor = ormFactory::get(system::url(2));
 
 	            $position = $neighbor->getPosition(system::url(6));
 	            if (system::url(4) == 'after')
