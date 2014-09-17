@@ -87,9 +87,9 @@ class ormDecorator {
 	 */
 	public function __call($name, $arguments) {
 		if (method_exists($this->obj, $name)) {
-			return $this->obj->{$name}($arguments);
+			return call_user_func_array(array($this->obj, $name), $arguments);
 		}
-		
+
 		return NULL;
 	}
 	
