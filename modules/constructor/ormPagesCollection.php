@@ -60,11 +60,14 @@ class ormPages {
             // Добавляем фильтр по классам (получаем данные только для классов образующих структуру сайта)
             $in_menu = reg::getList(ormPages::getPrefix().'/no_view');
             $cfilter = '';
-            while(list($num, $val) = each($in_menu)){
-            	$or = (empty($cfilter)) ? '' : ' or ';
-            	$cfilter .= $or.' o_class_id = "'.$val.'" ';
-            }
-            if (!empty($cfilter)) $cfilter = ' and ('.$cfilter.')';
+			
+			if (system::$isAdmin) {
+				while(list($num, $val) = each($in_menu)){
+					$or = (empty($cfilter)) ? '' : ' or ';
+					$cfilter .= $or.' o_class_id = "'.$val.'" ';
+				}
+				if (!empty($cfilter)) $cfilter = ' and ('.$cfilter.')';
+			}
 
             if (system::$isAdmin)
             	$select = 'o_id, o_name, o_class_id, o_create_date, o_change_date, pseudo_url, other_link, view_in_menu, active, is_home_page, template_id, template2_id, lang_id, domain_id'.$select;
