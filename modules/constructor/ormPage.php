@@ -316,6 +316,21 @@ class ormPage extends ormObject {
 
         } else if ($this->isEditable()) {
 
+			//автоматически заполняем пустые обязательные поля
+			if (!empty($this->name)) {
+				if (empty($this->h1)) {
+					$this->h1 = $this->name;
+				}
+				
+				if (empty($this->title)) {
+					$this->title = $this->name;
+				}
+				
+				if (empty($this->pseudo_url)) {
+					$this->pseudo_url = system::translite($this->name);
+				}
+			}
+			
             $tmp = parent::save();
 
             if ($tmp !== false)
