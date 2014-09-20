@@ -246,7 +246,7 @@ class __page {
         if (system::action() == "proc_upd") {
 
             // Говорим какой объект нужно изменить
-			$obj = new ormFactory(system::POST('obj_id'));
+			$obj = ormFactory::get(system::POST('obj_id'));
 
 		} else if (system::action() == "proc_add") {
 
