@@ -481,7 +481,7 @@ class system {
 	* @desc Дополняем строку до нужного размера
 	*/
 	static function fitLine($str, $length) {
-		$str_length = strlen($str);
+		$str_length = mb_strlen($str, 'UTF-8');
 
 		if ($str_length < $length) {
 			$count = $length - $str_length;
