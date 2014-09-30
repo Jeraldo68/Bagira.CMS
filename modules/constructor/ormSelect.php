@@ -553,9 +553,9 @@ class ormSelect {
                             $parent_field = ($this->fields[$field]['f_relation'] > 0) ? 'r_parent_id' : 'r_children_id';
                             $child_field = ($this->fields[$field]['f_relation'] > 0) ? 'r_children_id' : 'r_parent_id';
 
-                            $rels .= '(link_'.$num.'.&..'.$child_field.' = obj_.&..o_id and
-                                link_'.$num.'.&..'.$parent_field.' = "'.$obj_id.'" and
-                                link_'.$num.'.&..r_field_id '.$znak.' "%field_'.$this->fields[$field]['f_sname'].'_repl%")';
+							$rels .= '(link_'.$num.'.&..'.$child_field.' = obj_.&..o_id and
+                                link_'.$num.'.&..'.$parent_field.' '.$znak.' "'.$obj_id.'" and
+                                link_'.$num.'.&..r_field_id = "%field_'.$this->fields[$field]['f_sname'].'_repl%")';
                         }
 
                         if (!empty($rels))
@@ -566,14 +566,15 @@ class ormSelect {
 
                     } else {
 
-                        if ($this->fields[$field]['f_relation'] > 0)
-                            return '(link_'.$num.'.&..r_children_id = obj_.&..o_id and
-                                link_'.$num.'.&..r_parent_id = "'.$val.'" and
-                                link_'.$num.'.&..r_field_id '.$znak.' "%field_'.$this->fields[$field]['f_sname'].'_repl%")';
-                        else
-                            return '(link_'.$num.'.&..r_parent_id = obj_.&..o_id and
-                                link_'.$num.'.&..r_children_id = "'.$val.'" and
-                                link_'.$num.'.&..r_field_id '.$znak.' "%field_'.$this->fields[$field]['f_sname'].'_repl%")';
+						if ($this->fields[$field]['f_relation'] > 0)
+							return '(link_'.$num.'.&..r_children_id = obj_.&..o_id and
+                                link_'.$num.'.&..r_parent_id '.$znak.' "'.$val.'" and
+                                link_'.$num.'.&..r_field_id = "%field_'.$this->fields[$field]['f_sname'].'_repl%")';
+						else
+							return '(link_'.$num.'.&..r_parent_id = obj_.&..o_id and
+                                link_'.$num.'.&..r_children_id '.$znak.' "'.$val.'" and
+                                link_'.$num.'.&..r_field_id = "%field_'.$this->fields[$field]['f_sname'].'_repl%")';
+						
                     }
 
                 } else if ($this->fields[$field]['f_type'] == 105) {
