@@ -283,7 +283,15 @@ class coreMacros {
 	* @desc МАКРОС: Выводит указанную дату и время в заданном формате, аналог PHP-функции date()
 	*/
  	function fdate($format = 'd.m.Y', $time = 0) {
-		$time = (is_string($time) && !is_numeric($time)) ? strtotime($time) : time();
+		
+		if (empty($time)) {
+			$time = time();
+		}
+		
+		if (!is_numeric($time)) {
+			$time = strtotime($time);
+		}
+		
 	  	return date($format, $time);
 	}
 
@@ -295,7 +303,13 @@ class coreMacros {
 	*/
 	function rus_month($time = 0, $type = 3) {
 
-		$time = (is_string($time) && !is_numeric($time)) ? strtotime($time) : time();
+		if (empty($time)) {
+			$time = time();
+		}
+
+		if (!is_numeric($time)) {
+			$time = strtotime($time);
+		}
 
         $months = lang::get('MONTH', $type);
 
@@ -310,7 +324,13 @@ class coreMacros {
 	*/
     function rus_weekday($time = 0, $type = 1) {
 
-		$time = (is_string($time) && !is_numeric($time)) ? strtotime($time) : time();
+		if (empty($time)) {
+			$time = time();
+		}
+
+		if (!is_numeric($time)) {
+			$time = strtotime($time);
+		}
 
         $months = lang::get('DAY', $type);
 
