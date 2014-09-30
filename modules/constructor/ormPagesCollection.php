@@ -26,6 +26,8 @@ class ormPages {
 
     private static $where = '';
 
+	public static $isAdmin = false;
+
     static function getSqlForRights() {
 
     	if (empty(self::$where)) {
@@ -49,7 +51,11 @@ class ormPages {
 
    		if (empty(self::$pages)) {
 
-            $act = (system::$isAdmin) ? '' : ' and active = 1';
+			if (system::url(0) == 'mpanel') {
+				self::$isAdmin = true;
+			}
+			
+            $act = (self::$isAdmin) ? '' : ' and active = 1';
 
             if (true) {
                 $where = self::getSqlForRights();
@@ -61,15 +67,17 @@ class ormPages {
             $in_menu = reg::getList(ormPages::getPrefix().'/no_view');
             $cfilter = '';
 			
-			if (system::$isAdmin) {
+			
+			if (self::$isAdmin) {
 				while(list($num, $val) = each($in_menu)){
 					$or = (empty($cfilter)) ? '' : ' or ';
 					$cfilter .= $or.' o_class_id = "'.$val.'" ';
 				}
 				if (!empty($cfilter)) $cfilter = ' and ('.$cfilter.')';
 			}
+			
 
-            if (system::$isAdmin)
+            if (self::$isAdmin)
             	$select = 'o_id, o_name, o_class_id, o_create_date, o_change_date, pseudo_url, other_link, view_in_menu, active, is_home_page, template_id, template2_id, lang_id, domain_id'.$select;
             else
                 $select = ' * '.$select;
@@ -82,7 +90,7 @@ class ormPages {
         				  o_to_trash = 0 and
         				  p_obj_id = o_id'.$cfilter.$act.$where.'';
 
-        	if (system::$isAdmin) {
+        	if (self::$isAdmin) {
 
         	    if (!empty($openPages)) {
 
@@ -127,7 +135,7 @@ class ormPages {
         			ORDER BY r_position ASC';
 
 
-        	if (system::$isAdmin) {
+        	if (self::$isAdmin) {
         		$sql = '('.$sql.') UNION (
         			SELECT child.r_parent_id, child.r_children_id, child.r_position
         	    	FROM <<objects>>, <<pages>>, <<rels>> child'.$table.'
@@ -197,7 +205,7 @@ class ormPages {
     // Вернет true, если у раздела есть подразделы
     static function issetChildren($section_id){
 
-    	//if (system::$isAdmin) {
+    	//if (self::$isAdmin) {
 	    	self::initIssetList();
 	    	return (in_array($section_id, self::$issetList)) ? true : false;
 	 /* 	} else {
@@ -221,7 +229,7 @@ class ormPages {
 
     	if (!isset(self::$pages_count[$section_id])) {
 
-            $act = (system::$isAdmin) ? '' : ' and active = 1';
+            $act = (self::$isAdmin) ? '' : ' and active = 1';
 
             $act .= (empty($section_id)) ? ' and r_parent_id is NULL' : ' and r_parent_id = "'.$section_id.'"';
 
