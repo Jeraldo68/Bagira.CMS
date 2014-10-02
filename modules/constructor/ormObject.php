@@ -1054,15 +1054,19 @@ class ormObject extends innerErrorList {
 
     // Специальная обработка некоторых типов данных
     protected function procValue($field, $value) {
-
+		
+		$this->loadData(true, $field);
         $type = $this->fields[$field]['f_type'];
+		
+		$cur_value = '';
+		if (isset($this->cur_prop[$field])) {
+			$cur_value = $this->cur_prop[$field];
+		}
 
         switch ($type) {
 
             // Файл
             case 70:
-				
-				$cur_file = $this->__get($field);
 				
                 if (isset($_FILES['file_'.$field])) {
 					$dirname = '/upload/file/'.date('Y_m');
@@ -1074,8 +1078,8 @@ class ormObject extends innerErrorList {
                 }
 
 				// Если файл был загружен через выбор на сервере, не удаляем его
-                if (system::fileName($value) != system::fileName($cur_file) && strpos($cur_file, '/upload/custom/') === false) {
-					@unlink(ROOT_DIR.$cur_file); //удаляем прошлый файл
+                if ( ($value != $cur_value) && strpos($cur_value, '/upload/custom/') === false) {
+					@unlink(ROOT_DIR.$cur_value); //удаляем прошлый файл
                 }
 				
                 return '`'.$field.'` = "'.$value.'", ';
@@ -1095,10 +1099,8 @@ class ormObject extends innerErrorList {
                 break;
 
             // Изображение
-            case 75:
-
-                $cur_file = $this->__get($field);
-
+			case 75:
+				
                 if (isset($_FILES['file_'.$field])) {
 					$dirname = '/upload/image/'.date('Y_m');
 					if (!file_exists(ROOT_DIR.$dirname)) {
@@ -1109,13 +1111,13 @@ class ormObject extends innerErrorList {
                 }
 
                 // Удаляем КЭШ рисунков, если были изменения
-                if (system::fileName($value) != system::fileName($cur_file) ) {
+                if ( $value != $cur_value ) {
                     $this->preResizeJpeg($value);
-                    $this->deleteCacheImages(system::filePathToPrefix($cur_file).system::fileName($cur_file));
+                    $this->deleteCacheImages(system::filePathToPrefix($cur_value).system::fileName($cur_value));
 
 					// Если файл был загружен через выбор на сервере, не удаляем его
-					if (strpos($cur_file, '/upload/custom/') === false) {
-						@unlink(ROOT_DIR.$cur_file); //удаляем прошлый файл
+					if (strpos($cur_value, '/upload/custom/') === false) {
+						@unlink(ROOT_DIR.$cur_value); //удаляем прошлый файл
 					}
                 }
 
@@ -1125,8 +1127,6 @@ class ormObject extends innerErrorList {
 
             // Видео
             case 80:
-
-				$cur_file = $this->__get($field);
 				
                 if (isset($_FILES['file_'.$field])) {
 					$dirname = '/upload/media/'.date('Y_m');
@@ -1138,8 +1138,8 @@ class ormObject extends innerErrorList {
                 }
 
 				// Если файл был загружен через выбор на сервере, не удаляем его
-				if (system::fileName($value) != system::fileName($cur_file) && strpos($cur_file, '/upload/custom/') === false) {
-					@unlink(ROOT_DIR.$cur_file); //удаляем прошлый файл
+				if ( ($value != $cur_value) && strpos($cur_value, '/upload/custom/') === false) {
+					@unlink(ROOT_DIR.$cur_value); //удаляем прошлый файл
                 }
 				
                 return '`'.$field.'` = "'.$value.'", ';
@@ -1147,8 +1147,6 @@ class ormObject extends innerErrorList {
 
             // Флеш-ролик
             case 85:
-				
-				$cur_file = $this->__get($field);
 				
                 if (isset($_FILES['file_'.$field])) {
 					$dirname = '/upload/flash/'.date('Y_m');
@@ -1160,8 +1158,8 @@ class ormObject extends innerErrorList {
                 }
 
 				// Если файл был загружен через выбор на сервере, не удаляем его
-				if (system::fileName($value) != system::fileName($cur_file) && strpos($cur_file, '/upload/custom/') === false) {
-					@unlink(ROOT_DIR.$cur_file); //удаляем прошлый файл
+				if ( ($value != $cur_value) && strpos($cur_value, '/upload/custom/') === false) {
+					@unlink(ROOT_DIR.$cur_value); //удаляем прошлый файл
                 }
 				
                 return '`'.$field.'` = "'.$value.'", ';
