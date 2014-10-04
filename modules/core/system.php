@@ -593,7 +593,8 @@ class system {
 			return '';
 		
 		$pref = dirname($file_name);
-		$pref = str_replace ("/", "_", $pref);
+		$bad_symbols = array("/", " ");
+		$pref = str_replace ($bad_symbols, "_", $pref);
 		$pref = substr($pref, 1);
 		$pref = empty($pref) ? '' : $pref.'_';
 
