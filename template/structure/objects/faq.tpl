@@ -37,7 +37,8 @@ END;
 $TEMPLATE['list_faq'] = <<<END
 <li>
     <div class="answer2"><a href="#" class="title" title="">%obj.content%</a><small>%obj.name%,&nbsp;
-        %core.fdate(d, %obj.create_date%)% %core.rus_month(%obj.create_date%)% %core.fdate(Y, %obj.create_date%)%</small></div><div class="clear"></div>
+			%core.fdate(j mmm Y, %obj.create_date%)%
+		</small></div><div class="clear"></div>
     <div class="answer">
         <div class="answer3">
             <span class="content">%obj.answer%</span> 

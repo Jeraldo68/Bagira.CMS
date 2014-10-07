@@ -31,9 +31,7 @@ $TEMPLATE['list_news'] = <<<END
         <a href="%obj.url%#comments" style="text-decoration:none;">%comments.count(%obj.id%)%</a>
      </h4>
      <span>
-         %core.fdate(d, %obj.publ_date%)%
-         %core.rus_month(%obj.publ_date%)%
-         %core.fdate(Y, %obj.publ_date%)%
+		 %core.fdate(j mmm Y, %obj.publ_date%)%
      </span>
      <div class="text">
         %obj.notice%
@@ -78,9 +76,7 @@ $TEMPLATE['frame_news'] = <<<END
 <div id="rightcolumn">
 
     <div class="date">
-        %core.fdate(d, %obj.publ_date%)%
-        %core.rus_month(%obj.publ_date%)%
-        %core.fdate(Y, %obj.publ_date%)%
+		%core.fdate(j mmm Y, %obj.create_date%)%
     </div>
 
     %structure.getProperty(author, %obj.id%, author)%

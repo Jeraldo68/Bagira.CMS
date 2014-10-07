@@ -29,9 +29,7 @@ $TEMPLATE['list_review'] = <<<END
             <div class="readonly" rel="%obj.user_rate%" id="review%obj.id%"></div>
             <p>— оценка покупки</p>
             <div class="datepubl">
-                %core.fdate(d, %obj.create_date%)%
-                %core.rus_month(%obj.create_date%, 3)%
-                %core.fdate(Y, %obj.create_date%)%
+				%core.fdate(j mmm Y, %obj.create_date%)%
             </div>
             <div class="clear"></div>
              %obj.content%<br/><br/>

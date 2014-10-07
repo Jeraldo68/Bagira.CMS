@@ -279,62 +279,16 @@ class coreMacros {
     /**
 	* @return stirng - дата и время в указанном формате.
 	* @param string $format - Формат вывода, по аналогии с PHP-функцией date()
-	* @param string $time - Дата и Время в формате TIMESTAMP или текстовом. Если 0, используется текущее время.
+	 * mmmm - январь, mmm - января, mm - янв
+	 * ddd - понедельник, dd - пн
+	 * если аббревиатура написана большими буквами, то выводимый месяц или день будет с заглавной буквы
+	 * MMM - Января, DDD - Понедельник
+	 * 
+	* @param string $time - Дата и Время в формате TIMESTAMP или текстовом. Если false, используется текущее время.
 	* @desc МАКРОС: Выводит указанную дату и время в заданном формате, аналог PHP-функции date()
 	*/
- 	function fdate($format = 'd.m.Y', $time = 0) {
-		
-		if (empty($time)) {
-			$time = time();
-		}
-		
-		if (!is_numeric($time)) {
-			$time = strtotime($time);
-		}
-		
-	  	return date($format, $time);
-	}
-
-    /**
-	* @return stirng - Название месяца.
-	* @param string $time - Дата и Время в формате TIMESTAMP или текстовом. Если 0, используется текущее время.
-    * @param Int $type - Формат вывода названия месяца от 1 до 3
-	* @desc МАКРОС: Вернет название месяца на русском языке
-	*/
-	function rus_month($time = 0, $type = 3) {
-
-		if (empty($time)) {
-			$time = time();
-		}
-
-		if (!is_numeric($time)) {
-			$time = strtotime($time);
-		}
-
-        $months = lang::get('MONTH', $type);
-
-	  	return $months[date("m", $time)];
-	}
-
-    /**
-	* @return stirng - Название дня недели.
-	* @param string $time - Дата и Время в формате TIMESTAMP или текстовом. Если 0, используется текущее время.
-    * @param Int $type - Формат вывода названия дня недели от 1 до 3
-	* @desc МАКРОС: Вернет название дня недели на русском языке
-	*/
-    function rus_weekday($time = 0, $type = 1) {
-
-		if (empty($time)) {
-			$time = time();
-		}
-
-		if (!is_numeric($time)) {
-			$time = strtotime($time);
-		}
-
-        $months = lang::get('DAY', $type);
-
-	  	return $months[date("N", $time)];
+ 	function fdate($format = 'd.m.Y', $time = false) {
+		return Date::parse($time)->format($format);
 	}
 
     /**

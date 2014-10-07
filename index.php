@@ -151,6 +151,7 @@
     system::addClass('Jevix', MODUL_DIR.'/core/jevix/jevix.class.php');
 	system::addClass('XML', MODUL_DIR.'/core/xml.class.php');
 	system::addClass('Logger', MODUL_DIR.'/core/class.logger.php');
+	system::addClass('Date', MODUL_DIR.'/core/class.date.php');
 
 
 
