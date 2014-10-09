@@ -591,7 +591,7 @@ class ui {
         $cep = page::parse($TEMPLATE['navibar_link']);
 
         for($i = 0; $i < count(self::$pageNavibar); $i++) {
-            page::assign("title", substr(self::$pageNavibar[$i]['title'], 0, 100));
+            page::assign("title", mb_substr(self::$pageNavibar[$i]['title'], 0, 100, 'UTF-8'));
             page::assign("link", system::au().self::$pageNavibar[$i]['link']);
             $t = (empty(self::$pageNavibar[$i]['link'])) ? '' : '_link';
             $cep .= page::parse($TEMPLATE['navibar'.$t]);
