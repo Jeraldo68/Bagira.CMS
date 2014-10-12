@@ -12,6 +12,9 @@ CKEDITOR.editorConfig = function( config ) {
 
 	config.toolbar = 'Bagira';
 
+	config.filebrowserBrowseUrl = '/css_mpanel/elfinder/elfinder.html';
+	config.filebrowserWindowHeight = 520;
+
 	config.extraPlugins = 'mediaembed';
 
 	config.coreStyles_bold = { element : 'b', overrides : 'strong' };

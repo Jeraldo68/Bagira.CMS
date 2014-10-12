@@ -238,8 +238,6 @@ $TEMPLATE['field_60'] = <<<END
 
 <script type="text/javascript">
     CKEDITOR.replace('%field.sname%', {
-        filebrowserBrowseUrl : '/css_mpanel/elfinder/index.html',
-        filebrowserWindowHeight : '480',
         height: '%field.max_size%'
     });
 </script>
