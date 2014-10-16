@@ -11,7 +11,7 @@ $TEMPLATE['separator'] = <<<END
 END;
 
 $TEMPLATE['separator_text'] = <<<END
-    <tr><td colspan="2"><h4>%title%</h4></td></tr>
+    <tr><td colspan="2"><h4>%field.title%</h4></td></tr>
 END;
 
 $TEMPLATE['field'] = <<<END

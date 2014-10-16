@@ -225,7 +225,7 @@ class coreMacros {
 
 					page::assign('obj.id', $obj->id);
 					page::assign('obj.name', $obj->name);
-					page::assign('title', $obj->getClass()->getFieldName($field_name));
+					page::assign('field.title', $obj->getClass()->getFieldName($field_name));
 
 					if(!empty($value))
 					{

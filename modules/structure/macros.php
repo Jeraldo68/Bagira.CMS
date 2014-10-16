@@ -1027,7 +1027,7 @@ class structureMacros {
 
 	            	page::assign('obj.id', $obj->id);
 		            page::assign('obj.name', $obj->name);
-		            page::assign('title', $obj->getClass()->getFieldName($field_name));
+		            page::assign('field.title', $obj->getClass()->getFieldName($field_name));
 
 			    	if (!empty($value)) {
 
@@ -1084,7 +1084,7 @@ class structureMacros {
 
 					page::assign('obj.id', $obj->id);
 					page::assign('obj.name', $obj->name);
-					page::assign('title', $obj->getClass()->getFieldName($field_name));
+					page::assign('field.title', $obj->getClass()->getFieldName($field_name));
 
 					if (!empty($value)) {
 
@@ -1528,8 +1528,8 @@ class structureMacros {
                 if (empty($field['f_type'])) {
 
                     // Разделители полей
-                    page::assign('size', $field['f_max_size']);
-                    page::assign('title', $field['f_name']);
+                    page::assign('field.size', $field['f_max_size']);
+                    page::assign('field.title', $field['f_name']);
 
                     if (!empty($field['f_name']) && isset($TEMPLATE['separator_text']))
                         $fields .= page::parse($TEMPLATE['separator_text']);
