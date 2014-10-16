@@ -1080,6 +1080,18 @@ class user {
     }
 
 
+	/**
+	 * Проверяет включены ли у пользователя кукисы
+	 * @return bool
+	 */
+	public static function isCookieEnable() {
+		if (isset($_SERVER['HTTP_COOKIE'])) {
+			return true;
+		}
+		return false;
+	}
+
+
 }
 
 ?>
