@@ -106,7 +106,7 @@ class Jevix{
 	public $apostrof = "’";
 	public $dotes = "…";
 	public $nl = "\r\n";
-	public $defaultTagParamRules = array('href' => '#link', 'src' => '#image', 'width' => '#int', 'height' => '#int', 'text' => '#text', 'title' => '#text');
+	public $defaultTagParamRules = array('href' => '#link', 'src' => '#link', 'width' => '#text', 'height' => '#text', 'text' => '#text', 'title' => '#text');
 
 	protected $text;
 	protected $textBuf;
@@ -803,7 +803,7 @@ class Jevix{
 		if(!$this->matchCh('=', true)){
 			// Стремная штука - параметр без значения <input type="checkbox" checked>, <td nowrap class=b>
 			if(($this->curCh=='>' || ($this->curChClass & self::LAT) == self::LAT)){
-				$value = $name;
+//				$value = $name;
 				return true;
 			} else {
 				$this->restoreState();
@@ -904,12 +904,16 @@ class Jevix{
 		foreach($params as $param=>$value){
 			$param = mb_strtolower($param, 'UTF-8');
 			$value = trim($value);
-			if($value == '') continue;
 
 			// Атрибут тега разрешён? Какие возможны значения? Получаем список правил
 			$paramAllowedValues = isset($tagRules[self::TR_PARAM_ALLOWED][$param]) ? $tagRules[self::TR_PARAM_ALLOWED][$param] : false;
 			if(empty($paramAllowedValues)) continue;
 
+			if($value == '') {
+				$resParams[$param] = "";
+				continue;
+			}
+			
 			// Если есть список разрешённых параметров тега
 			if(is_array($paramAllowedValues) && !in_array($value, $paramAllowedValues)) {
 				$this->eror("Недопустимое значение для атрибута тега $tag $param=$value");
@@ -981,7 +985,7 @@ class Jevix{
 		  foreach($tagRules[self::TR_PARAM_AUTO_ADD] as $name => $aValue) {
 		      // If there isn't such attribute - setup it
 		      if(!array_key_exists($name, $resParams) or ($aValue['rewrite'] and $resParams[$name] != $aValue['value'])) {
-			  $resParams[$name] = $aValue['value'];
+			  	$resParams[$name] = $aValue['value'];
 		      }
 		  }
 		}
@@ -997,6 +1001,8 @@ class Jevix{
 		foreach($resParams as $param => $value) {
 			if ($value != '') {
 				$text.=' '.$param.'="'.$value.'"';
+			} else {
+				$text.=' '.$param;
 			}
 		}
 

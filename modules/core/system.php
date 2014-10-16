@@ -1073,12 +1073,16 @@ class system {
             // Администратору доверяем больше, разрешаем ему втавлять потенциально опасные теги - object, param, embed, video, iframe
 
             // 1. Устанавливаем разрешённые теги. (Все не разрешенные теги считаются запрещенными.)
-            $jevix->cfgAllowTags(array('table', 'tr', 'td', 'th', 'p', 'a', 'img', 'i', 'b', 'u', 'em', 'strong', 'nobr', 'blockquote',
-                                      'li', 'ol', 'ul', 'sup', 'abbr', 'pre', 'acronym', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-                                      'adabracut', 'br', 'code', 'div', 'span', 'object', 'param', 'embed', 'video', 'code', 'iframe', 'hr'));
+            $jevix->cfgAllowTags(
+				array(
+					'table', 'thead', 'tbody', 'tfoot', 'tr', 'td', 'th', 'p', 'a', 'img', 'i', 'b', 'u', 'em', 'strong', 'nobr', 'blockquote', 
+					'li', 'ol', 'ul', 'sup', 'abbr', 'pre', 'acronym', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+					'adabracut', 'br', 'code', 'div', 'span', 'object', 'param', 'embed', 'video', 'iframe', 'hr',
+					'time', 'audio', 'video', 'source'
+				));
 
             // 2. Устанавливаем коротие теги. (не имеющие закрывающего тега)
-            $jevix->cfgSetTagShort(array('br','img', 'param', 'embed', 'hr'));
+            $jevix->cfgSetTagShort(array('br','img', 'param', 'embed', 'hr', 'source'));
 
             // 3. Устанавливаем преформатированные теги. (в них все будет заменятся на HTML сущности)
             $jevix->cfgSetTagPreformatted(array('pre'));
@@ -1087,25 +1091,45 @@ class system {
             $jevix->cfgSetTagCutWithContent(array('script', 'javascript', 'style', 'applet'));
 
             // 5. Устанавливаем разрешённые параметры тегов. Также можно устанавливать допустимые значения этих параметров.
-            $jevix->cfgAllowTagParams('div', array('class', 'id', 'style'));
-            $jevix->cfgAllowTagParams('p', array('style'));
-            $jevix->cfgAllowTagParams('h1', array('style'));
-            $jevix->cfgAllowTagParams('h2', array('style'));
-            $jevix->cfgAllowTagParams('h3', array('style'));
-            $jevix->cfgAllowTagParams('h4', array('style'));
-            $jevix->cfgAllowTagParams('h5', array('style'));
-            $jevix->cfgAllowTagParams('h6', array('style'));
-            $jevix->cfgAllowTagParams('span', array('class', 'id', 'style'));
-            $jevix->cfgAllowTagParams('a', array('title', 'href', 'target', 'class', 'id', 'rel', 'style'));
-            $jevix->cfgAllowTagParams('img', array('style', 'src', 'alt' => '#text', 'title', 'align' => array('right', 'left', 'center'), 'width' => '#text', 'height' => '#int', 'hspace' => '#int', 'vspace' => '#int'));
-            $jevix->cfgAllowTagParams('table', array('border', 'class', 'width', 'align', 'valign', 'style', 'id'));
-            $jevix->cfgAllowTagParams('tr', array('height', 'class', 'style'));
-            $jevix->cfgAllowTagParams('td', array('colspan', 'rowspan', 'class', 'width', 'height', 'align', 'valign', 'style'));
-            $jevix->cfgAllowTagParams('th', array('colspan', 'rowspan', 'class', 'width', 'height', 'align', 'valign', 'style'));
-            $jevix->cfgAllowTagParams('object', array('width' => '#text', 'height'));
-            $jevix->cfgAllowTagParams('param', array('name', 'value'));
-            $jevix->cfgAllowTagParams('embed', array('src', 'type', 'allowscriptaccess', 'allowfullscreen', 'width' => '#text', 'height', 'wmode'));
-            $jevix->cfgAllowTagParams('iframe', array('src', 'type', 'allowscriptaccess', 'allowfullscreen', 'width' => '#text', 'height', 'wmode', 'frameborder'));
+            $jevix->cfgAllowTagParams('div', 		array('class', 'id', 'style'));
+            $jevix->cfgAllowTagParams('p', 			array('class', 'id', 'style'));
+            $jevix->cfgAllowTagParams('ul', 		array('class', 'id', 'style'));
+            $jevix->cfgAllowTagParams('ol', 		array('class', 'id', 'style'));
+            $jevix->cfgAllowTagParams('li', 		array('class', 'id', 'style'));
+            $jevix->cfgAllowTagParams('blockquote', array('class', 'id', 'style'));
+            $jevix->cfgAllowTagParams('h1', 		array('class', 'id', 'style'));
+            $jevix->cfgAllowTagParams('h2', 		array('class', 'id', 'style'));
+            $jevix->cfgAllowTagParams('h3', 		array('class', 'id', 'style'));
+            $jevix->cfgAllowTagParams('h4', 		array('class', 'id', 'style'));
+            $jevix->cfgAllowTagParams('h5', 		array('class', 'id', 'style'));
+            $jevix->cfgAllowTagParams('h6', 		array('class', 'id', 'style'));
+            $jevix->cfgAllowTagParams('span', 		array('class', 'id', 'style'));
+            $jevix->cfgAllowTagParams('strong', 	array('class', 'id', 'style'));
+            $jevix->cfgAllowTagParams('b', 			array('class', 'id', 'style'));
+            $jevix->cfgAllowTagParams('i', 			array('class', 'id', 'style'));
+            $jevix->cfgAllowTagParams('u', 			array('class', 'id', 'style'));
+            $jevix->cfgAllowTagParams('em', 		array('class', 'id', 'style'));
+            $jevix->cfgAllowTagParams('time', 		array('class', 'id', 'style'));
+			$jevix->cfgAllowTagParams('a', 			array('class', 'id', 'style', 'title', 'href', 'target', 'id', 'rel', 'style'));
+
+			$jevix->cfgAllowTagParams('video', 		array('class', 'id', 'style', 'src', 'autoplay', 'controls', 'loop', 'preload'));
+            $jevix->cfgAllowTagParams('audio', 		array('class', 'id', 'style', 'src', 'autoplay', 'controls', 'loop', 'preload', 'poster', 'height', 'width'));
+            $jevix->cfgAllowTagParams('source', 	array('class', 'id', 'style', 'src', 'type', 'media'));
+			
+            $jevix->cfgAllowTagParams('img', 		array('class', 'id', 'style', 'src', 'alt', 'title', 'align' => array('right', 'left', 'center'), 'width', 'height', 'hspace', 'vspace'));
+			
+            $jevix->cfgAllowTagParams('table', 		array('class', 'id', 'style', 'border', 'width', 'align', 'valign', 'cellpadding', 'cellspacing', 'frame', 'rules', 'summary'));
+            $jevix->cfgAllowTagParams('thead', 		array('class', 'id', 'style'));
+            $jevix->cfgAllowTagParams('tbody', 		array('class', 'id', 'style'));
+            $jevix->cfgAllowTagParams('tfoot', 		array('class', 'id', 'style'));
+            $jevix->cfgAllowTagParams('tr', 		array('class', 'id', 'style', 'height', 'align', 'valign', 'bgcolor', 'bordercolor', 'char', 'charoff'));
+            $jevix->cfgAllowTagParams('td', 		array('class', 'id', 'style', 'width', 'align', 'valign', 'bgcolor', 'bordercolor', 'char', 'charoff', 'colspan', 'rowspan', 'scope', 'nowrap'));
+            $jevix->cfgAllowTagParams('th', 		array('class', 'id', 'style', 'width', 'align', 'valign', 'bgcolor', 'bordercolor', 'char', 'charoff', 'colspan', 'rowspan', 'scope', 'nowrap'));
+			
+            $jevix->cfgAllowTagParams('object', 	array('width', 'height'));
+            $jevix->cfgAllowTagParams('param', 		array('name', 'value'));
+            $jevix->cfgAllowTagParams('embed', 		array('src', 'type', 'allowscriptaccess', 'allowfullscreen', 'width', 'height', 'wmode'));
+            $jevix->cfgAllowTagParams('iframe', 	array('src', 'type', 'allowscriptaccess', 'allowfullscreen', 'width', 'height', 'wmode', 'frameborder'));
 
             // 6. Устанавливаем параметры тегов являющиеся обязательными. Без них вырезает тег оставляя содержимое.
             $jevix->cfgSetTagParamsRequired('img', 'src');
@@ -1123,7 +1147,7 @@ class system {
             $jevix->cfgSetAutoLinkMode($autolink);
 
             // 13. Отключаем типографирование в определенном теге
-            $jevix->cfgSetTagNoTypography('code','video','iframe');
+            $jevix->cfgSetTagNoTypography('code', 'iframe');
 
             // 14. Устанавливаем пустые теги
             $jevix->cfgSetTagIsEmpty('iframe');
