@@ -55,6 +55,7 @@ class template extends innerErrorList {
     }
 
     public function setFile($name) {
+		$name = str_replace('-', '_', $name);
         $name = system::checkVar($name, isVarName);
         if (empty($name))
             $this->newError(65, 'Имя файла шаблона указано в неправильном формате!');
