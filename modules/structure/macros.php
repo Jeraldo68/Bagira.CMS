@@ -1125,7 +1125,7 @@ class structureMacros {
 		if (!is_array($TEMPLATE))
 			return page::errorNotFound(__CLASS__.'.'.__FUNCTION__, $templ_file);
 
-        if ($page = ormPages::get($obj_id)) {
+        if ($page = ormFactory::get($obj_id)) {
 
             if ($field = $page->getClass()->getField($field_name)) {
 
