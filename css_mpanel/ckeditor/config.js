@@ -20,6 +20,10 @@ CKEDITOR.editorConfig = function( config ) {
 	config.coreStyles_bold = { element : 'b', overrides : 'strong' };
 	config.coreStyles_italic = { element : 'i', overrides : 'em' };
 
+	config.stylesSet = [
+		{ name: 'Красный текст', element: 'span', attributes: { 'class': 'red' } }
+	];
+	
 	config.pasteFromWordRemoveFontStyles = true;
 	config.forceEnterMode = true;
 
@@ -31,7 +35,7 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'insert', items : [ '-','Image','MediaEmbed','Iframe','Flash','Table'/*,'Smiley'*/,'SpecialChar'] },
 		{ name: 'insert', items : ['-','About'] },
 		'/',
-		{ name: 'styles', items : [ 'FontSize','Format' ] },    /* ,'Font' */
+		{ name: 'styles', items : [ 'FontSize','Format','Styles' ] },    /* ,'Font' */
 		{ name: 'paragraph', items : [ '-','Bold','Italic','Underline','Strike'] },
 		{ name: 'links', items : [ 'Link','Unlink' ] },
 		{ name: 'paragraph', items : [ '-','JustifyLeft','JustifyCenter','JustifyRight' /*,'JustifyBlock'*/ ] },
