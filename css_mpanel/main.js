@@ -39,6 +39,7 @@ Array.prototype.in_array = function (p_val) {
 function getExtension(a) {
 	a = a.split('.');
 	var ext = a[a.length-1];
+	ext = ext.toLowerCase();
 	return ext;
 }
 
