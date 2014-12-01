@@ -462,13 +462,18 @@ class system {
 	* @param boolean $absolut -  Если true, считает что $url указан абсолютный.
 		Если false, $url обрабатывается с учетом состояния системы: учитывается текущий домен,
 		языковая версия, находимся ли мы в панели управления.
+	* @param boolean $movper - Если true будет добавлен 301 заголовок
 	* @desc Делает редирект и корректно завершает работу системы
 	*/
-    static function redirect($url, $absolut = false){
+    static function redirect($url, $absolut = false, $movper = true){
 
     	if (!$absolut)
             $url = (self::$isAdmin) ? self::au().$url : languages::pre().$url;
 
+		if ($movper) {
+			Header("HTTP/1.1 301 Moved Permanently");
+		}
+		
     	Header('Location: '.$url);
     	self::stop();
     }
