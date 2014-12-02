@@ -74,7 +74,8 @@ class Date {
 	private static function replace(&$format, $num, $type, $arr) {
 		
 		foreach ($arr as $key => $val) {
-			$word = Lang::get($type)[$val][$num];
+			$word = Lang::get($type);
+			$word = $word[$val][$num];
 			$format = str_replace($key, $word, $format);
 			$format = str_replace(mb_strtoupper($key, 'UTF-8'), mb_ucfirst($word, 'UTF-8'), $format);
 		}
