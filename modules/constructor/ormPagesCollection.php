@@ -50,8 +50,11 @@ class ormPages {
 	static function init($openPages = array()){
 
    		if (empty(self::$pages)) {
+			
+			$url = system::getCurrentUrl();
+			$url = explode('/', $url);
 
-			if (system::url(0) == 'mpanel') {
+			if ($url[1] == 'mpanel') {
 				self::$isAdmin = true;
 			}
 			
