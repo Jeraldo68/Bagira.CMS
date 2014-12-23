@@ -189,8 +189,9 @@ class ormPages {
 
 			$sql = 'SELECT p_obj_id id
 					FROM <<pages>>, <<rights>>, <<objects>>, (SELECT r_parent_id 
-									FROM <<rels>> 
-									WHERE r_field_id IS NULL
+									FROM <<rels>>, <<pages>>
+									WHERE r_field_id IS NULL 
+										AND r_children_id = p_obj_id 
 									GROUP BY r_parent_id) parent
 					WHERE p_obj_id = parent.r_parent_id 
 							AND p_obj_id = o_id
