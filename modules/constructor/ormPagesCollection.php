@@ -485,6 +485,11 @@ class ormPages {
     	return self::$pages_active;
     }
 
+	// Добавить в список активных страниц
+	static function addActiveId($page_id){
+		self::$pages_active[] = $page_id;
+	}
+
     static function setActivePath(){
     	self::$pages_active = func_get_args();
 
