@@ -422,7 +422,7 @@ function Translit(from, where){
 }
 
 function showElFinder(fname) {
-    window.open('/css_mpanel/elfinder/index.html?langCode=ru&fname='+fname,'newwin','width=1000, height=420');
+    window.open('/css_mpanel/elfinder/elfinder.html?langCode=ru&fname='+fname,'newwin','width=1000, height=420');
 }
 
 

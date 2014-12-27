@@ -29,13 +29,24 @@
 				return (match && match.length > 1) ? match[1] : '' ;
 			}
 
+			var funcNum = window.location.search.replace(/^.*CKEditorFuncNum=(\d+).*$/, "$1");
+			var langCode = window.location.search.replace(/^.*langCode=([a-z]{2}).*$/, "$1");
+			var fname = window.location.search.replace(/^.*fname=([a-z_1-9]+).*$/, "$1");
+			
 			$().ready(function() {
 				var funcNum = getUrlParam('CKEditorFuncNum');
 
 				var elf = $('#elfinder').elfinder({
 					url : 'php/connector.php',
 					getFileCallback : function(file) {
-						window.opener.CKEDITOR.tools.callFunction(funcNum, file);
+						
+						if (fname != '' && fname[0] != '?') {
+							window.opener.setFileField(file, fname);
+						} else {
+							window.opener.CKEDITOR.tools.callFunction(funcNum, file);
+						}
+						
+						
 						window.close();
 					},
 					resizable: false,
