@@ -303,7 +303,7 @@ END;
 $TEMPLATE['field_95_plus'] = <<<END
 
 
-<textarea id="%field.sname%_new_val" name="%field.sname%_new_val" class="minitext" style="display:none;" wrap="on"></textarea>
+<textarea id="%field.sname%_new_val" name="%field.sname%_new_val" class="minitext" style="display:none;"></textarea>
 
 <span class="ok_value" onClick="return doAddNewHandbook('%field.sname%');" style="display:none;"></span>
 <span class="add_value" id="add_new_%field.sname%" onClick="return AddNewHandbook(this, '%field.sname%');"></span>

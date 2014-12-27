@@ -91,7 +91,7 @@ $TEMPLATE['field_frame'] = <<<END
 END;
 
 $TEMPLATE['field'] = <<<END
-<textarea class="inputfield%new%" name="obj%form_name%[%obj_id%][%field.sname%]" id="%field.sname%_%obj_id%"  style="width:%width%px;height:45px;"  wrap="on">%field.value%</textarea>
+<textarea class="inputfield%new%" name="obj%form_name%[%obj_id%][%field.sname%]" id="%field.sname%_%obj_id%"  style="width:%width%px;height:45px;">%field.value%</textarea>
 END;
 
 ?>
