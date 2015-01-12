@@ -54,7 +54,7 @@ class ormPages {
 			$url = system::getCurrentUrl();
 			$url = explode('/', $url);
 
-			if ($url[1] == 'mpanel') {
+			if (isset($url[1]) && $url[1] == 'mpanel') {
 				self::$isAdmin = true;
 			}
 			
