@@ -108,9 +108,11 @@ class controller {
 						if (in_array($field['f_type'], array(70, 75, 80, 85))) {
 							$fsname = $field['f_sname'];
 							$fvalue = $obj->$fsname;
-							if ($fvalue != '') {
-								page::assign($fsname, $fvalue);
-							}
+							page::assign($fsname, $fvalue);
+						} else if ($field['f_type'] == 90) {
+							$fsname = $field['f_sname'];
+							$fvalue = $obj->{'_'.$fsname};
+							page::assign($fsname, $fvalue);
 						}
 					}
 				}
