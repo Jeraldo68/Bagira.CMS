@@ -14,7 +14,7 @@ $TEMPLATE['frame'] = <<<END
 Пароль: %passw%  <br /><br />
 
 С уважением, <br />
-администрация сайта %site_name%
+администрация сайта <a href="http://%site_url%">%site_name%</a>
 END;
 
 ?>
