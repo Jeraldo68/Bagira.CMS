@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 error_reporting(0); // Set E_ALL for debuging
 
 include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'elFinderConnector.class.php';
@@ -11,6 +12,9 @@ include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'elFinderVolumeLocalFileSyste
 // Required for FTP connector support
 // include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'elFinderVolumeFTP.class.php';
 
+if (empty($_SESSION['curUser']) || !isset($_SESSION['curUser']['isAdmin']) || !$_SESSION['curUser']['isAdmin']) {
+	die('Permission denied');
+}
 
 /**
  * Simple function to demonstrate how to control file access using "accessControl" callback.
