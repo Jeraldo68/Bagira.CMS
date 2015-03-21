@@ -214,8 +214,10 @@ class db{
             echo '<br /><br />';
         }
 
-        $time = system::getTimeLabel(999, false);
-        self::toList($sql.'<br />'.$time);
+		if (SHOW_SPEED) {
+			$time = system::getTimeLabel(999, false);
+			self::toList($sql.'<br />'.$time);
+		}
 
         return $value;
 	}
