@@ -337,19 +337,29 @@ class system {
  	    	include_once(self::$classes[$class_name]);
 	}
 
-	// Выводит статистику по количеству запросов и времени обработки страницы
-    private static function printStat($forced = 0){
+	// Выводит статистику по используемой памяти, количеству запросов и времени обработки страницы
+	private static function printStat($forced = 0){
+
+		if ( (SHOW_MEMORY && !self::isAjax()) || $forced ) {
+			echo '<br clear="all" />';
+			echo 'Memory usage: <br clear="all" />';
+			echo 'emalloc: '.page::macros('core')->niceSize(memory_get_usage());
+			echo '<br clear="all" />';
+			echo 'real: '.page::macros('core')->niceSize(memory_get_usage(true));
+
+			echo '<br clear="all" />';
+		}
 
 		if ( (SHOW_SPEED && !self::isAjax()) || $forced ) {
 
-	    	echo '<br clear="all" />';
+			echo '<br clear="all" />';
 
-	    	list($msec, $sec) = explode(chr(32), microtime());
-			echo round($sec + $msec - START_TIME, 5)."<br />";
+			list($msec, $sec) = explode(chr(32), microtime());
+			echo 'ALL time: '.round($sec + $msec - START_TIME, 5)."<br />";
 
 			$q = db::getQueryList();
 
-            echo system::getSumTimeLabel(999, false).'<br />';
+			echo 'SQL time: '.system::getSumTimeLabel(999, false).'<br />';
 			echo count($q).'<br /><br />';
 
 
@@ -357,7 +367,8 @@ class system {
 				echo '('.($num+1).')<br />'.$val.'<br /><br />';
 
 		}
-    }
+	}
+	
 
     // Метод, завершающий работу системы
     static function stop($forced = 0){
