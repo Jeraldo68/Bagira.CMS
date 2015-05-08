@@ -154,9 +154,9 @@
     system::addClass('resizer', MODUL_DIR.'/core/libs/resizer.php');
     system::addClass('AcImage', MODUL_DIR.'/core/libs/ImageToolkit/AcImage.php');
     system::addClass('Jevix', MODUL_DIR.'/core/libs/jevix/jevix.class.php');
-	system::addClass('XML', MODUL_DIR.'/core/libs/xml.class.php');
-	system::addClass('Logger', MODUL_DIR.'/core/libs/class.logger.php');
-	system::addClass('Date', MODUL_DIR.'/core/libs/class.date.php');
+	system::addClass('XML', MODUL_DIR.'/core/libs/XML.php');
+	system::addClass('Logger', MODUL_DIR.'/core/libs/Logger.php');
+	system::addClass('Date', MODUL_DIR.'/core/libs/Date.php');
 	system::addClass('fastSelect', MODUL_DIR.'/core/libs/fastSelect.php');
 	system::addClass('Session', MODUL_DIR.'/core/libs/Session.php');
 
