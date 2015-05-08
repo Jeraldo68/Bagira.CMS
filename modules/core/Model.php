@@ -1,0 +1,246 @@
+<?php
+
+/*
+    Bagira.CMS Copyright 2015
+
+    Абстрактный класс модель, для работы с БД.
+*/
+
+abstract class Model extends innerErrorList {
+	
+	protected static $table = ''; // <<table>>
+	
+	protected static $fields  = array();
+	protected static $rfields = array(); //обязательные поля
+	protected static $zfields = array(); //поля с 0 значениями, числовые поля
+	protected static $ffields = array(); //файловые поля
+	
+	protected $id;
+	protected $cur_props = array(); //данные из БД
+	protected $new_props = array(); //любые новые данные
+
+	/**
+	 * вернет существующий объект
+	 * @param $id
+	 * @return bool|Model
+	 */
+	public static function get($id) {
+		if (!is_numeric($id)) {
+			return false;
+		}
+
+		$obj = new static($id);
+		
+		if (!$obj->isNew()) {
+			return $obj;
+		}
+		
+		return false;
+	}
+
+	public function __construct($id = false) {
+		if (!empty($id) && is_numeric($id)) {
+			$this->id = $id;
+			$this->loadData();
+		} else {
+			foreach (static::$zfields as $field) {
+				$this->{$field} = 0;
+			}
+		}
+		
+	}
+	
+	public static function table() {
+		$table = trim(static::$table);
+		
+		if (empty($table)) {
+			$table = trim(get_called_class());
+			$table = mb_strtolower($table, 'UTF-8');
+			$table = '<<'.$table.'s>>';
+		}
+		
+		return $table;
+	}
+	
+	public function fill($arr) {
+		if (is_array($arr)) {
+			foreach ($arr as $key => $val) {
+				$this->{$key} = $val;
+			}
+			
+			foreach (static::$ffields as $field) {
+				$value = $arr[$field];
+				$cur_file = $this->{$field};
+
+				if (isset($_FILES['file_'.$field])) {
+					$dirname = '/upload/file/'.date('Y_m');
+					if (!file_exists(ROOT_DIR.$dirname)) {
+						mkdir(ROOT_DIR.$dirname, 0755, true);
+					}
+					$tmp = system::copyFile($_FILES['file_'.$field]['tmp_name'], $_FILES['file_'.$field]['name'], $dirname);
+					$value = (empty($tmp)) ? $value : $tmp;
+				}
+
+				// Если файл был загружен через выбор на сервере, не удаляем его
+				if (system::fileName($value) != system::fileName($cur_file) && strpos($cur_file, '/upload/custom/') === false) {
+					@unlink(ROOT_DIR.$cur_file); //удаляем прошлый файл
+				}
+
+				$this->{$field} = $value;
+			}
+		}
+	}
+	
+	public function loadData() {
+		if (!empty($this->id)) {
+			$sel = new fastSelect(get_called_class().' loadData');
+			$sel->select('*')
+				->from(static::table())
+				->where('id = :id', array(':id' => $this->id))
+				->limit(1);
+			
+			if ($data = $sel->queryRow()) {
+				foreach ($data as $key => $val) {
+					$this->cur_props[$key] = $val;
+				}
+			} else {
+				$this->id = NULL;
+				$this->newError(801, 'Объект с указанным ID не существует');
+			}
+		}
+	}
+
+	/**
+	 * Проверяет является ли объект новым или есть данные в таблице
+	 * @return bool
+	 */
+	public function isNew() {
+		if (!empty($this->id)) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public function save() {
+		
+		foreach (static::$rfields as $name) {
+			if (empty($this->{$name})) {
+				$this->newError(704, 'Не задано обязательное поле "'.$name.'"');
+				return false;
+			}
+		}
+		
+		if ($this->issetErrors()) {
+			return false;
+		}
+		
+		$tmp = array();
+		
+		foreach (static::$zfields as $field) {
+			if (empty($this->{$field})) {
+				$this->{$field} = 0;
+			}
+		}
+		
+		foreach (static::$fields as $field) {
+			$tmp[] = '`'.$field.'` = "'.addslashes($this->{$field}).'"';
+		}
+		
+		if (!$this->isNew()) {  //update
+			$sql = 'UPDATE '.static::table().' SET '.implode(', ', $tmp).' WHERE id = "'.$this->id.'"';
+			db::q($sql);
+		} else {  //new
+			$sql = 'INSERT INTO '.static::table().' SET '.implode(', ', $tmp); 
+			$id = db::q($sql);
+			if (is_numeric($id)) {
+				$this->id = $id;
+			} else {
+				$this->newError(705, 'Объект не удалось сохранить');
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	
+	public function delete() {
+		if (!$this->isNew()) {
+			$sql = 'DELETE FROM '.static::table().' WHERE id = '.$this->id;
+			db::q($sql);
+		}
+
+		foreach (static::$ffields as $field) {
+			$value = $this->{$field};
+
+			if (!empty($value)) {
+				// Если файл был загружен через выбор на сервере, не удаляем его
+				if (strpos($value, '/upload/custom/') === false) {
+					@unlink(ROOT_DIR.$value); //удаляем прошлый файл
+//					$this->deleteCacheImages(system::filePathToPrefix($value).system::fileName($value));
+				}
+			}
+		}
+	}
+
+	
+	// Удаляем кешированые миниатюры изображений
+	private function deleteCacheImages($del_file, $from_path = '/cache/img/') {
+
+		if (is_dir(ROOT_DIR.$from_path) && !empty($del_file)) {
+
+			chdir(ROOT_DIR.$from_path);
+			$handle = opendir('.');
+
+			while (($file = readdir($handle)) !== false) {
+				if ($file != "." && $file != "..") {
+
+					if (is_dir(ROOT_DIR.$from_path.$file)) {
+						$this->deleteCacheImages($del_file, $from_path.$file.'/');
+						chdir(ROOT_DIR.$from_path);
+					}
+
+					if (is_file(ROOT_DIR.$from_path.$file) && $file == $del_file)
+						@unlink(ROOT_DIR.$from_path.$file);
+				}
+			}
+			closedir($handle);
+		}
+	}
+	
+	
+	public function __isset($name) {
+		if ($name == 'id') {
+			return true;
+		}
+		
+		if (isset($this->new_props[$name]) || isset($this->cur_props[$name])) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public function __get($name) {
+		
+		if ($name == 'id') {
+			return $this->id;
+		} else if (isset($this->new_props[$name])) {
+			return $this->new_props[$name];
+		} else if (isset($this->cur_props[$name])) {
+			return $this->cur_props[$name];
+		}
+		
+		return NULL;
+	}
+	
+	public function __set($name, $value) {
+		if (in_array($name, static::$fields)) {
+			$this->new_props[$name] = $value;
+		}
+	}
+	
+}
+
+?>
