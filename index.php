@@ -157,6 +157,7 @@
 	system::addClass('XML', MODUL_DIR.'/core/libs/xml.class.php');
 	system::addClass('Logger', MODUL_DIR.'/core/libs/class.logger.php');
 	system::addClass('Date', MODUL_DIR.'/core/libs/class.date.php');
+	system::addClass('fastSelect', MODUL_DIR.'/core/libs/fastSelect.php');
 
 
 
