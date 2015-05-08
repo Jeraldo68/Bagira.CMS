@@ -158,6 +158,7 @@
 	system::addClass('Logger', MODUL_DIR.'/core/libs/class.logger.php');
 	system::addClass('Date', MODUL_DIR.'/core/libs/class.date.php');
 	system::addClass('fastSelect', MODUL_DIR.'/core/libs/fastSelect.php');
+	system::addClass('Session', MODUL_DIR.'/core/libs/Session.php');
 
 
 
