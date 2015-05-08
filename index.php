@@ -81,9 +81,9 @@
     system::addClass('reg', MODUL_DIR.'/core/reg.php');
     system::addClass('user', MODUL_DIR.'/core/user.php');
     system::addClass('lang', MODUL_DIR.'/core/lang.php');
-    system::addClass('ruNumbers', MODUL_DIR.'/core/ruNumbers.php');
-    system::addClass('innerErrorList', MODUL_DIR.'/core/innerErrorList.php');
-    system::addClass('elFinder', MODUL_DIR.'/core/elFinder.php');
+    system::addClass('ruNumbers', MODUL_DIR.'/core/libs/ruNumbers.php');
+    system::addClass('innerErrorList', MODUL_DIR.'/core/libs/innerErrorList.php');
+    system::addClass('elFinder', MODUL_DIR.'/core/libs/elFinder.php');
 
     // Авторизация через соц. сети
     system::addClass('TwitterOAuth', MODUL_DIR.'/users/social/twitter/twitteroauth/twitteroauth.php');
@@ -149,14 +149,14 @@
     //system::addClass('eShopOrder', MODUL_DIR.'/eshop/eShopOrder.php');
 
     // Разное
-    system::addClass('phpmailer', MODUL_DIR.'/core/phpmailer/class.phpmailer.php');
-    system::addClass('SMTP', MODUL_DIR.'/core/phpmailer/class.smtp.php');
-    system::addClass('resizer', MODUL_DIR.'/core/resizer.php');
-    system::addClass('AcImage', MODUL_DIR.'/core/ImageToolkit/AcImage.php');
-    system::addClass('Jevix', MODUL_DIR.'/core/jevix/jevix.class.php');
-	system::addClass('XML', MODUL_DIR.'/core/xml.class.php');
-	system::addClass('Logger', MODUL_DIR.'/core/class.logger.php');
-	system::addClass('Date', MODUL_DIR.'/core/class.date.php');
+    system::addClass('phpmailer', MODUL_DIR.'/core/libs/phpmailer/class.phpmailer.php');
+    system::addClass('SMTP', MODUL_DIR.'/core/libs/phpmailer/class.smtp.php');
+    system::addClass('resizer', MODUL_DIR.'/core/libs/resizer.php');
+    system::addClass('AcImage', MODUL_DIR.'/core/libs/ImageToolkit/AcImage.php');
+    system::addClass('Jevix', MODUL_DIR.'/core/libs/jevix/jevix.class.php');
+	system::addClass('XML', MODUL_DIR.'/core/libs/xml.class.php');
+	system::addClass('Logger', MODUL_DIR.'/core/libs/class.logger.php');
+	system::addClass('Date', MODUL_DIR.'/core/libs/class.date.php');
 
 
 
