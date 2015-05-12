@@ -1359,26 +1359,26 @@ class ormObject extends innerErrorList {
 
     // Удаляем кешированые миниатюры изображений
     private function deleteCacheImages($del_file, $from_path = '/cache/img/') {
-
-        if (is_dir(ROOT_DIR.$from_path) && !empty($del_file)) {
-
-            chdir(ROOT_DIR.$from_path);
-            $handle = opendir('.');
-
-            while (($file = readdir($handle)) !== false) {
-                if ($file != "." && $file != "..") {
-
-                    if (is_dir(ROOT_DIR.$from_path.$file)) {
-                        $this->deleteCacheImages($del_file, $from_path.$file.'/');
-                        chdir(ROOT_DIR.$from_path);
-                    }
-
-                    if (is_file(ROOT_DIR.$from_path.$file) && $file == $del_file)
-                        @unlink(ROOT_DIR.$from_path.$file);
-                }
-            }
-            closedir($handle);
-        }
+	
+		if (is_dir(ROOT_DIR.$from_path) && !empty($del_file)) {
+		
+			$filename = system::filePathToPrefix($del_file).system::fileName($del_file);
+		
+			$full = ROOT_DIR.$from_path.'*/'.$filename;
+			$arr = glob($full);
+			$arr = ($arr === false) ? array() : $arr;
+		
+			$full = ROOT_DIR.$from_path.'/'.$filename;
+			$arr2 = glob($full);
+			$arr2 = ($arr2 === false) ? array() : $arr2;
+		
+			$arr = array_merge($arr, $arr2);
+		
+			foreach ($arr as $file) {
+				@unlink($file);
+			}
+		}
+		
     }
 
 
