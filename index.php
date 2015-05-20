@@ -44,7 +44,7 @@
     define('START_TIME', $sec + $msec);
 
     // Пути к основным папкам системы
-	define('ROOT_DIR', getcwd());
+	define('ROOT_DIR', dirname(__FILE__));
 	define('MODUL_DIR', ROOT_DIR.'/modules');
 	define('TEMPL_DIR', ROOT_DIR.'/template');
     define('CACHE_DIR', ROOT_DIR.'/cache');
