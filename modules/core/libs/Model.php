@@ -15,6 +15,9 @@ abstract class Model extends innerErrorList {
 	protected static $zfields = array(); //поля с 0 значениями, числовые поля
 	protected static $ffields = array(); //файловые поля
 	
+	//поля с выпадающим списком
+	protected static $lfields = array();
+	
 	protected $id;
 	protected $cur_props = array(); //данные из БД
 	protected $new_props = array(); //любые новые данные
@@ -48,6 +51,34 @@ abstract class Model extends innerErrorList {
 			}
 		}
 		
+	}
+	
+	/**
+	 * Вернет список значений справочника
+	 * @param $sname
+	 * @return array
+	 */
+	public function getList($sname) {
+		if (isset(static::$lfields[$sname])) {
+			return static::$lfields[$sname];
+		}
+		
+		return array();
+	}
+	
+	/**
+	 * Вернет конкретное значение у поля справочника
+	 * @param $field
+	 * @return null|mixed
+	 */
+	public function listVal($field) {
+		$arr = $this->getList($field);
+		
+		if (array_key_exists($this->{$field}, $arr)) {
+			return $arr[$this->{$field}];
+		}
+		
+		return NULL;
 	}
 	
 	public static function table() {
@@ -178,7 +209,7 @@ abstract class Model extends innerErrorList {
 				// Если файл был загружен через выбор на сервере, не удаляем его
 				if (strpos($value, '/upload/custom/') === false) {
 					@unlink(ROOT_DIR.$value); //удаляем прошлый файл
-					$this->deleteCacheImages(system::filePathToPrefix($value).system::fileName($value));
+//					$this->deleteCacheImages(system::filePathToPrefix($value).system::fileName($value));
 				}
 			}
 		}
@@ -187,26 +218,26 @@ abstract class Model extends innerErrorList {
 	
 	// Удаляем кешированые миниатюры изображений
 	private function deleteCacheImages($del_file, $from_path = '/cache/img/') {
-		
+
 		if (is_dir(ROOT_DIR.$from_path) && !empty($del_file)) {
-			
-			$filename = system::filePathToPrefix($del_file).system::fileName($del_file);
-			
-			$full = ROOT_DIR.$from_path.'*/'.$filename;
-			$arr = glob($full);
-			$arr = ($arr === false) ? array() : $arr;
-			
-			$full = ROOT_DIR.$from_path.'/'.$filename;
-			$arr2 = glob($full);
-			$arr2 = ($arr2 === false) ? array() : $arr2;
-			
-			$arr = array_merge($arr, $arr2);
-			
-			foreach ($arr as $file) {
-				@unlink($file);
+
+			chdir(ROOT_DIR.$from_path);
+			$handle = opendir('.');
+
+			while (($file = readdir($handle)) !== false) {
+				if ($file != "." && $file != "..") {
+
+					if (is_dir(ROOT_DIR.$from_path.$file)) {
+						$this->deleteCacheImages($del_file, $from_path.$file.'/');
+						chdir(ROOT_DIR.$from_path);
+					}
+
+					if (is_file(ROOT_DIR.$from_path.$file) && $file == $del_file)
+						@unlink(ROOT_DIR.$from_path.$file);
+				}
 			}
+			closedir($handle);
 		}
-		
 	}
 	
 	
