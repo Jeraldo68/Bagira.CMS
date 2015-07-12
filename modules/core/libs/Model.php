@@ -54,6 +54,14 @@ abstract class Model extends innerErrorList {
 	}
 	
 	/**
+	 * Вернет массив всех полей у модели
+	 * @return array
+	 */
+	public function getFields() {
+		return array_merge(array('id'), static::$fields);
+	}
+	
+	/**
 	 * Вернет список значений справочника
 	 * @param $sname
 	 * @return array
