@@ -209,7 +209,7 @@ abstract class Model extends innerErrorList {
 				// Если файл был загружен через выбор на сервере, не удаляем его
 				if (strpos($value, '/upload/custom/') === false) {
 					@unlink(ROOT_DIR.$value); //удаляем прошлый файл
-					$this->deleteCacheImages(system::filePathToPrefix($value).system::fileName($value));
+					$this->deleteCacheImages($value);
 				}
 			}
 		}
