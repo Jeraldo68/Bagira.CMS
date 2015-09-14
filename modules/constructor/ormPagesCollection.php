@@ -631,6 +631,9 @@ class ormPages {
 
     // Вернет контент для страницы "Страница не найдена"
     static function get404(){
+	
+		header("HTTP/1.0 404 Not Found");
+		
         page::disableCacheForThisPage();
 		page::globalVar('h1', lang::get('ERROR_404_TITLE'));
         page::globalVar('title', lang::get('ERROR_404_TITLE'));
