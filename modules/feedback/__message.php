@@ -74,8 +74,8 @@ class __message {
         			page::assign('base_email', domains::curDomain()->getEmail());
 
 		            $mail = new phpmailer();
-		            $mail->From = $this->parse($form_obj->answer_sender_address);
-		            $mail->FromName = $this->parse($form_obj->answer_sender_name);
+                    $mail->isSendmail();
+                    $mail->setFrom($this->parse($form_obj->answer_sender_address), $this->parse($form_obj->answer_sender_name));
 
 		            $mail->AddAddress($obj->email);
 		            $mail->WordWrap = 50;

@@ -205,10 +205,10 @@ class eShopOrder {
                 $title = str_replace(array('{', '}'), '%', $state->email_title);
 
                     $mail = new phpmailer();
+                    $mail->isSendmail();
                     $mail->WordWrap = 50;
                     $mail->IsHTML(true);
-                    $mail->From = domains::curDomain()->getEmail();
-                    $mail->FromName = domains::curDomain()->getSiteName();
+                    $mail->setFrom(domains::curDomain()->getEmail(), domains::curDomain()->getSiteName());
                     $mail->Subject = page::parse($title);
                     $mail->Body = page::parse($text);
 

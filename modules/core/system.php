@@ -1074,8 +1074,8 @@ class system {
 			
             // Отправляет письмо с инструкциями
 	        $mail = new phpmailer();
-	        $mail->From = $from;
-	        $mail->FromName = $from_name;
+            $mail->isSendmail();
+            $mail->setFrom($from, $from_name);
 	        $mail->AddAddress($email);
 	        $mail->WordWrap = 50;
 	        $mail->IsHTML(true);

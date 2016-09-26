@@ -121,14 +121,17 @@ class controller {
                 if ($form_obj->mailing_list != '') {
 
                     $mail = new phpmailer();
-                    $mail->From = $this->parse($form_obj->admin_sender_address);
-                    $mail->FromName = $this->parse($form_obj->admin_sender_name);
+                    $mail->isSendmail();
+                    $mail->setFrom($this->parse($form_obj->admin_sender_address), $this->parse($form_obj->admin_sender_name));
                     /*
                   if (!empty($this->files))
                     for($i = 0; $i < count($this->files); $i++)
                        $mail->AddAttachment($this->files[$i][0], $this->files[$i][1]);
                     */
-                    $mail->AddAddress($this->parse($form_obj->mailing_list));
+                    $mailing_list = explode(',', $this->parse($form_obj->mailing_list));
+                    foreach ($mailing_list as $val) {
+                        $mail->AddAddress($val);
+                    }
                     $mail->WordWrap = 50;
                     $mail->IsHTML(true);
 
@@ -142,8 +145,8 @@ class controller {
                 if ($form_obj->send_notice && !$issetErrors) {
 
                     $mail = new phpmailer();
-                    $mail->From = $this->parse($form_obj->notice_sender_address);
-                    $mail->FromName = $this->parse($form_obj->notice_sender_name);
+                    $mail->isSendmail();
+                    $mail->setFrom($this->parse($form_obj->notice_sender_address), $this->parse($form_obj->notice_sender_name));
 
                     $mail->AddAddress(system::POST('email'));
                     $mail->WordWrap = 50;

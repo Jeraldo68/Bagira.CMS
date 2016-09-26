@@ -175,8 +175,8 @@ class mailingProcess {
 
 	            // Отправляет письмо
 		        $mail = new phpmailer();
-		        $mail->From = $subscribe->back_email;
-		        $mail->FromName = $subscribe->back_name;
+                $mail->isSendmail();
+                $mail->setFrom($subscribe->back_email, $subscribe->back_name);
 		        $mail->AddAddress($obj->name);
 		        $mail->WordWrap = 50;
 		        $mail->IsHTML(true);
