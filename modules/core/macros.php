@@ -271,7 +271,7 @@ class coreMacros {
 	 * @param string $sep - разделитель только для тысячного разряда
 	 * @desc МАКРОС: Форматирует число по разрядности, аналог PHP-функции number_format()
 	 */
-	function capacity($number, $dec = 0, $point = ',', $sep = ' ') {
+	function capacity($number = 0, $dec = 0, $point = ',', $sep = ' ') {
 		$number = number_format($number, $dec, $point, $sep);
 		return str_replace(" ", "&nbsp;", $number);
 	}
