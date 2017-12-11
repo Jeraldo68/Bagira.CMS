@@ -83,6 +83,7 @@ class searchIndex extends searchRanking {
 	            			('.$q_words.') and
 	            			sr_obj_id = o_id and
 	            			o_id = p_obj_id and
+	            			o_to_trash = 0 and
 	            			active = 1 '.$cf.'
 	            		GROUP BY sr_obj_id) t;';
 
@@ -106,6 +107,7 @@ class searchIndex extends searchRanking {
 		            			('.$q_words.') and
 		            			sr_obj_id = o_id and
 		            			o_id = p_obj_id and
+		            			o_to_trash = 0 and
 		            			active = 1 '.$cf.'
 		            		GROUP BY sr_obj_id
 		            		ORDER BY SUM(sr_rank) DESC';
