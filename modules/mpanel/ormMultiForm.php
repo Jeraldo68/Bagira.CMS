@@ -512,8 +512,8 @@ class ormMultiForm extends uiTableFunctions {
                                         );
 
                                         $_FILES['file_'.$key] = $file;
-                                    }
 
+                                    } else unset($_FILES['file_'.$key]);
 
 		                		$obj->__set($key, $fields[$key]);
 
