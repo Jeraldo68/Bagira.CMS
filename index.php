@@ -10,8 +10,8 @@
     // Выберите часовой пояс, поже вынесим в настройки
    	//date_default_timezone_set('Europe/Moscow');
    	//date_default_timezone_set('Asia/Yekaterinburg');
-   	//date_default_timezone_set('Asia/Omsk');
-   	date_default_timezone_set('Asia/Novosibirsk');
+   	date_default_timezone_set('Asia/Omsk');
+   	//date_default_timezone_set('Asia/Novosibirsk');
    	//date_default_timezone_set('Asia/Krasnoyarsk');
    	//date_default_timezone_set('Asia/Irkutsk');
    	//date_default_timezone_set('Asia/Vladivostok');
