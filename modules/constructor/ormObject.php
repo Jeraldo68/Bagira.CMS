@@ -181,7 +181,9 @@ class ormObject extends innerErrorList {
 
             // Строка
             case 10:
-                $tmp = system::checkVar($value, isString);
+                if (user::isAdmin() && reg::getKey('/core/replace_quotes') == 1)
+                    $tmp = system::checkVar(preg_replace('/"(?=\w)/', '&laquo;', preg_replace('/(?<=\w)"/', '&raquo;', $value)), isString);
+                else $tmp = system::checkVar($value, isString);
                 break;
 
             // E-mail
@@ -809,7 +811,9 @@ class ormObject extends innerErrorList {
             while (list($key, $value) = each ($this->new_prop))
                 if (!$this->isPageField($key) && $key != 'name')
                     if ($this->fields[$key]['f_type'] != 105)
-                        $fields .= $this->procValue($key, $value);
+                        if (user::isAdmin() && reg::getKey('/core/replace_quotes') == 1)
+                            $fields .= $this->procValue($key, preg_replace('/&quot;(?=\w)/', '&laquo;', preg_replace('/(?<=\w)&quot;/', '&raquo;', $value)));
+                        else $fields .= $this->procValue($key, $value);
                     else
                         tags::changeTags($value, $this->id);
 
@@ -825,8 +829,9 @@ class ormObject extends innerErrorList {
 
         if($change) {
 
+            $name = (user::isAdmin() && reg::getKey('/core/replace_quotes') == 1) ? preg_replace('/&quot;(?=\w)/', '&laquo;', preg_replace('/(?<=\w)&quot;/', '&raquo;', $this->name)) : $this->name;
             $sql = 'UPDATE <<objects>>
-						SET o_name = "'.$this->name.'",
+						SET o_name = "'.$name.'",
 							o_change_date = "'.date('Y-m-d H:i:s').'"
 						WHERE o_id = "'.$this->id.'";';
 
@@ -835,7 +840,9 @@ class ormObject extends innerErrorList {
                 // Все хорошо, обновляем данные объекта
                 reset($this->new_prop);
                 while (list($key, $value) = each($this->new_prop))
-                    $this->cur_prop[$key] = $value;
+                    if (user::isAdmin() && reg::getKey('/core/replace_quotes') == 1)
+                        $this->cur_prop[$key] = preg_replace('/&quot;(?=\w)/', '&laquo;', preg_replace('/(?<=\w)&quot;/', '&raquo;', $value));
+                    else $this->cur_prop[$key] = $value;
 
                 while (list($key, $field_id) = each ($this->subject)) {
                     $form = new ormMultiForm('subject_list_'.$field_id);
@@ -881,9 +888,10 @@ class ormObject extends innerErrorList {
 
 
         // Основные характеристики объекта
+        $name = (user::isAdmin() && reg::getKey('/core/replace_quotes') == 1) ? preg_replace('/&quot;(?=\w)/', '&laquo;', preg_replace('/(?<=\w)&quot;/', '&raquo;', $this->name)) : $this->name;
         $sql = 'INSERT INTO <<objects>>
 					SET o_class_id = "'.$this->class->id().'",
-						o_name = "'.$this->name.'",
+						o_name = "'.$name.'",
 						o_change_date = "'.date('Y-m-d H:i:s').'",
 						o_create_date = "'.date('Y-m-d H:i:s').'";';
 
@@ -900,7 +908,9 @@ class ormObject extends innerErrorList {
             while (list($key, $value) = each ($this->new_prop))
                 if (!$this->isPageField($key) && $key != 'name')
                     if ($this->fields[$key]['f_type'] != 105)
-                        $fields .= $this->procValue($key, $value);
+                        if (user::isAdmin() && reg::getKey('/core/replace_quotes') == 1)
+                            $fields .= $this->procValue($key, preg_replace('/&quot;(?=\w)/', '&laquo;', preg_replace('/(?<=\w)&quot;/', '&raquo;', $value)));
+                        else $fields .= $this->procValue($key, $value);
                     else
                         tags::changeTags($value, $this->id);
 

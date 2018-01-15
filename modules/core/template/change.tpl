@@ -52,6 +52,9 @@ $TEMPLATE['frame'] = <<<END
 		<input class="input" type="text" name="search_count" id="search_count" value="%search_count%" style="width:40px;">
 		<div class="otstup"></div>
 
+        %replace_quotes%
+		<div class="otstup"></div>
+
     </div><!-- end ins-->
 	<div class="clear"></div>
 </div>

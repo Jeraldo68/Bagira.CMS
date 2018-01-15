@@ -50,7 +50,7 @@ $LANG['CONFIG_FORM_FIELD'][35] = 'Запрет использования IE7';
 $LANG['CONFIG_FORM_FIELD'][36] = 'Запрет на удаление Мини-Текстов';
 $LANG['CONFIG_FORM_FIELD'][37] = 'Запрет использования IE8';
 $LANG['CONFIG_FORM_FIELD'][38] = 'Количество элементов на странице поиска';
-
+$LANG['CONFIG_FORM_FIELD'][39] = 'Заменять двойные кавычки на двойные угловые';
 
 $LANG['CONFIG_FORM_FIELD'][50] = 'Общий размер файловой системы';
 $LANG['CONFIG_FORM_FIELD'][51] = 'Свободное дисковое пространство';

@@ -29,6 +29,7 @@ class __change {
 		page::assign('search_count_msg', lang::get('CONFIG_FORM_FIELD', 38));
 		page::assign('search_count', reg::getKey(ormPages::getPrefix('search').'/max_count'));
 
+        ui::CheckBox('replace_quotes', 1, reg::getKey('/core/replace_quotes'), lang::get('CONFIG_FORM_FIELD', 39));
 
          // Форма редактирования языков
         $form = new uiMultiForm('langs');
@@ -87,7 +88,7 @@ class __change {
         reg::setKey('/core/noIE7', system::POST('noIE7', isBool));
         reg::setKey('/core/noIE8', system::POST('noIE8', isBool));
         reg::setKey('/core/noDelMiniTexts', system::POST('noDelMiniTexts', isBool));
-
+        reg::setKey('/core/replace_quotes', system::POST('replace_quotes', isBool));
 
         // Загрузка ватермарка
         if (isset($_FILES['file_watermark']) && !empty($_FILES['file_watermark']['name']))
